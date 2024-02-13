@@ -107,7 +107,7 @@ function fontWoff() {
 }
 
 function phpDest() {
-	return src(['**/**/*.php', '**/**/*.json'])
+	return src(['**/**/*.php', '**/data/*.json'])
 		.pipe(dest(`../wp-content/themes/${themname}/`))
 }
 
