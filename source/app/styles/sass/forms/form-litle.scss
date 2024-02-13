@@ -1,0 +1,37 @@
+.form-litle {
+    &__items {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        @include fluidMarginB(20px, 25px, 480px, 1024px, 40px);
+    }
+
+    &__item {
+        flex: 1 1 150px;
+    }
+
+    &__item-full {
+        flex: 1 1 100%;
+    }
+
+    &__guarant {
+        display: block;
+        width: fit-content;
+        margin: 10px auto 0 auto;
+        color: #325D9C;
+        font-size: 14px;
+        line-height: 20px;
+        text-decoration-line: underline;
+        position: relative;
+        padding-left: 25px;
+        &::before {
+            @include bgbefore;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background-image: url(../images/icons/guarant.svg);
+        }
+    }
+}

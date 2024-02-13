@@ -1,0 +1,55 @@
+[2022-09-30 09:08:32 : INFO] - Re_Smush_It_Task with attachment ID : 19946, autocreated on : September 30, 2022 09:08:32 
+[2022-09-30 09:15:53 : INFO] - 
+ 
+[2022-09-30 09:15:53 : INFO] - Header for logs at time:  Fri, 30 Sep 2022 09:15:53 +0000 on https://akademily.de 
+[2022-09-30 09:15:53 : INFO] - WP: 5.8.1 
+[2022-09-30 09:15:53 : INFO] - PHP: 7.3.31 (fpm-fcgi, Linux vps11086.introserv.cloud 3.10.0-1160.45.1.el7.x86_64 #1 SMP Wed Oct 13 17:20:51 UTC 2021 x86_64) 
+[2022-09-30 09:15:53 : INFO] - MySQL: 5.5.68 
+[2022-09-30 09:15:53 : INFO] - WPLANG: ru_RU 
+[2022-09-30 09:15:53 : INFO] - Server: nginx/1.20.1 
+[2022-09-30 09:15:53 : INFO] - Outbound connections: N 
+[2022-09-30 09:15:53 : INFO] - safe_mode: 0 
+[2022-09-30 09:15:53 : INFO] - max_execution_time: 300 
+[2022-09-30 09:15:53 : INFO] - memory_limit: 128M (used: 51.6M | 34.5M) 
+[2022-09-30 09:15:53 : INFO] - multisite: N 
+[2022-09-30 09:15:53 : INFO] - openssl: OpenSSL 1.0.2k  26 Jan 2017 
+[2022-09-30 09:15:53 : INFO] - A total of 1 tasks of type smush found and will be processed in this iteration 
+[2022-09-30 09:15:53 : DEBUG] - Lock option (updraft_lock_smush, wp_options) was created in the database 
+[2022-09-30 09:15:53 : INFO] - Lock (updraft_lock_smush, wp_options) acquired after initialising the database 
+[2022-09-30 09:15:53 : INFO] - Processing task with ID : 1, and type 'smush' 
+[2022-09-30 09:15:53 : INFO] - Re_Smush_It_Task with attachment ID : 19946, autocreated on : September 30, 2022 09:08:32 
+[2022-09-30 09:15:53 : INFO] - 75 
+[2022-09-30 09:15:55 : INFO] - Backing up the original image - 2022/09/040404-updraft-pre-smush-original.jpg 
+[2022-09-30 09:15:55 : INFO] - Re_Smush_It_Task with attachment ID : 19946, autocreated on : September 30, 2022 09:08:32 
+[2022-09-30 09:15:55 : INFO] - 75 
+[2022-09-30 09:16:01 : INFO] - Re_Smush_It_Task with attachment ID : 19946, autocreated on : September 30, 2022 09:08:32 
+[2022-09-30 09:16:01 : INFO] - 75 
+[2022-09-30 09:16:07 : INFO] - Task with ID 1 and type (smush) failed with error code invalid_response - The compression apparently succeeded, but WP-Optimize could not retrieve the compressed image from the remote server. 
+[2022-09-30 09:16:07 : INFO] - data: {"src":"http:\/\/par3.static.resmush.it\/cc2ec608aa7a924afbb720d85e1690c1\/_src_040404-700x179.jpg","dest":"http:\/\/par3.static.resmush.it\/cc2ec608aa7a924afbb720d85e1690c1\/040404-700x179.jpg","src_size":13042,"dest_size":11485,"percent":12,"output":"json","expires":"Fri, 30 Sep 2022 11:21:02 +0200","generator":"reSmush.it rev.3.0.4.20210124"} 
+[2022-09-30 09:16:07 : INFO] - Re_Smush_It_Task with attachment ID : 19946, autocreated on : September 30, 2022 09:08:32 
+[2022-09-30 09:16:07 : INFO] - 75 
+[2022-09-30 09:16:08 : INFO] - Re_Smush_It_Task with attachment ID : 19946, autocreated on : September 30, 2022 09:08:32 
+[2022-09-30 09:16:08 : INFO] - 75 
+[2022-09-30 09:16:10 : INFO] - Re_Smush_It_Task with attachment ID : 19946, autocreated on : September 30, 2022 09:08:32 
+[2022-09-30 09:16:10 : INFO] - 75 
+[2022-09-30 09:16:10 : INFO] - Successfully optimized the image - /var/www/akademily_de/wp-content/uploads/2022/09/040404.jpg.The file was compressed from 33.49 KB to 33.49 KB saving 0 percent using WP-Optimize 
+[2022-09-30 09:16:10 : INFO] - Completed processing task with ID : 1, and type 'smush' 
+[2022-09-30 09:16:10 : INFO] - Lock option (updraft_lock_smush, wp_options) released 
+[2022-09-30 09:16:10 : INFO] - Successfully processed the queue (smush). 1 tasks were processed out of 1. 
+[2022-09-30 09:16:10 : INFO] - Lock option (updraft_lock_smush, wp_options) was deleted from the database 
+[2022-09-30 09:16:10 : INFO] - Cleaning up tasks of type (smush). A total of 1 tasks will be deleted. 
+[2022-09-30 09:26:18 : INFO] - 
+ 
+[2022-09-30 09:26:18 : INFO] - Header for logs at time:  Fri, 30 Sep 2022 09:26:18 +0000 on https://akademily.de 
+[2022-09-30 09:26:18 : INFO] - WP: 5.8.1 
+[2022-09-30 09:26:18 : INFO] - PHP: 7.3.31 (fpm-fcgi, Linux vps11086.introserv.cloud 3.10.0-1160.45.1.el7.x86_64 #1 SMP Wed Oct 13 17:20:51 UTC 2021 x86_64) 
+[2022-09-30 09:26:18 : INFO] - MySQL: 5.5.68 
+[2022-09-30 09:26:18 : INFO] - WPLANG: ru_RU 
+[2022-09-30 09:26:18 : INFO] - Server: nginx/1.20.1 
+[2022-09-30 09:26:18 : INFO] - Outbound connections: N 
+[2022-09-30 09:26:18 : INFO] - safe_mode: 0 
+[2022-09-30 09:26:18 : INFO] - max_execution_time: 300 
+[2022-09-30 09:26:18 : INFO] - memory_limit: 128M (used: 51.6M | 16.5M) 
+[2022-09-30 09:26:18 : INFO] - multisite: N 
+[2022-09-30 09:26:18 : INFO] - openssl: OpenSSL 1.0.2k  26 Jan 2017 
+[2022-09-30 09:26:18 : INFO] - The queue for tasks of type "smush" is empty. Aborting! 

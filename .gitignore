@@ -1,0 +1,9 @@
+# Ignore them file
+source/node_modules
+Thumbs.db
+*.DS_Store
+source/package-lock.json
+debug.log
+source/src/Feedback.php
+source/.vscode
+.vscode

@@ -1,0 +1,14 @@
+.single-breadcrumb {
+	margin-bottom: 50px;
+	font-weight: 700;
+  border-bottom: 1px solid #d5e7ff;
+  padding-bottom: 5px;
+
+	a {
+		color: #445664;
+	}
+}
+
+.breadcrumb_last {
+	color: $red;
+}

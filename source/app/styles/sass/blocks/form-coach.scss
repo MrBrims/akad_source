@@ -1,0 +1,61 @@
+.form-coach {
+	&__guarant {
+		color: #325D9C;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+		text-transform: uppercase;
+		text-align: center;
+		margin: 16px 0;
+	}
+
+	&__guarant-items {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 10px;
+		margin-bottom: 25px;
+	}
+
+	&__guarant-item {
+		flex: 1 1 130px;
+		font-family: $titlefont;
+		color: #325D9C;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 18px;
+		text-decoration-line: underline;
+		display: flex;
+		gap: 7px;
+		align-items: center;
+		cursor: pointer;
+
+		svg {
+			flex-shrink: 0;
+		}
+	}
+
+	&__guarant-pay {
+		display: flex;
+		gap: 8px;
+		justify-content: center;
+
+		div {
+			width: 32px;
+			height: 16px;
+			border: 1px solid #FAFAFA;
+			background: #FFF;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
+
+@media (max-width: 380px) {
+	.form-coach {
+		&__guarant-pay {
+			flex-wrap: wrap;
+		}
+	}
+}

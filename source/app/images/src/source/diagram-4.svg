@@ -1,0 +1,35 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="002-quote" clip-path="url(#clip0_362_3330)">
+<g id="Quote">
+<g id="Group">
+<path id="Vector" d="M4.375 7.4375H0V4.15625C0 2.34697 1.47197 0.875 3.28125 0.875H4.375V3.0625H3.28125C2.67816 3.0625 2.1875 3.55316 2.1875 4.15625V5.25H4.375V7.4375Z" fill="white"/>
+</g>
+<g id="Group_2">
+<path id="Vector_2" d="M10.9375 7.4375H6.5625V4.15625C6.5625 2.34697 8.03447 0.875 9.84375 0.875H10.9375V3.0625H9.84375C9.24066 3.0625 8.75 3.55316 8.75 4.15625V5.25H10.9375V7.4375Z" fill="white"/>
+</g>
+<g id="Group_3">
+<path id="Vector_3" d="M24.7188 27.125H23.625V24.9375H24.7188C25.3218 24.9375 25.8125 24.4468 25.8125 23.8438V22.75H23.625V20.5625H28V23.8438C28 25.653 26.528 27.125 24.7188 27.125Z" fill="white"/>
+</g>
+<g id="Group_4">
+<path id="Vector_4" d="M18.1562 27.125H17.0625V24.9375H18.1562C18.7593 24.9375 19.25 24.4468 19.25 23.8438V22.75H17.0625V20.5625H21.4375V23.8438C21.4375 25.653 19.9655 27.125 18.1562 27.125Z" fill="white"/>
+</g>
+<g id="Group_5">
+<path id="Vector_5" d="M13.125 3.0625H28V5.25H13.125V3.0625Z" fill="white"/>
+</g>
+<g id="Group_6">
+<path id="Vector_6" d="M0 22.75H14.875V24.9375H0V22.75Z" fill="white"/>
+</g>
+<g id="Group_7">
+<path id="Vector_7" d="M0 16.1875H28V18.375H0V16.1875Z" fill="white"/>
+</g>
+<g id="Group_8">
+<path id="Vector_8" d="M0 9.625H28V11.8125H0V9.625Z" fill="white"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_362_3330">
+<rect width="28" height="28" fill="white"/>
+</clipPath>
+</defs>
+</svg>

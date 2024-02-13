@@ -1,0 +1,80 @@
+.cooperation {
+    &__title {}
+
+    &__items {
+        --gap: 25px;
+        --elements: 2;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap);
+
+    }
+
+    &__item {
+        border-radius: 8px;
+        border: 1px solid #BBD1DC;
+        background: #FFF;
+        width: $layout;
+        padding: 16px 24px;
+    }
+
+    &__item-head {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    &__item-icon {
+        width: 32px;
+        height: 32px;
+        object-fit: cover;
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+    }
+
+    &__item-title {
+        max-width: fit-content;
+        padding-left: 55px;
+        position: relative;
+        color: #002E5D;
+        font-size: 20px;
+        font-weight: 500;
+        text-transform: uppercase;
+
+        &::before {
+            @include bgbefore;
+            left: 0;
+            width: 48px;
+            height: 48px;
+            background-image: url(../images/icons/cooperation-title-decore.svg);
+        }
+
+    }
+
+    &__text {
+        color: #445664;
+        font-size: 16px;
+    }
+}
+
+@media (max-width:920px) {
+    .cooperation {
+        &__items {
+            --elements: 1;
+        }
+    }
+}
+
+@media (max-width:520px) {
+    .cooperation {
+        &__item {
+            padding: 15px 10px;
+        }
+
+        &__item-title {
+            font-size: 18px;
+        }
+    }
+}

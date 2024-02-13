@@ -1,0 +1,38 @@
+.rich-text {
+    margin-top: 0;
+    h2 {
+        color: $titlecolor;
+        @include fluidMarginT(40px, 80px, 480px, 1024px, 80px);
+        @include fluidMarginB(20px, 25px, 480px, 1024px, 25px);
+    }
+
+    h3,
+    h4 {
+        color: $titlecolor;
+        margin-top: 25px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 15px;
+    }
+
+    ul {
+        padding-left: 20px;
+        list-style-type: disc;
+    }
+
+    ol {
+        padding-left: 20px;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    .faq__inner-title,
+    .page-author__name,
+    .main-faq__inner-title {
+        margin: 0;
+    }
+}

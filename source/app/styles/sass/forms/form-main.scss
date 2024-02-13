@@ -1,0 +1,50 @@
+.form-main {
+    &__item-box {
+        margin-bottom: 15px;
+    }
+
+    &__terxtarea {
+        display: block;
+        width: 100%;
+    }
+
+    .form-main__theme {
+        min-height: 120px;
+    }
+
+    .form-main__komment {
+        min-height: 100px;
+    }
+
+    &__btn {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+				margin-top: 30px;
+        text-transform: uppercase;
+        border: none;
+    }
+
+    &__text-protect {
+        position: relative;
+        text-align: center;
+        padding-left: 25px;
+        font-size: 12px;
+        max-width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+
+        &::before {
+            @include bgbefore;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            background-image: url(../images/icons/check-protect.svg);
+        }
+
+        span {
+            color: $red;
+            font-weight: 700;
+        }
+    }
+}
