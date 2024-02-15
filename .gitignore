@@ -1,5 +1,5 @@
 # Ignore them file
-source/node_modules
+**/node_modules
 Thumbs.db
 *.DS_Store
 source/package-lock.json
@@ -7,3 +7,4 @@ debug.log
 **/src/Feedback.php
 source/.vscode
 .vscode
+wp-content/themes/akademily**
