@@ -4,6 +4,6 @@ Thumbs.db
 *.DS_Store
 source/package-lock.json
 debug.log
-source/src/Feedback.php
+**/src/Feedback.php
 source/.vscode
 .vscode
