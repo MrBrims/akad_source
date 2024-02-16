@@ -4,11 +4,13 @@
 define('DE_PATH', __DIR__);
 define('DE_URI', get_template_directory_uri());
 define('DE_HOMEPAGE', get_option('page_on_front'));
+define('SITE_NAME', 'Akademily.de');
 define('TYPES', json_decode(file_get_contents(DE_URI . '/data/types.json'), true));
 define('SPEC', json_decode(file_get_contents(DE_URI . '/data/spec.json'), true));
 
 
 /** Settings WordPress */
+require_once 'src/PrivateConstants.php';
 require_once 'src/General.php';
 require_once 'src/Helpers.php';
 require_once 'src/Shortcodes.php';
