@@ -23,7 +23,7 @@ import postCss from 'gulp-postcss'
 import cssnano from 'cssnano'
 import autoprefixer from 'autoprefixer'
 import imagemin from 'gulp-imagemin'
-import webp          from 'gulp-webp'
+import webp from 'gulp-webp'
 import ttf2woff2 from 'gulp-ttf2woff2'
 import changed from 'gulp-changed'
 import concat from 'gulp-concat'
@@ -32,37 +32,47 @@ import { deleteAsync } from 'del'
 
 function scripts() {
 	return src(['app/js/*.js', '!app/js/*.min.js'])
-		.pipe(webpackStream({
-			mode: 'production',
-			performance: { hints: false },
-			plugins: [
-				new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery' }), // jQuery (npm i jquery)
-			],
-			module: {
-				rules: [
-					{
-						test: /\.m?js$/,
-						exclude: /(node_modules)/,
-						use: {
-							loader: 'babel-loader',
-							options: {
-								presets: ['@babel/preset-env'],
-								plugins: ['babel-plugin-root-import']
-							}
-						}
-					}
-				]
-			},
-			optimization: {
-				minimize: true,
-				minimizer: [
-					new TerserPlugin({
-						terserOptions: { format: { comments: false } },
-						extractComments: false
-					})
-				]
-			},
-		}, webpack)).on('error', (err) => {
+		.pipe(
+			webpackStream(
+				{
+					mode: 'production',
+					performance: { hints: false },
+					plugins: [
+						new webpack.ProvidePlugin({
+							$: 'jquery',
+							jQuery: 'jquery',
+							'window.jQuery': 'jquery',
+						}), // jQuery (npm i jquery)
+					],
+					module: {
+						rules: [
+							{
+								test: /\.m?js$/,
+								exclude: /(node_modules)/,
+								use: {
+									loader: 'babel-loader',
+									options: {
+										presets: ['@babel/preset-env'],
+										plugins: ['babel-plugin-root-import'],
+									},
+								},
+							},
+						],
+					},
+					optimization: {
+						minimize: true,
+						minimizer: [
+							new TerserPlugin({
+								terserOptions: { format: { comments: false } },
+								extractComments: false,
+							}),
+						],
+					},
+				},
+				webpack
+			)
+		)
+		.on('error', err => {
 			this.emit('end')
 		})
 		.pipe(concat('app.min.js'))
@@ -70,13 +80,20 @@ function scripts() {
 }
 
 function styles() {
-	return src([`app/styles/${preprocessor}/*.*`, `!app/styles/${preprocessor}/_*.*`])
+	return src([
+		`app/styles/${preprocessor}/*.*`,
+		`!app/styles/${preprocessor}/_*.*`,
+	])
 		.pipe(eval(`${preprocessor}glob`)())
 		.pipe(eval(preprocessor)({ 'include css': true }))
-		.pipe(postCss([
-			autoprefixer({ grid: 'autoplace' }),
-			cssnano({ preset: ['default', { discardComments: { removeAll: true } }] })
-		]))
+		.pipe(
+			postCss([
+				autoprefixer({ grid: 'autoplace' }),
+				cssnano({
+					preset: ['default', { discardComments: { removeAll: true } }],
+				}),
+			])
+		)
 		.pipe(concat('app.min.css'))
 		.pipe(dest(`../wp-content/themes/${themname}/resources/css/`))
 }
@@ -95,6 +112,7 @@ function images() {
 
 function imagesWebp() {
 	return src(['app/images/dist/**/*'])
+		.pipe(changed('app/images/dist'))
 		.pipe(webp())
 		.pipe(dest(`../wp-content/themes/${themname}/resources/images/`))
 }
@@ -107,13 +125,21 @@ function fontWoff() {
 }
 
 function phpDest() {
-	return src(['**/**/*.php', '**/**/*.json'])
+	return src(['**/**/*.php'])
+		.pipe(changed('**/**/*.php'))
 		.pipe(dest(`../wp-content/themes/${themname}/`))
 }
 
+function jsonDest() {
+	return src(['data/**/*.json'])
+		.pipe(changed('data/**/*.json'))
+		.pipe(dest(`../wp-content/themes/${themname}/data`))
+}
+
 function otherDest() {
-	return src(['style.css', 'screenshot.png'])
-		.pipe(dest(`../wp-content/themes/${themname}/`))
+	return src(['style.css', 'screenshot.png']).pipe(
+		dest(`../wp-content/themes/${themname}/`)
+	)
 }
 
 async function cleandist() {
@@ -121,33 +147,84 @@ async function cleandist() {
 }
 
 function deploy() {
-	return src('assets/')
-		.pipe(rsync({
+	return src('assets/').pipe(
+		rsync({
 			root: 'assets/',
 			hostname: 'username@yousite.com',
 			destination: 'yousite/public_html/',
 			// clean: true, // Mirror copy with file deletion
-			include: [/* '*.htaccess' */], // Included files to deploy,
+			include: [
+				/* '*.htaccess' */
+			], // Included files to deploy,
 			exclude: ['**/Thumbs.db', '**/*.DS_Store'],
 			recursive: true,
 			archive: true,
 			silent: false,
-			compress: true
-		}))
+			compress: true,
+		})
+	)
 }
 
 function startwatch() {
 	watch('**/**/*.php', { usePolling: true }, phpDest)
+	watch('data/**/*.json', { usePolling: true }, jsonDest)
 	watch(`app/styles/${preprocessor}/**/*`, { usePolling: true }, styles)
-	watch(['app/js/**/*.js', 'app/libs/**/*.js', '!app/js/**/*.min.js'], { usePolling: true }, scripts)
+	watch(
+		['app/js/**/*.js', 'app/libs/**/*.js', '!app/js/**/*.min.js'],
+		{ usePolling: true },
+		scripts
+	)
 	watch('app/images/src/**/*.svg', { usePolling: true }, imagesSvg)
-	watch(['app/images/src/**/*', '!app/images/**/*.svg'], { usePolling: true }, images)
+	watch(
+		['app/images/src/**/*', '!app/images/**/*.svg'],
+		{ usePolling: true },
+		images
+	)
 	watch('app/images/dist/**/*', { usePolling: true }, imagesWebp)
 	watch('app/fonts/*', { usePolling: true }, fontWoff)
 }
 
-export { scripts, styles, imagesSvg, images, imagesWebp, fontWoff, phpDest, otherDest, deploy }
-export let assets = series(scripts, styles, images, fontWoff, phpDest, otherDest)
-export let build = series(cleandist, images, fontWoff, scripts, styles, phpDest, otherDest)
+export {
+	scripts,
+	styles,
+	imagesSvg,
+	images,
+	imagesWebp,
+	fontWoff,
+	phpDest,
+	jsonDest,
+	otherDest,
+	deploy,
+}
+export let assets = series(
+	scripts,
+	styles,
+	images,
+	fontWoff,
+	phpDest,
+	jsonDest,
+	otherDest
+)
+export let build = series(
+	cleandist,
+	images,
+	fontWoff,
+	scripts,
+	styles,
+	phpDest,
+	jsonDest,
+	otherDest
+)
 
-export default series(scripts, styles, imagesSvg, images, imagesWebp, fontWoff, phpDest, otherDest, startwatch)
+export default series(
+	scripts,
+	styles,
+	imagesSvg,
+	images,
+	imagesWebp,
+	fontWoff,
+	phpDest,
+	jsonDest,
+	otherDest,
+	startwatch
+)
