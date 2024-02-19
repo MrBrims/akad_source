@@ -10,7 +10,6 @@ define('SPEC', json_decode(file_get_contents(DE_URI . '/data/spec.json'), true))
 
 
 /** Settings WordPress */
-require_once 'src/PrivateConstants.php';
 require_once 'src/General.php';
 require_once 'src/Helpers.php';
 require_once 'src/Shortcodes.php';
@@ -26,6 +25,7 @@ require_once 'src/CarbonFields/PostMeta.php';
 require_once 'src/CarbonFields/MainMeta.php';
 
 /** Feedback */
+require_once 'src/PrivateConstants.php';
 require_once 'src/Feedback.php';
 
 /*
