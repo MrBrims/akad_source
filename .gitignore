@@ -1,9 +1,11 @@
 # Ignore them file
-source/node_modules
+**/node_modules
 Thumbs.db
 *.DS_Store
 source/package-lock.json
 debug.log
-source/src/Feedback.php
+**/src/Feedback**.php
+**/src/PrivateConstants.php
 source/.vscode
 .vscode
+wp-content/themes/**
