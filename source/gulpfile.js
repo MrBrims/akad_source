@@ -112,14 +112,12 @@ function images() {
 
 function imagesWebp() {
 	return src(['app/images/dist/**/*'])
-		.pipe(changed('app/images/dist'))
 		.pipe(webp())
 		.pipe(dest(`../wp-content/themes/${themname}/resources/images/`))
 }
 
 function fontWoff() {
 	return src(['app/fonts/**/*.ttf'])
-		.pipe(changed('app/fonts/dist'))
 		.pipe(ttf2woff2())
 		.pipe(dest(`../wp-content/themes/${themname}/resources/fonts/`))
 }
@@ -143,7 +141,7 @@ function otherDest() {
 }
 
 async function cleandist() {
-	await deleteAsync('assets/**/*', { force: true })
+	await deleteAsync(`../wp-content/themes/${themname}/**/*`, { force: true })
 }
 
 function deploy() {
@@ -217,6 +215,7 @@ export let build = series(
 )
 
 export default series(
+	cleandist,
 	scripts,
 	styles,
 	imagesSvg,
