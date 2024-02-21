@@ -300,7 +300,45 @@ class CommonMeta
 				->set_layout('tabbed-horizontal')
 				->setup_labels(['singular_name' => 'отзовик'])
 				->add_fields([
-					Field::make('image', 'footer_rev_icons', __('Иконка способа отзовика'))
+					Field::make('image', 'footer_rev_icons', __('Иконка отзовика'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(60),
+					Field::make('text', 'footer_rev_link', __('Ссылка на отзовик'))
+						->set_width(40),
+				]),
+			Field::make('rich_text', 'footer_uber_links', __('Ссылки Über uns'))
+				->set_width(30),
+			Field::make('rich_text', 'footer_blog_links', __('Ссылки Blog'))
+				->set_width(30),
+			Field::make('rich_text', 'footer_other_links', __('Прочие ссылки'))
+				->set_width(30),
+			Field::make('rich_text', 'footer_arbeit_links', __('Wir arbeiten in'))
+				->set_width(50),
+			Field::make('rich_text', 'footer_ghost_links', __('GHOSTWRITING'))
+				->set_width(50),
+			Field::make('rich_text', 'footer_fach_links', __('Fachbereiche'))
+				->set_width(50),
+			Field::make('rich_text', 'footer_lekt_links', __('Lektorat & Korrekturlesen'))
+				->set_width(50),
+			Field::make('rich_text', 'footer_and_links', __('Andere Dienste'))
+				->set_width(50),
+			Field::make('complex', 'footer_icons_plag', __('Иконки плагиата'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'иконку'])
+				->set_width(60)
+				->add_fields([
+					Field::make('image', 'footer_icon_plag', __('Иконки'))
+						->set_type('image')
+						->set_value_type('url'),
+				]),
+			Field::make('rich_text', 'footer_hilfe_links', __('Hilfe & coaching'))
+				->set_width(50),
+			Field::make('complex', 'footer_icons_trust', __('Траст бейджи'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'бейдж'])
+				->add_fields([
+					Field::make('image', 'footer_icon_trust', __('Бейджи'))
 						->set_type('image')
 						->set_value_type('url'),
 				])

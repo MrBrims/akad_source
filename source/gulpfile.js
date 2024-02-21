@@ -31,7 +31,7 @@ import rsync from 'gulp-rsync'
 import { deleteAsync } from 'del'
 
 function scripts() {
-	return src(['app/js/*.js', '!app/js/*.min.js'])
+	return src(['app/js/*.js', '!app/js/*.min.js', '!app/js/admin.js'])
 		.pipe(
 			webpackStream(
 				{
@@ -134,6 +134,18 @@ function jsonDest() {
 		.pipe(dest(`../wp-content/themes/${themname}/data`))
 }
 
+function adminJs() {
+	return src(['app/js/admin.js']).pipe(
+		dest(`../wp-content/themes/${themname}/resources/js`)
+	)
+}
+
+function adminCss() {
+	return src(['app/styles/admin.css']).pipe(
+		dest(`../wp-content/themes/${themname}/resources/css`)
+	)
+}
+
 function otherDest() {
 	return src(['style.css', 'screenshot.png']).pipe(
 		dest(`../wp-content/themes/${themname}/`)
@@ -167,6 +179,8 @@ function startwatch() {
 	watch('**/**/*.php', { usePolling: true }, phpDest)
 	watch('data/**/*.json', { usePolling: true }, jsonDest)
 	watch(`app/styles/${preprocessor}/**/*`, { usePolling: true }, styles)
+	watch(`app/js/admin.js`, { usePolling: true }, adminJs)
+	watch(`app/styles/admin.css`, { usePolling: true }, adminCss)
 	watch(
 		['app/js/**/*.js', 'app/libs/**/*.js', '!app/js/**/*.min.js'],
 		{ usePolling: true },
@@ -224,6 +238,8 @@ export default series(
 	fontWoff,
 	phpDest,
 	jsonDest,
+	adminJs,
+	adminCss,
 	otherDest,
 	startwatch
 )
