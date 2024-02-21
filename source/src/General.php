@@ -71,7 +71,7 @@ class General
 		add_filter('wp_check_filetype_and_ext', [$this, 'fix_svg_mime_type'], 10, 5);
 	}
 
-	// Добавиление utm_source в куки
+	// Добавление utm_source в куки
 	public static function utmSource()
 	{
 		if (isset($_GET['utm_source'])) {

@@ -18,7 +18,7 @@ class Shortcodes
 
 	public function mceAddButtons($pluginArray)
 	{
-		$pluginArray['mcButtons'] = DE_URI . '/assets/js/admin.js';
+		$pluginArray['mcButtons'] = DE_URI . '/resources/js/admin.js';
 		return $pluginArray;
 	}
 
