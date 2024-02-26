@@ -41,11 +41,12 @@ export function mailerForm() {
     }
 
     for (let form of forms) {
+      form.action = 'sendForm';
       form.addEventListener('submit', function (e) {
         e.preventDefault();
 
         let data = new FormData(form);
-
+        data.append('action', 'sendForm');
         // Класс для визуализации формы при отправке
         form.classList.add('--sending');
 
@@ -62,10 +63,7 @@ export function mailerForm() {
 
         fetch('/wp-admin/admin-ajax.php', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-          },
-          body: 'action=sendForm&' + getQueryString(data),
+          body: data,
           credentials: 'same-origin'
         })
           .then(response => response.json())

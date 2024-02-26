@@ -9,3 +9,5 @@ debug.log
 source/.vscode
 .vscode
 wp-content/themes/**
+wp-content/cache/**
+wp-content/wp-rocket-config/**
