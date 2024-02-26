@@ -18,6 +18,10 @@
 			</span>
 			<input class="form-litle__input phone-input input" name="phone" type="tel">
 		</div>
+		<div class="form-litle__item">
+			<span class="form__text">File <span class="form__tippy" data-tippy-content="ZIP, DOCX oder PDF (&lt;50mb)"></span></span>
+			<input class="form-litle__input input" name="file" type="file">
+		</div>
 	</div>
 	<input class="form__btn btn" type="submit" value="UNVERBINDLICH ANFRAGEN">
 	<h4 class="form-coach__guarant">
