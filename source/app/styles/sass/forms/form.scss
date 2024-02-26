@@ -40,6 +40,10 @@
 
   &__file-custom {
     position: relative;
+    color: #BBD1DC;
+    &.loaded {
+      color: #000000;
+    }
     input {
       display: none;
     }
