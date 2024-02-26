@@ -36,7 +36,25 @@
     color: #002E5D;
     display: block;
     margin-bottom: 8px;
+  }
 
+  &__file-custom {
+    position: relative;
+    input {
+      display: none;
+    }
+
+    &::before {
+      @include bgbefore;
+      width: 40px;
+      height: 40px;
+      right: 0;
+      background-image: url(../images/icons/file-form.svg);
+      background-color: $accent;
+      cursor: pointer;
+      border-radius: 0 2px 2px 0;
+      background-size: 16px;
+    }
   }
 
   &__required-field {

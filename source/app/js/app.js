@@ -19,6 +19,7 @@ import { mailerForm } from '~/app/libs/_mailerForm.js'
 import { gift } from '~/app/libs/_gift.js'
 import { revLoad } from '~/app/libs/_revLoad.js'
 import { scrollVisible } from '~/app/libs/_toTop.js'
+import { fileLabel } from '~/app/libs/_fileLabel.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Lazy load map
@@ -47,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Custom datepicker
 	inputDateCustom()
+
+	// Custom file label
+	fileLabel()
 
 	// Custom phone input
 	inputPhoneCustom()
