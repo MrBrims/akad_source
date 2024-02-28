@@ -12,7 +12,7 @@ import webpackStream from 'webpack-stream'
 import webpack from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 import gulpSass from 'gulp-sass'
-import dartSass from 'sass'
+import * as dartSass from 'sass'
 import sassglob from 'gulp-sass-glob'
 const sass = gulpSass(dartSass)
 import less from 'gulp-less'
@@ -32,6 +32,7 @@ import { deleteAsync } from 'del'
 
 function scripts() {
 	return src(['app/js/*.js', '!app/js/*.min.js', '!app/js/admin.js'])
+		.pipe(changed(`../wp-content/themes/${themname}/resources/js/`))
 		.pipe(
 			webpackStream(
 				{
@@ -84,11 +85,12 @@ function styles() {
 		`app/styles/${preprocessor}/*.*`,
 		`!app/styles/${preprocessor}/_*.*`,
 	])
+		.pipe(changed(`../wp-content/themes/${themname}/resources/css/`))
 		.pipe(eval(`${preprocessor}glob`)())
 		.pipe(eval(preprocessor)({ 'include css': true }))
 		.pipe(
 			postCss([
-				autoprefixer({ grid: 'autoplace' }),
+				autoprefixer({ grid: 'true' }),
 				cssnano({
 					preset: ['default', { discardComments: { removeAll: true } }],
 				}),
@@ -100,56 +102,68 @@ function styles() {
 
 function imagesSvg() {
 	return src(['app/images/src/**/*.svg'])
+		.pipe(changed(`../wp-content/themes/${themname}/resources/images/`))
 		.pipe(imagemin())
 		.pipe(dest(`../wp-content/themes/${themname}/resources/images/`))
 }
 
 function images() {
 	return src(['app/images/src/**/*', '!app/images/src/**/*.svg'])
+		.pipe(changed(`app/images/dist`))
 		.pipe(imagemin())
 		.pipe(dest(`app/images/dist`))
 }
 
 function imagesWebp() {
 	return src(['app/images/dist/**/*'])
+		.pipe(
+			changed(`../wp-content/themes/${themname}/resources/images/`, {
+				extension: '.webp',
+			})
+		)
 		.pipe(webp())
 		.pipe(dest(`../wp-content/themes/${themname}/resources/images/`))
 }
 
 function fontWoff() {
 	return src(['app/fonts/**/*.ttf'])
+		.pipe(
+			changed(`../wp-content/themes/${themname}/resources/fonts/`, {
+				extension: '.woff2',
+			})
+		)
 		.pipe(ttf2woff2())
 		.pipe(dest(`../wp-content/themes/${themname}/resources/fonts/`))
 }
 
 function phpDest() {
 	return src(['**/**/*.php'])
-		.pipe(changed('**/**/*.php'))
+		.pipe(changed(`../wp-content/themes/${themname}/`))
 		.pipe(dest(`../wp-content/themes/${themname}/`))
 }
 
 function jsonDest() {
 	return src(['data/**/*.json'])
-		.pipe(changed('data/**/*.json'))
+		.pipe(changed(`../wp-content/themes/${themname}/data`))
 		.pipe(dest(`../wp-content/themes/${themname}/data`))
 }
 
 function adminJs() {
-	return src(['app/js/admin.js']).pipe(
-		dest(`../wp-content/themes/${themname}/resources/js`)
-	)
+	return src(['app/js/admin.js'])
+		.pipe(changed(`../wp-content/themes/${themname}/resources/js`))
+		.pipe(dest(`../wp-content/themes/${themname}/resources/js`))
 }
 
 function adminCss() {
-	return src(['app/styles/admin.css']).pipe(
-		dest(`../wp-content/themes/${themname}/resources/css`)
-	)
+	return src(['app/styles/admin.css'])
+		.pipe(changed(`../wp-content/themes/${themname}/resources/css`))
+		.pipe(dest(`../wp-content/themes/${themname}/resources/css`))
 }
 
 function otherDest() {
-	return src(['style.css', 'screenshot.png']).pipe(
-		dest(`../wp-content/themes/${themname}/`)
-	)
+	return src(['style.css', 'screenshot.png'])
+		.pipe(changed(`../wp-content/themes/${themname}/`))
+		.pipe(dest(`../wp-content/themes/${themname}/`))
 }
 
 async function cleandist() {
@@ -219,17 +233,21 @@ export let assets = series(
 )
 export let build = series(
 	cleandist,
-	images,
-	fontWoff,
 	scripts,
 	styles,
+	imagesSvg,
+	images,
+	imagesWebp,
+	fontWoff,
 	phpDest,
 	jsonDest,
-	otherDest
+	adminJs,
+	adminCss,
+	otherDest,
+	startwatch
 )
 
 export default series(
-	cleandist,
 	scripts,
 	styles,
 	imagesSvg,
