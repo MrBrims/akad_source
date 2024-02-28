@@ -42,7 +42,7 @@
 					</clipPath>
 				</defs>
 			</svg>
-			<span>Datenschutz</span>
+			<span data-tippy-content="<h4>Vertraulichkeit über alles</h4> Wir legen großen Wert auf Privatsphäre und verbreiten keine Informationen von unseren Kunden. Deshalb können Sie sicher sein, dass Ihre persönlichen Daten wie etwa Name, E-Mail oder Telefonnummer an keine Dritten weitergeleitet werden, wenn Sie unser Kunde sind. ">Datenschutz</span>
 		</div>
 		<div class="form-coach__guarant-item">
 			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -55,27 +55,27 @@
 					</clipPath>
 				</defs>
 			</svg>
-			<span>Top-Service</span>
+			<span data-tippy-content="<h4>Bei uns sind nur erstklassige Autoren mit jahrelangen Arbeitserfahrungen tätig </h4> Unsere hochqualifizierten Fachleute überprüfen jede erstellte Arbeit, bevor sie dem Auftraggeber übergeben wird. Dadurch wird garantiert, dass unsere Kunden nur fehlerfreie und im akademischen Stil geschriebene Arbeiten erhalten ">Top Qualität</span>
 		</div>
 		<div class="form-coach__guarant-item">
 			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
 				<path d="M10.7325 8.78375C10.7325 7.71964 9.8644 6.85156 8.80031 6.85156C8.06823 6.85156 7.44017 7.26361 7.11216 7.86765H4.88792C4.55991 7.26361 3.93185 6.85156 3.19977 6.85156C2.13568 6.85156 1.26758 7.71964 1.26758 8.78375C1.26758 9.85185 2.13568 10.7199 3.19977 10.7199C4.26386 10.7199 5.13196 9.85185 5.13196 8.78375C5.13196 8.74373 5.12395 8.70775 5.11995 8.66773H6.88013C6.87612 8.70775 6.86811 8.74373 6.86811 8.78375C6.86811 9.85185 7.73621 10.7199 8.80031 10.7199C9.8644 10.7199 10.7325 9.85185 10.7325 8.78375Z" fill="#325D9C" />
 				<path d="M11.7086 5.87107C11.0805 5.69505 10.4444 5.54704 9.80838 5.42703L9.19231 2.32273C9.16831 2.20673 9.0963 2.10672 8.99629 2.05071C8.89228 1.9947 8.76827 1.98671 8.66027 2.02671C6.94409 2.67477 5.05592 2.67477 3.33974 2.02671C3.23175 1.98271 3.10774 1.9947 3.00773 2.05071C2.90372 2.10672 2.83172 2.20673 2.80771 2.32273L2.19164 5.42703C1.55559 5.54704 0.919521 5.69505 0.287453 5.87107C0.0754449 5.93509 -0.0445626 6.1551 0.0154312 6.36711C0.0754449 6.57914 0.295462 6.69915 0.507494 6.64314C4.09983 5.61506 7.90019 5.61506 11.4925 6.64314C11.5285 6.65115 11.5645 6.65916 11.6005 6.65916C11.7766 6.65916 11.9366 6.54313 11.9846 6.36711C12.0446 6.1551 11.9246 5.93509 11.7086 5.87107Z" fill="#325D9C" />
 			</svg>
-			<span>Diskretion</span>
+			<span data-tippy-content="Wir schätzen unsere Kunden und unseren guten Ruf. Deshalb verpflichten wir uns, Ihnen die fertige Arbeit genau zum vereinbarten Termin oder etwas früher zu übergeben. Sollte dies nicht der Fall sein, garantieren wir Ihnen die ganze Geldsumme zurückzuzahlen.">Termingerechte Lieferung</span>
 		</div>
 		<div class="form-coach__guarant-item">
-			<svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<g clip-path="url(#a)" fill="#325D9C">
-					<path d="M6.6 0h-6C.24 0 0 .24 0 .6v10.8c0 .36.24.6.6.6h7.8c.36 0 .6-.24.6-.6v-9L6.6 0ZM1.8 1.8H6c.36 0 .6.24.6.6S6.36 3 6 3H1.8c-.36 0-.6-.24-.6-.6s.24-.6.6-.6Zm5.4 8.4H1.8c-.36 0-.6-.24-.6-.6s.24-.6.6-.6h5.4c.36 0 .6.24.6.6s-.3.6-.6.6Zm0-2.4H1.8c-.36 0-.6-.24-.6-.6s.24-.6.6-.6h5.4c.36 0 .6.24.6.6s-.3.6-.6.6Zm0-2.4H1.8c-.36 0-.6-.24-.6-.6s.24-.6.6-.6h5.4c.36 0 .6.24.6.6s-.3.6-.6.6Zm3 4.2.9 2.4.9-2.4h-1.8ZM11.7 0h-1.2c-.18 0-.3.12-.3.3v8.1H12V.3c0-.18-.12-.3-.3-.3Z" />
+			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+				<g clip-path="url(#clip0_1057_8263)">
+					<path d="M11 0H6.84364C6.56869 0 6.1844 0.159286 5.99013 0.353406L0.291817 6.05169C-0.0972722 6.44034 -0.0972722 7.07755 0.291817 7.46573L4.53468 11.7084C4.92289 12.0971 5.55947 12.0971 5.94827 11.708L11.6466 6.01059C11.8407 5.8165 12 5.4316 12 5.15724V1.00004C12 0.450143 11.5498 0 11 0ZM8.99984 4.00002C8.44754 4.00002 7.9998 3.55181 7.9998 2.99998C7.9998 2.44724 8.44754 1.99994 8.99984 1.99994C9.55214 1.99994 10 2.44724 10 2.99998C10.0001 3.55181 9.55214 4.00002 8.99984 4.00002Z" fill="#325D9C" />
 				</g>
 				<defs>
-					<clipPath id="a">
-						<path fill="#fff" d="M0 0h12v12H0z" />
+					<clipPath id="clip0_1057_8263">
+						<rect width="12" height="12" fill="white" />
 					</clipPath>
 				</defs>
 			</svg>
-			<span>Schriftlicher Vertrag</span>
+			<span data-tippy-content="<h4>Anpassung an Ihr Budget</h4> Unter unseren Autoren gibt es Bachelors, Magister und Doktoren in verschiedenen Wissensbereichen, darum können Sie bei uns einen Autor gemäß Ihrem Budget finden. ">Transparente Preise</span>
 		</div>
 		<div class="form-coach__guarant-item">
 			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -89,7 +89,20 @@
 					</clipPath>
 				</defs>
 			</svg>
-			<span>Erfahrene Experten</span>
+			<span data-tippy-content="<h4>Ihr Text entspricht genau Ihren Hinweisen und Vorlagen</h4> Gemäß einer der von uns erbrachten Dienstleistungen gewährleisten wir unseren Kunden unbegrenzte kostenfreie Revisionen im Laufe der Erstellung ihrer Arbeiten und 2 Wochen nach der Übergabe. Für Bachelor-, Master-, Diplom- und Doktorarbeiten gilt diese Regel unbefristet.">Unbegrenzte kostenfreie Korrekturen</span>
+		</div>
+		<div class="form-coach__guarant-item">
+			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+				<g clip-path="url(#clip0_1057_8290)">
+					<path d="M10.1992 0H1.79922C1.43922 0 1.19922 0.24 1.19922 0.6V11.4C1.19922 11.76 1.43922 12 1.79922 12H10.1992C10.5592 12 10.7992 11.76 10.7992 11.4V0.6C10.7992 0.24 10.5592 0 10.1992 0ZM4.19922 1.2C5.21922 1.2 5.99922 1.98 5.99922 3C5.99922 3.3 5.93922 3.54 5.81922 3.78L7.01922 4.98C7.25922 5.22 7.25922 5.64 7.01922 5.82C6.65922 6.12 6.29922 5.94 6.17922 5.82L4.97922 4.62C4.73922 4.74 4.49922 4.8 4.19922 4.8C3.17922 4.8 2.39922 4.02 2.39922 3C2.39922 1.98 3.17922 1.2 4.19922 1.2ZM6.59922 10.8H2.99922C2.63922 10.8 2.39922 10.56 2.39922 10.2C2.39922 9.84 2.63922 9.6 2.99922 9.6H6.59922C6.95922 9.6 7.19922 9.84 7.19922 10.2C7.19922 10.56 6.95922 10.8 6.59922 10.8ZM8.99922 8.4H2.99922C2.63922 8.4 2.39922 8.16 2.39922 7.8C2.39922 7.44 2.63922 7.2 2.99922 7.2H8.99922C9.35922 7.2 9.59922 7.44 9.59922 7.8C9.59922 8.16 9.35922 8.4 8.99922 8.4Z" fill="#325D9C" />
+				</g>
+				<defs>
+					<clipPath id="clip0_1057_8290">
+						<rect width="12" height="12" fill="white" />
+					</clipPath>
+				</defs>
+			</svg>
+			<span data-tippy-content="<h4> Nur einzigartige Arbeiten für unsere Kunden</h4> Jede bestellte Arbeit wird von unseren Autoren individuell, mit Rücksicht auf Wünsche und Vorlagen des Auftraggebers geschrieben. Eine unserer Hauptanforderungen an Autoren – kein Plagiat. Alle fertigen Arbeiten werden mithilfe spezieller Programme auf Plagiat geprüft, deshalb können Sie sicher sein: Ihre Arbeit ist einzigartig und keiner auf der Welt hat ein zweites Exemplar."> Plagiatfreie Arbeiten</span>
 		</div>
 	</div>
 
