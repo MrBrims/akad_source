@@ -69,6 +69,29 @@ class General
 		// Загрузка svg
 		add_filter('upload_mimes', [$this, 'svgUploadAllow']);
 		add_filter('wp_check_filetype_and_ext', [$this, 'fix_svg_mime_type'], 10, 5);
+
+		// Скрыть стандартный редактор для страниц указанный в массиве
+		add_action('admin_init', [$this, 'hide_editor']);
+	}
+
+	// Скрыть стандартный редактор для страниц указанный в массиве
+	public function hide_editor()
+	{
+		$post_id = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : null);
+		if (!$post_id) return;
+
+		// Список страниц, для которых нужно скрыть редактор
+		$hide_editor_on_pages = array(
+			'bachelorarbeit',
+			'page-slug-1',
+			'page-slug-2',
+			// добавьте слаги страниц, для которых нужно скрыть редактор
+		);
+
+		$current_page = get_post($post_id);
+		if (in_array($current_page->post_name, $hide_editor_on_pages)) {
+			remove_post_type_support('page', 'editor');
+		}
 	}
 
 	// Добавление utm_source в куки

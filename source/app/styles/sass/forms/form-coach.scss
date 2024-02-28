@@ -39,10 +39,11 @@
 		display: flex;
 		gap: 8px;
 		justify-content: center;
+		flex-wrap: wrap;
 
 		div {
-			width: 32px;
-			height: 16px;
+			width: 40px;
+			height: auto;
 			border: 1px solid #FAFAFA;
 			background: #FFF;
 			display: flex;

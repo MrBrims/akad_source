@@ -11,31 +11,48 @@ get_header();
     <div class="container">
         <div class="inner">
             <div class="content">
-                <div class="rich-text section">
-                    <?php the_content(); ?>
-                </div>
                 <?php
-                get_template_part('parts/sections/price-list');
-                get_template_part('parts/sections/guarant');
-                get_template_part('parts/sections/text');
-                get_template_part('parts/sections/how-work');
+                $data = carbon_get_post_meta(get_the_ID(), 'ak_complex_fields_page');
+                // echo '<pre>';
+                // print_r($data);
+                // echo '</pre>';
+                foreach ($data as $key) {
+                    switch ($key['_type']) {
+                        case 'template_rich':
+                            if (!$key['ak_complex_rich_text']) {
+                                break;
+                            }
+                            include 'complex_blocks/rich-text.php';
+                            break;
+                        case 'template_global_select':
+                            if (!$key['ak_complex_global_select']) {
+                                break;
+                            }
+                            get_template_part($key['ak_complex_global_select']);
+                            break;
+                        case 'template_price':
+                            if (!$key['get_ak_complex_table_price']) {
+                                break;
+                            }
+                            include 'complex_blocks/table-price.php';
+                            break;
+                    }
+                }
+                get_template_part('parts/sections/main-faq');
                 ?>
             </div>
-            <aside class="sidebar">
+            <div class="sidebar">
                 <div class="team-vidget">
                     <?php get_template_part('parts/blocks/team'); ?>
                 </div>
-            </aside>
+            </div>
         </div>
+        <?php
+        get_template_part('parts/sections/message');
+        get_template_part('parts/sections/contact');
+        get_template_part('parts/shema/microdata');
+        ?>
     </div>
-    <?php
-    get_template_part('parts/sections/message');
-    get_template_part('parts/sections/reviews');
-    get_template_part('parts/sections/blog-slider');
-    get_template_part('parts/sections/main-faq');
-    get_template_part('parts/sections/contact');
-    get_template_part('parts/shema/microdata');
-    ?>
 </main>
 
 <?php get_footer(); ?>
