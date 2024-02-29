@@ -26,11 +26,24 @@ class ComplexFields
 					->set_layout('tabbed-vertical')
 					->setup_labels(['singular_name' => 'блок'])
 					->add_fields('template_rich', 'Текстовый блок', get_ak_complex_rich())
+					->set_header_template('
+					<% if (ak_complex_rich_text_name) { %>
+						<%- ak_complex_rich_text_name %>
+						<% } else { %>
+						<%- "Текстовый блок" %>
+					<% } %>
+					')
 					->add_fields('template_global_select', 'Глобальное поле', get_ak_complex_global_select())
+					->set_header_template('
+					<% if (ak_complex_global_select_name) { %>
+						<%- ak_complex_global_select_name %>
+						<% } else { %>
+						<%- "Глобальное поле" %>
+					<% } %>
+					')
 					->add_fields('template_price', 'Прайс', get_ak_complex_table_price())
 			])
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
-			// ->add_tab(__('Таблица прайса'), CommonMeta::priceList())
 			->add_tab(__('Звездочки в сниппете'), CommonMeta::microdataStar());
 	}
 }

@@ -10,16 +10,18 @@ import { niceSelectVanilla } from '~/app/libs/_niceSelecModule.js'
 import { showMore } from '~/app/libs/_showMore.js'
 import { swiperMudules } from '~/app/libs/_swiperMudules.js'
 import { tippyJs } from '~/app/libs/_tippyJs.js'
+import { tocPage } from '~/app/libs/_tocPage.js'
 // import { selectCustom } from '~/app/libs/_selectCustom.js'
 import { lazyLoad } from '~/app/libs/_lazyLoad.js'
 // import { adminIndentWp } from '~/app/libs/_adminIndentWp.js'
 import { mailerForm } from '~/app/libs/_mailerForm.js'
 // import { bakalavr } from '~/app/libs/_bakalavr.js'
 // import { footerLinks } from '~/app/libs/_footerLinks.js'
+import { fileLabel } from '~/app/libs/_fileLabel.js'
 import { gift } from '~/app/libs/_gift.js'
 import { revLoad } from '~/app/libs/_revLoad.js'
 import { scrollVisible } from '~/app/libs/_toTop.js'
-import { fileLabel } from '~/app/libs/_fileLabel.js'
+import Fancybox from '@fancyapps/ui'
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Lazy load map
@@ -30,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Popups
 	popup()
+
+	// Toc
+	tocPage()
 
 	// Отступ если есть wpadminbar
 	// adminIndentWp();
