@@ -3,11 +3,19 @@
 	@include fluidPaddingB(40px, 70px, 480px, 1024px, 70px);
 	padding-left: 10px;
 	padding-right: 10px;
-	background-image: url(../images/pattern.svg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
+
 	position: relative;
+
+	&::before {
+		content: "";
+		z-index: -1;
+		position: absolute;
+		inset: -30px -400px;
+		background-image: url(../images/pattern.svg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+	}
 
 	&__container {
 		background-color: #fff;
@@ -36,6 +44,10 @@
 
 @media (max-width: 980px) {
 	.message {
+		&::before {
+			inset: -10px 0;
+		}
+
 		&__container {
 			padding: 20px 40px;
 		}

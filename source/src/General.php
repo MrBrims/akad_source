@@ -72,6 +72,16 @@ class General
 
 		// Скрыть стандартный редактор для страниц указанный в массиве
 		add_action('admin_init', [$this, 'hide_editor']);
+
+		// Подключение js и css для админки
+		add_action('admin_enqueue_scripts', [$this, 'adminStyleScript'], 99);
+	}
+
+	// Подключение js и css для админки
+	public function adminStyleScript()
+	{
+		wp_enqueue_style('style-admin', get_template_directory_uri() . '/resources/css/admin.css');
+		wp_enqueue_script('script-admin', get_template_directory_uri() . '/resources/js/admin.js');
 	}
 
 	// Скрыть стандартный редактор для страниц указанный в массиве
