@@ -14,67 +14,28 @@
 		</svg>
 	</a>
 </div>
-
-<div class="gift">
-	<button class="gift__close">
-		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-			<g clip-path="url(#clip0_1054_6378)">
-				<rect x="2.40021" y="-5.34058e-05" width="30.547" height="3.39411" transform="rotate(45 2.40021 -5.34058e-05)" fill="#BBD1DC" />
-				<rect x="6.10352e-05" y="21.6001" width="30.547" height="3.39411" transform="rotate(-45 6.10352e-05 21.6001)" fill="#BBD1DC" />
-			</g>
-			<defs>
-				<clipPath id="clip0_1054_6378">
-					<rect width="24" height="24" fill="white" />
-				</clipPath>
-			</defs>
-		</svg>
-	</button>
-	<h4 class="gift__title">
-		Sonderangebot für Bachelorarbeiten und Masterarbeiten!
-	</h4>
-	<p class="gift__subtitle">
-		Bestellen Sie eine Bachelorarbeit oder eine Masterarbeit bis zum 29. Februar und wählen Sie selbst ein Geschenk!
-	</p>
-	<ul class="gift__list">
-		<li class="gift__list-item">
-			<span>Expose</span> <span>bis 3 Seiten</span>
-		</li>
-		<li class="gift__list-item">
-			<span>Coaching</span> <span>30 Min.</span>
-		</li>
-		<li class="gift__list-item">
-			<span>Präsentation</span> <span>7 Folien</span>
-		</li>
-	</ul>
-	<a class="gift__btn popup-link" href="#popup-form">
-		Jetzt erhalten!
-	</a>
-	<img class="gift__decor-img" src="<?php echo get_template_directory_uri(); ?>/resources/images/gift/gift-decor-yan-2024.svg" alt="gift">
-	<img class="gift__decor2-img" src="<?php echo get_template_directory_uri(); ?>/resources/images/gift/gift-decor-2-yan-2024.svg" alt="gift">
-</div>
-
-<div class="gift-mobile">
-	<img class="gift-mobile__btn" alt="gift box" src="<?php echo get_template_directory_uri(); ?>/resources/images/gift/box-gift-akad.svg">
-	<div class="gift-mobile__box">
-		<h4 class="gift-mobile__title">
-			Sonderangebot für Bachelorarbeiten und Masterarbeiten!
-		</h4>
-		<p class="gift-mobile__subtitle">
-			Bestellen Sie eine Bachelorarbeit oder eine Masterarbeit bis zum 29. Februar und wählen Sie selbst ein Geschenk!
-		</p>
-		<ul class="gift-mobile__list">
-			<li class=" gift-mobile__list-item">
-				<span>Expose</span> <span>bis 3 Seiten</span>
-			</li>
-			<li class="gift-mobile__list-item">
-				<span>Coaching</span> <span>30 Min.</span>
-			</li>
-			<li class="gift-mobile__list-item">
-				<span>Präsentation</span> <span>7 Folien</span>
-			</li>
-		</ul>
-		<a class="gift-mobile__link popup-link" href="#popup-form">
-			Jetzt erhalten!
-		</a>
+<?php if (!empty(carbon_get_theme_option('akad_gift_img'))) : ?>
+	<div class="gift" style="background-image:url('<?php echo carbon_get_theme_option('akad_gift_img'); ?>')">
+		<button class="gift__close">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+				<g clip-path="url(#clip0_1054_6378)">
+					<rect x="2.40021" y="-5.34058e-05" width="30.547" height="3.39411" transform="rotate(45 2.40021 -5.34058e-05)" fill="#ffffff" />
+					<rect x="6.10352e-05" y="21.6001" width="30.547" height="3.39411" transform="rotate(-45 6.10352e-05 21.6001)" fill="#ffffff" />
+				</g>
+				<defs>
+					<clipPath id="clip0_1054_6378">
+						<rect width="24" height="24" fill="white" />
+					</clipPath>
+				</defs>
+			</svg>
+		</button>
+		<a class="gift__btn popup-link" href="#popup-form"></a>
 	</div>
-</div>
+
+	<div class="gift-mobile">
+		<img class="gift-mobile__btn" alt="gift box" src="<?php echo get_template_directory_uri(); ?>/resources/images/gift/box-gift-akad.svg">
+		<div class="gift-mobile__box" style="background-image:url('<?php echo carbon_get_theme_option('akad_gift_img'); ?>')">
+			<a class="gift-mobile__link popup-link" href="#popup-form"></a>
+		</div>
+	</div>
+<?php endif; ?>

@@ -243,8 +243,7 @@ export let build = series(
 	jsonDest,
 	adminJs,
 	adminCss,
-	otherDest,
-	startwatch
+	otherDest
 )
 
 export default series(

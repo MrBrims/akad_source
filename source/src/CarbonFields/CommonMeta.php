@@ -19,6 +19,15 @@ class CommonMeta
 		];
 	}
 
+	public static function globalGifts(): array
+	{
+		return [
+			Field::make('image', 'akad_gift_img', __('Изображение акции'))
+				->set_type('image')
+				->set_value_type('url'),
+		];
+	}
+
 	public static function globalInfo(): array
 	{
 		return [
