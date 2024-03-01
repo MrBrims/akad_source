@@ -74,7 +74,7 @@
 						</span>
 					</div>
 				</div>
-				<a class="connect__whats-btn" target="_blank" href="https://wa.me/<?php echo preg_replace('/[^,.0-9]/', '', Helpers::num_whats()); ?>">
+				<a class="connect__whats-btn js-wapp" target="_blank" href="https://wa.me/<?php echo preg_replace('/[^,.0-9]/', '', Helpers::num_whats()); ?>">
 					WhatsApp Chat
 				</a>
 			</div>
