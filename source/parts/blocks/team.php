@@ -16,7 +16,7 @@
 								<div class="team__position">
 									<?php echo $key['team_card_position']; ?>
 								</div>
-								<a class="team__whatsapp" href="https://wa.me/<?php echo preg_replace('/[^,.0-9]/', '', $key['team_card_tel']); ?>">
+								<a class="team__whatsapp js-wapp" href="https://wa.me/<?php echo preg_replace('/[^,.0-9]/', '', $key['team_card_tel']); ?>">
 									<?php echo $key['team_card_tel']; ?>
 								</a>
 								<a class="team__mail" href="mailto:<?php echo $key['team_card_mail']; ?>">

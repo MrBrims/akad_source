@@ -32,7 +32,7 @@ class General
 
 		// add_action('init', [$this, 'set_tocken']);
 
-		// add_action('init', [$this, 'geo']);
+		add_action('init', [$this, 'geo']);
 
 		add_action('wp_enqueue_scripts', [$this, 'removeCode']);
 
@@ -444,44 +444,130 @@ class General
 		return implode("\r\n", $out);
 	}
 
-	// public static function geo()
-	// {
-	//   // URL параметры
-	//   $session = [
-	//     "first" => ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . (($_SERVER['REQUEST_URI'] == '/wp-content/themes/akademilyassets/js/feedback.js?ver=1') ? '/' : $_SERVER['REQUEST_URI']),
-	//     "isMobile" => wp_is_mobile() ? 'true' : 'false',
-	//     "refer" => $_SERVER["HTTP_REFERER"],
-	//     "dich" => $_SERVER['REQUEST_URI'],
-	//   ];
-	//   if (!isset($_COOKIE['session'])) {
-	//     setcookie('session', json_encode($session), time() + 60 * 60 * 24, '/');
-	//   };
+	function geo ()
+	{
+		$user_agent = $_SERVER["HTTP_USER_AGENT"];
+		function getOS ($user_agent)
+		{
+			if (strpos($user_agent, "Windows") !== false)
+				$os = "Windows";
+			elseif (strpos($user_agent, "Linux") !== false)
+				$os = "Linux";
+			elseif (strpos($user_agent, "X11") !== false)
+				$os = "Linux";
+			elseif (strpos($user_agent, "iPhone") !== false)
+				$os = "iPhone";
+			elseif (strpos($user_agent, "OpenBSD") !== false)
+				$os = "OpenBSD";
+			elseif (strpos($user_agent, "SunOS") !== false)
+				$os = "SunOS";
+			elseif (strpos($user_agent, "Safari") !== false)
+				$os = "Safari";
+			elseif (strpos($user_agent, "Macintosh") !== false)
+				$os = "Macintosh";
+			elseif (strpos($user_agent, "Mac_PowerPC") !== false)
+				$os = "Macintosh";
+			elseif (strpos($user_agent, "QNX") !== false)
+				$os = "QNX";
+			elseif (strpos($user_agent, "BeOS") !== false)
+				$os = "BeOS";
+			elseif (strpos($user_agent, "OS/2") !== false)
+				$os = "OS/2";
+			elseif (strpos($user_agent, "QNX") !== false)
+				$os = "QNX";
+			else
+				$os = "Undefined or Search Bot";
+			return $os;
+		}
+		function getBrowser ($user_agent)
+		{
+			if (strpos($user_agent, "Firefox") !== false)
+				$browser = "Firefox";
+			elseif (strpos($user_agent, "Opera") !== false)
+				$browser = "Opera";
+			elseif (strpos($user_agent, "Chrome") !== false)
+				$browser = "Chrome";
+			elseif (strpos($user_agent, "MSIE") !== false)
+				$browser = "Internet Explorer";
+			elseif (strpos($user_agent, "Safari") !== false)
+				$browser = "Safari";
+			else
+				$browser = "Undefined";
+			return $browser;
+		}
 
-	//   // GET параметры
-	//   if (!isset($_COOKIE['getParam'])) {
-	//     setcookie('getParam', json_encode($_GET), time() + 60 * 60 * 24, '/');
-	//   }
+		function getGeo ()
+		{
+			$api = 'https://json.geoiplookup.io/';
 
-	//   // GEO параметры
-	//   if (!isset($_COOKIE['geo'])) {
-	//     $client_ip = $_SERVER['REMOTE_ADDR'];
-	//     // проверка для локалки
-	//     // $client_ip = '84.244.8.172';
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_URL, $api);
+			$response = curl_exec($ch);
+			curl_close($ch);
 
-	//     $api = 'https://json.geoiplookup.io/' . $client_ip;
+			$response = json_decode($response);
 
-	//     $ch = curl_init();
-	//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	//     curl_setopt($ch, CURLOPT_URL, $api);
+			$geo = [
+				'ip' => $response->ip,
+				'country_name' => $response->country_name,
+				'region' => $response->region,
+				'city' => $response->city
+			];
+			return $geo;
+		}
+		// реферальная ссылка
+		if (!isset($_COOKIE['refer'])) {
+			if (isset($_SERVER["HTTP_REFERER"]) && !strpos($_SERVER["HTTP_REFERER"], $_SERVER['HTTP_HOST'])) {
+				setcookie('refer', $_SERVER["HTTP_REFERER"], time() + 60 * 60 * 24 * 7, '/');
+			} else {
+				setcookie('refer', 'none', time() + 60 * 60 * 24 * 365, '/');
+			}
+		}
+		//  куки
+		$utm = $_GET;
+		// органика - директ - реклама
+		if (isset($utm['utm_source']) || strpos($_COOKIE['fc_page'], 'utm_source') !== false || strpos($_SERVER["REQUEST_URI"], 'utm_source') !== false) {
+			$utm['utm_channel'] = 'cpc';
+		} elseif (!isset($_SERVER["HTTP_REFERER"]) || (stripslashes($_COOKIE['refer']) === 'none')) {
+			$utm['utm_channel'] = 'direct';
+		} else {
+			$utm['utm_channel'] = 'organic';
+		}
+		// запись утм
+		if (!isset($_COOKIE['fc_utm'])) {
+			setcookie('fc_utm', json_encode($utm), time() + 60 * 60 * 24 * 3, '/');
+		}
+		setcookie('lc_utm', json_encode($utm), time() + 60 * 60 * 24, '/');
 
-	//     $response = curl_exec($ch);
-	//     curl_close($ch);
+		// Страница
+		if (!strpos($_SERVER['REQUEST_URI'], 'wp-json')) {
+			if (!isset($_COOKIE['fc_page'])) {
+				setcookie('fc_page', (((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']), time() + 60 * 60 * 24 * 3, '/');
+			}
+			setcookie('lc_page', (((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']), time() + 60 * 60 * 24, '/');
+		}
 
-	//     $response = json_encode(json_decode($response));
-	//     setcookie('geo', $response, time() + 60 * 60 * 24, '/');
-	//     return $response;
-	//   }
-	// }
+		//OS
+		if (!isset($_COOKIE['os'])) {
+			setcookie('os', getOS($user_agent), time() + 60 * 60 * 24, '/');
+		}
+		//Browser
+		if (!isset($_COOKIE['browser'])) {
+			setcookie('browser', getBrowser($user_agent), time() + 60 * 60 * 24, '/');
+		}
+		// mobile
+		if (!isset($_COOKIE['is_mobile'])) {
+			setcookie('is_mobile', (wp_is_mobile() ? 'yes' : 'no'), time() + 60 * 60 * 24, '/');
+		}
+		// GEO параметры
+		if (!isset($_COOKIE['geo'])) {
+			setcookie('geo', json_encode(getGeo()), time() + 60 * 60 * 24, '/');
+		}
+		if (!isset($_COOKIE['user_agent'])) {
+			setcookie('user_agent', $user_agent, time() + 60 * 60 * 24, '/');
+		}
+	}
 }
 
 new General();

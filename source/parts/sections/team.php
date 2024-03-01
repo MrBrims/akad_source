@@ -76,7 +76,7 @@
 						</span>
 					</div>
 					<div class="team__item-bottom">
-						<a class="team__main-whatsapp" href="https://wa.me/<?php echo preg_replace('/[^,.0-9]/', '', $key['main_team_card_whatsapp']); ?>">
+						<a class="team__main-whatsapp js-wapp" href="https://wa.me/<?php echo preg_replace('/[^,.0-9]/', '', $key['main_team_card_whatsapp']); ?>">
 							WhatsApp
 						</a>
 						<a class="team__main-email" href="mailto:<?php echo $key['main_team_card_mail']; ?>">

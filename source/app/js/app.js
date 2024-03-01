@@ -22,6 +22,8 @@ import { gift } from '~/app/libs/_gift.js'
 import { revLoad } from '~/app/libs/_revLoad.js'
 import { scrollVisible } from '~/app/libs/_toTop.js'
 import Fancybox from '@fancyapps/ui'
+import { handleLinkClickAndSendWapp } from '~/app/libs/_whatsappToTG.js'
+
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Lazy load map
@@ -83,6 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Visible to top
 	scrollVisible()
+
+	// WhatsApp Info to Telegram
+	handleLinkClickAndSendWapp()
 
 	//gift
 	gift()
