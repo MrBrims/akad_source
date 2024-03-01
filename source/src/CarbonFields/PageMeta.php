@@ -8,7 +8,7 @@ class PageMeta
 	public function __construct()
 	{
 		add_action('carbon_fields_register_fields', [$this, 'homePageMeta']);
-		// add_action('carbon_fields_register_fields', [$this, 'halfePageMeta']);
+		add_action('carbon_fields_register_fields', [$this, 'halfePageMeta']);
 		add_action('carbon_fields_register_fields', [$this, 'ghostPageMeta']);
 		add_action('carbon_fields_register_fields', [$this, 'lektoratPageMeta']);
 		add_action('carbon_fields_register_fields', [$this, 'fachPageMeta']);
@@ -42,14 +42,14 @@ class PageMeta
 
 	public function halfePageMeta()
 	{
-		// Container::make('post_meta', __('Настройки страницы'))
-		// ->where('post_type', '=', 'page')
-		// ->where('post_template', '=', 'parts/page-halfe.php')
-		// ->add_tab(__('Первый экран'), CommonMeta::heroMeta())
-		// ->add_tab(__('Текст'), CommonMeta::richText())
-		// ->add_tab(__('FAQ'), CommonMeta::localFaq())
-		// ->add_tab(__('Таблица прайса'), CommonMeta::priceList())
-		// ->add_tab(__('Звездочки в сниппете'), CommonMeta::microdataStar());
+		Container::make('post_meta', __('Настройки страницы'))
+			->where('post_type', '=', 'page')
+			->where('post_template', '=', 'parts/page-halfe.php')
+			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Текст'), CommonMeta::richText())
+			->add_tab(__('FAQ'), CommonMeta::localFaq())
+			->add_tab(__('Таблица прайса'), CommonMeta::priceList())
+			->add_tab(__('Звездочки в сниппете'), CommonMeta::microdataStar());
 	}
 
 	public function ghostPageMeta()

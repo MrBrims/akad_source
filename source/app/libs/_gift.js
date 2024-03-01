@@ -7,7 +7,7 @@ export function gift() {
 	let giftPopupVisible = false
 	let giftMobileVisible = false
 
-	if (giftPopup) {
+	if (giftPopup && giftClose && giftBtn && giftMobile && giftMobileBtn) {
 		giftClose.addEventListener('click', () => {
 			giftPopup.classList.remove('--visible')
 		})
