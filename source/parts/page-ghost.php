@@ -15,10 +15,10 @@ get_header();
                     <?php the_content(); ?>
                 </div>
                 <?php
-								get_template_part('parts/sections/bakalavr');
+                get_template_part('parts/sections/bakalavr');
                 get_template_part('parts/sections/text');
-								get_template_part('parts/sections/qualification');
-								get_template_part('parts/sections/text-two');
+                get_template_part('parts/sections/qualification');
+                get_template_part('parts/sections/text-two');
                 get_template_part('parts/sections/guarant');
                 get_template_part('parts/sections/relax');
                 get_template_part('parts/sections/how-work');
@@ -33,7 +33,7 @@ get_header();
     </div>
     <?php
     get_template_part('parts/sections/price');
-		get_template_part('parts/sections/text-three');
+    get_template_part('parts/sections/text-three');
     get_template_part('parts/sections/message');
     get_template_part('parts/sections/after-form');
     get_template_part('parts/sections/main-faq');

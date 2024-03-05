@@ -90,16 +90,16 @@ class General
 		$post_id = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : null);
 		if (!$post_id) return;
 
-		// Список страниц, для которых нужно скрыть редактор
-		$hide_editor_on_pages = array(
-			'bachelorarbeit',
-			'page-slug-1',
-			'page-slug-2',
-			// добавьте слаги страниц, для которых нужно скрыть редактор
+		// Список шаблонов страниц, для которых нужно скрыть редактор
+		$hide_editor_on_templates = array(
+			'pages/halfe-page.php',
+			'template-page-1.php',
+			'template-page-2.php',
+			// добавьте названия шаблонов страниц, для которых нужно скрыть редактор
 		);
 
-		$current_page = get_post($post_id);
-		if (in_array($current_page->post_name, $hide_editor_on_pages)) {
+		$current_template = get_page_template_slug($post_id);
+		if (in_array($current_template, $hide_editor_on_templates)) {
 			remove_post_type_support('page', 'editor');
 		}
 	}
