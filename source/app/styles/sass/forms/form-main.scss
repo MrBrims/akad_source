@@ -1,4 +1,5 @@
 .form-main {
+
     &__item-box {
         margin-bottom: 15px;
     }
@@ -20,9 +21,27 @@
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 30px;
-				margin-top: 30px;
+        margin-top: 30px;
         text-transform: uppercase;
         border: none;
+    }
+
+    &__protect-title {
+        position: relative;
+        text-align: center;
+        max-width: fit-content;
+        margin: 8px auto;
+        font-size: 14px;
+        padding-left: 25px;
+
+        &::before {
+            @include bgbefore;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            background-image: url(../images/icons/shield.svg);
+            background-size: cover;
+        }
     }
 
     &__text-protect {
@@ -33,6 +52,7 @@
         max-width: fit-content;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 8px;
 
         &::before {
             @include bgbefore;
@@ -46,5 +66,10 @@
             color: $red;
             font-weight: 700;
         }
+    }
+
+    &__protect-footer {
+        font-size: 12px;
+        text-align: center;
     }
 }

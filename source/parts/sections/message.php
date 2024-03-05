@@ -11,7 +11,12 @@
 	</div>
 	<div class="message__container">
 		<?php
-		get_template_part('parts/blocks/form-main');
+		if (get_the_ID() == 22452) {
+			echo '<h3 class="title message__title">Erhalten Sie ein unverbindliches Angebot für Ihre Online-Klausur</h3>';
+			get_template_part('parts/blocks/form-main-online');
+		} else {
+			get_template_part('parts/blocks/form-main');
+		}
 		?>
 	</div>
 </section>

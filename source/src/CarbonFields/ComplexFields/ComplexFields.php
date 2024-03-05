@@ -19,7 +19,7 @@ class ComplexFields
 	{
 		Container::make('post_meta', 'Настройки страницы')
 			->where('post_type', '=', 'page')
-			->where('post_template', '=', 'parts/page-halfe.php')
+			->where('post_template', '=', 'pages/halfe-page.php')
 			->add_tab(__('Главный экран'), CommonMeta::heroMeta())
 			->add_tab(__('Блоки'), [
 				Field::make('complex', 'ak_complex_fields_page', __('Блоки страницы'))

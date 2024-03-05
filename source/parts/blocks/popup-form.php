@@ -10,7 +10,12 @@
 				</a>
 			</div>
 			<div class="popup__inner popup-form__inner">
-				<?php get_template_part('parts/blocks/form-main'); ?>
+				<?php
+				if (get_the_ID() == 22452)
+					get_template_part('parts/blocks/form-main-online');
+				else
+					get_template_part('parts/blocks/form-main');
+				?>
 			</div>
 		</div>
 	</div>

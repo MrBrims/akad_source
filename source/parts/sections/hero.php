@@ -11,16 +11,26 @@
 				<!-- <a class="hero__btn btn popup-link" href="#popup-form">
 					PREIS KALKULIEREN
 				</a> -->
-				<?php get_template_part('parts/blocks/rating'); ?>
+				<?php
+				get_template_part('parts/blocks/rating');
+				if (get_the_ID() == 22452) get_template_part('parts/blocks/guarant-block');
+				?>
 			</div>
 			<div class="hero__item">
 				<div class="hero__form-box">
 					<p class="hero__form-title">
-						Anruf bestellen
+						<?php
+						if (get_the_ID() == 22452)
+							echo 'Schnellanfrage stellen';
+						else
+							echo 'Anruf bestellen';
+						?>
 					</p>
 					<?php
 					if (get_the_ID() == 73 || get_page_template_slug() == "parts/page-halfe.php") {
 						get_template_part('parts/blocks/form-coach');
+					} else if (get_the_ID() == 22452) {
+						get_template_part('parts/blocks/form-online');
 					} else {
 						get_template_part('parts/blocks/form-litle');
 					}
@@ -29,6 +39,9 @@
 				<img class="hero__decore-img" src="<?php echo carbon_get_post_meta(get_the_ID(), 'hero_img'); ?>">
 			</div>
 		</div>
+		<?php
+		if (get_the_ID() == 22452) get_template_part('parts/blocks/accent-block');
+		?>
 </section>
 <div class="container">
 	<?php if (!is_front_page() && function_exists('yoast_breadcrumb')) { ?>
