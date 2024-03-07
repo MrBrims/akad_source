@@ -14,8 +14,8 @@
 		</svg>
 	</a>
 </div>
-<?php if (!empty(carbon_get_theme_option('akad_gift_img'))) : ?>
-	<div class="gift" style="background-image:url('<?php echo carbon_get_theme_option('akad_gift_img'); ?>')">
+<?php if (!empty(carbon_get_post_meta(get_the_ID(), 'akad_gift_img'))) : ?>
+	<div class="gift" style="background-image:url('<?php echo carbon_get_post_meta(get_the_ID(), 'akad_gift_img'); ?>')">
 		<button class="gift__close">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 				<g clip-path="url(#clip0_1054_6378)">
@@ -31,10 +31,9 @@
 		</button>
 		<a class="gift__btn popup-link" href="#popup-form"></a>
 	</div>
-
 	<div class="gift-mobile">
 		<img class="gift-mobile__btn" alt="gift box" src="<?php echo get_template_directory_uri(); ?>/resources/images/gift/box-gift-akad.svg">
-		<div class="gift-mobile__box" style="background-image:url('<?php echo carbon_get_theme_option('akad_gift_img'); ?>')">
+		<div class="gift-mobile__box" style="background-image:url('<?php echo carbon_get_post_meta(get_the_ID(), 'akad_gift_img'); ?>')">
 			<a class="gift-mobile__link popup-link" href="#popup-form"></a>
 		</div>
 	</div>
