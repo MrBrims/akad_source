@@ -26,7 +26,7 @@
   }
 
   &__contact {
-    max-width: 210px;
+    flex: 1 1 210px;
     width: 100%;
   }
 
@@ -51,6 +51,7 @@
 
   &__soc {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
   }
