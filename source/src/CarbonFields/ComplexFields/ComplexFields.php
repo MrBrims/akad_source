@@ -7,6 +7,8 @@ use Carbon_Fields\Field;
 require 'components/rich-text.php';
 require 'components/global-select.php';
 require 'components/table-price.php';
+require 'components/unic-work.php';
+require 'components/unic-guarant.php';
 
 class ComplexFields
 {
@@ -42,8 +44,11 @@ class ComplexFields
 					<% } %>
 					')
 					->add_fields('template_price', 'Прайс', get_ak_complex_table_price())
+					->add_fields('template_unic_work', 'Как работаем', get_ak_complex_work())
+					->add_fields('template_unic_guarant', 'Гарантии', get_ak_complex_guarant())
 			])
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('Звездочки в сниппете'), CommonMeta::microdataStar());
 	}
 }

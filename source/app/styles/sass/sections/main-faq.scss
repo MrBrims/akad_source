@@ -1,4 +1,6 @@
 .main-faq {
+    padding-top: 25px;
+
     &__tab {
         display: flex;
         gap: 25px;
@@ -120,6 +122,6 @@
             max-width: 100%;
             position: static;
         }
-        
+
     }
 }
