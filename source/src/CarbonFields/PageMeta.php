@@ -37,7 +37,8 @@ class PageMeta
 			->add_tab(__('Текст после формы'), CommonMeta::richAfterForm())
 			->add_tab(__('Прайс'), CommonMeta::mainPriceTab())
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
-			->add_tab(__('Текст после отзывов'), CommonMeta::richAfterReviews());
+			->add_tab(__('Текст после отзывов'), CommonMeta::richAfterReviews())
+			->add_tab(__('Акция'), CommonMeta::globalGifts());
 	}
 
 	public function halfePageMeta()
@@ -66,6 +67,7 @@ class PageMeta
 			->add_tab(__('Текст 3'), CommonMeta::richTextThree())
 			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('Текст после формы'), CommonMeta::richAfterForm())
+			->add_tab(__('Акция'), CommonMeta::globalGifts())
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
 			->add_tab(__('Звездочки в сниппете'), CommonMeta::microdataStar());
 	}
