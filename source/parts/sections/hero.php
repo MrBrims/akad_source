@@ -18,23 +18,12 @@
 			</div>
 			<div class="hero__item">
 				<div class="hero__form-box">
-					<p class="hero__form-title">
-						<?php
-						if (get_the_ID() == 22452)
-							echo 'Schnellanfrage stellen';
-						else
-							echo 'Anruf bestellen';
-						?>
-					</p>
-					<?php
-					if (get_the_ID() == 73 || get_page_template_slug() == "parts/page-halfe.php") {
-						get_template_part('parts/blocks/form-coach');
-					} else if (get_the_ID() == 22452) {
-						get_template_part('parts/blocks/form-online');
-					} else {
-						get_template_part('parts/blocks/form-litle');
-					}
-					?>
+					<?php if (!empty(carbon_get_post_meta(get_the_ID(), 'ak_hero_form_title'))) : ?>
+						<p class="hero__form-title">
+							<?php echo carbon_get_post_meta(get_the_ID(), 'ak_hero_form_title'); ?>
+						</p>
+					<?php endif ?>
+					<?php get_template_part(carbon_get_post_meta(get_the_ID(), 'ak_hero_form')); ?>
 				</div>
 				<img class="hero__decore-img" src="<?php echo carbon_get_post_meta(get_the_ID(), 'hero_img'); ?>">
 			</div>

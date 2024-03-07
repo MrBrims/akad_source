@@ -33,6 +33,18 @@ get_header();
 							}
 							include get_template_directory() . '/parts/complex_blocks/table-price.php';
 							break;
+						case 'template_unic_work':
+							if (!$key['unic_accordeon_work']) {
+								break;
+							}
+							include get_template_directory() . '/parts/complex_blocks/unic-work-template.php';
+							break;
+						case 'template_unic_guarant':
+							if (!$key['unic_guarant_card']) {
+								break;
+							}
+							include get_template_directory() . '/parts/complex_blocks/unic-guarant-template.php';
+							break;
 					}
 				}
 				get_template_part('parts/sections/main-faq');

@@ -384,6 +384,16 @@ class CommonMeta
 				->set_width(30)
 				->set_value_type('url'),
 			Field::make('rich_text', 'hero_text', __('Текст после заголовка')),
+			Field::make('select', 'ak_hero_form', 'Выбор формы')
+				->set_width(30)
+				->add_options(array(
+					'parts/blocks/form-litle' => 'Маленька общая',
+					'parts/blocks/form-online' => 'Для онлайнов',
+					'parts/blocks/form-coach' => 'Для коачинга',
+				)),
+			Field::make('text', 'ak_hero_form_title', __('Заголовок формы'))
+				->set_default_value('Anruf bestellen')
+				->set_width(70),
 		];
 	}
 
@@ -410,6 +420,19 @@ class CommonMeta
 		return [
 			Field::make('text', 'coaching_title', __('Заголовок')),
 			Field::make('rich_text', 'coaching_text', __('Контент секции Coaching')),
+		];
+	}
+
+	public static function bigFom(): array
+	{
+		return [
+			Field::make('text', 'ak_bigform_title', __('Заголовок формы')),
+			Field::make('select', 'ak_complex_global_select', 'Выбор формы')
+				->add_options(array(
+					'parts/blocks/form-main' => 'Большая общая',
+					'parts/blocks/form-main-online' => 'Для онлайнов',
+					'parts/blocks/form-main-coach' => 'Для коачинга',
+				))
 		];
 	}
 
