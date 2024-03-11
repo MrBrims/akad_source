@@ -54,7 +54,7 @@
 						</clipPath>
 					</defs>
 				</svg><span class="form__tippy" data-tippy-content="ZIP, DOCX oder PDF (&lt;50mb)"></span></span>
-			<label class="form__file-custom form-main__input">
+			<label class="form__file-custom-big form-main__input">
 				<input name="file" type="file">
 				<span class="form__file-place">ZIP, DOCX oder PDF (<50mb) </span>
 			</label>
