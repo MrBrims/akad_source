@@ -7,7 +7,7 @@ class CommonMeta
 
 	// Global Fields
 
-	public static function globalContact(): array
+	public static function globalContact (): array
 	{
 		return [
 			Field::make('text', 'global_phone', __('Телефон'))
@@ -19,7 +19,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalGifts(): array
+	public static function globalGifts (): array
 	{
 		return [
 			Field::make('image', 'akad_gift_img', __('Изображение акции'))
@@ -28,7 +28,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalInfo(): array
+	public static function globalInfo (): array
 	{
 		return [
 			Field::make('text', 'global_time', __('Время работы'))
@@ -38,7 +38,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalRating(): array
+	public static function globalRating (): array
 	{
 		return [
 			Field::make('text', 'rating_google', __('Рейтинг Google'))
@@ -50,7 +50,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalTeam(): array
+	public static function globalTeam (): array
 	{
 		return [
 			Field::make('complex', 'team_card', __('Слайдер менеджеров'))
@@ -74,7 +74,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalHowWork(): array
+	public static function globalHowWork (): array
 	{
 		return [
 			Field::make('complex', 'accordeon_work', __('Аккордеон Как мы работаем'))
@@ -96,7 +96,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalGuarantMeta(): array
+	public static function globalGuarantMeta (): array
 	{
 		return [
 			Field::make('text', 'guarant_title', __('Заголовок')),
@@ -116,7 +116,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalFaq(): array
+	public static function globalFaq (): array
 	{
 		return [
 			Field::make('text', 'faq_title', __('Заголовок')),
@@ -130,7 +130,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalMainFaq(): array
+	public static function globalMainFaq (): array
 	{
 		return [
 			Field::make('complex', 'main_faq_tab', __('Табы'))
@@ -156,7 +156,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalContactWhatsapp(): array
+	public static function globalContactWhatsapp (): array
 	{
 		return [
 			Field::make('textarea', 'contact_whatsapp_title', __('Заголовок'))
@@ -170,7 +170,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalReviews(): array
+	public static function globalReviews (): array
 	{
 		return [
 			Field::make('text', 'reviews_title', __('Заголовок')),
@@ -201,7 +201,7 @@ class CommonMeta
 		];
 	}
 
-	public static function qualGlobalMeta(): array
+	public static function qualGlobalMeta (): array
 	{
 		return [
 			Field::make('text', 'qualification_title', __('Заголовок')),
@@ -223,7 +223,7 @@ class CommonMeta
 		];
 	}
 
-	public static function bakalavrGlobalMeta(): array
+	public static function bakalavrGlobalMeta (): array
 	{
 		return [
 			Field::make('text', 'bakalavr_title', __('Заголовок')),
@@ -231,43 +231,147 @@ class CommonMeta
 		];
 	}
 
-	public static function teamGlobalMeta(): array
+	public static function teamGlobalMeta (): array
 	{
 		return [
-			Field::make('text', 'main_team_title', __('Заголовок')),
-			Field::make('complex', 'main_team_card', __('Карточки'))
+			Field::make('separator', 'main_team_mp', __('Отдел МП')),
+			Field::make('text', 'main_team_mp_title', __('Заголовок')),
+			Field::make('complex', 'main_team_mp_card', __('Карточки'))
 				->set_layout('tabbed-horizontal')
 				->setup_labels(['singular_name' => 'карточку'])
 				->add_fields([
-					Field::make('image', 'main_team_card_photo', __('Фото'))
+					Field::make('image', 'main_team_mp_photo', __('Фото'))
 						->set_type('image')
 						->set_value_type('url')
 						->set_width(20),
-					Field::make('text', 'main_team_card_name', __('Имя'))
-						->set_width(40),
-					Field::make('text', 'main_team_card_position', __('Должность'))
-						->set_width(40),
-					Field::make('text', 'main_team_card_rating', __('Рейтинг'))
-						->set_width(50),
-					Field::make('text', 'main_team_card_rating_all', __('Общее число оценок'))
-						->set_width(50),
-					Field::make('text', 'main_team_card_year', __('Лет работы'))
+					Field::make('text', 'main_team_mp_name', __('Имя'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_position', __('Должность'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_rating', __('Рейтинг'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_rating_all', __('Общее число оценок'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_year', __('Лет работы'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_order', __('Число заказов'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_client', __('Обслужено клиентов'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_time', __('Время работы'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_whatsapp', __('WhatsApp'))
 						->set_width(30),
-					Field::make('text', 'main_team_card_order', __('Число заказов'))
+					Field::make('text', 'main_team_mp_phone', __('Телефон'))
 						->set_width(30),
-					Field::make('text', 'main_team_card_client', __('Обслужено клиентов'))
+					Field::make('text', 'main_team_mp_mail', __('Почта'))
 						->set_width(30),
-					Field::make('rich_text', 'main_team_card_descr', __('Описание')),
-					Field::make('text', 'main_team_card_time', __('Время работы')),
-					Field::make('text', 'main_team_card_whatsapp', __('WhatsApp'))
-						->set_width(50),
-					Field::make('text', 'main_team_card_mail', __('Почта'))
-						->set_width(50),
-				])
+					Field::make('rich_text', 'main_team_mp_descr', __('Описание')),
+				]),
+			Field::make('separator', 'main_team_mo', __('Отдел МО')),
+			Field::make('text', 'main_team_mo_title', __('Заголовок')),
+			Field::make('complex', 'main_team_mo_card', __('Карточки'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'карточку'])
+				->add_fields([
+					Field::make('image', 'main_team_mo_photo', __('Фото'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(20),
+					Field::make('text', 'main_team_mo_name', __('Имя'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_position', __('Должность'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_rating', __('Рейтинг'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_rating_all', __('Общее число оценок'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_year', __('Лет работы'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_order', __('Число заказов'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_client', __('Обслужено клиентов'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_time', __('Время работы'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_whatsapp', __('WhatsApp'))
+						->set_width(30),
+					Field::make('text', 'main_team_mo_phone', __('Телефон'))
+						->set_width(30),
+					Field::make('text', 'main_team_mo_mail', __('Почта'))
+						->set_width(30),
+					Field::make('rich_text', 'main_team_mo_descr', __('Описание'))
+				]),
+			Field::make('separator', 'main_team_ma', __('Отдел МА')),
+			Field::make('text', 'main_team_ma_title', __('Заголовок')),
+			Field::make('complex', 'main_team_ma_card', __('Карточки'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'карточку'])
+				->add_fields([
+					Field::make('image', 'main_team_ma_photo', __('Фото'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(20),
+					Field::make('text', 'main_team_ma_name', __('Имя'))
+						->set_width(20),
+					Field::make('text', 'main_team_ma_position', __('Должность'))
+						->set_width(20),
+					Field::make('text', 'main_team_ma_rating', __('Рейтинг'))
+						->set_width(20),
+					Field::make('text', 'main_team_ma_rating_all', __('Общее число оценок'))
+						->set_width(20),
+					Field::make('text', 'main_team_ma_year', __('Лет работы'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_author', __('Число авторов'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_time', __('Время работы'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_whatsapp', __('WhatsApp'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_phone', __('Телефон'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_mail', __('Почта'))
+						->set_width(30),
+					Field::make('rich_text', 'main_team_ma_descr', __('Описание')),
+				]),
+			Field::make('separator', 'main_team_dev', __('Отдел ДЕВ-МАРКЕТИНГ')),
+			Field::make('text', 'main_team_dev_title', __('Заголовок')),
+			Field::make('complex', 'main_team_dev_card', __('Карточки'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'карточку'])
+				->add_fields([
+					Field::make('image', 'main_team_dev_photo', __('Фото'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(10),
+					Field::make('text', 'main_team_dev_name', __('Имя'))
+						->set_width(25),
+					Field::make('text', 'main_team_dev_position', __('Должность'))
+						->set_width(25),
+					Field::make('text', 'main_team_dev_time', __('Время работы'))
+						->set_width(25)
+				]),
+			Field::make('separator', 'main_team_fin', __('ФИН Отдел')),
+			Field::make('text', 'main_team_fin_title', __('Заголовок')),
+			Field::make('complex', 'main_team_fin_card', __('Карточки'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'карточку'])
+				->add_fields([
+					Field::make('image', 'main_team_fin_photo', __('Фото'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(10),
+					Field::make('text', 'main_team_fin_name', __('Имя'))
+						->set_width(25),
+					Field::make('text', 'main_team_fin_position', __('Должность'))
+						->set_width(25),
+					Field::make('text', 'main_team_fin_time', __('Время работы'))
+						->set_width(25)
+				]),
 		];
 	}
 
-	public static function globalFooter(): array
+	public static function globalFooter (): array
 	{
 		return [
 			Field::make('image', 'footer_logo', __('Логотип в футере'))
@@ -354,7 +458,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalScripts(): array
+	public static function globalScripts (): array
 	{
 		return [
 			Field::make('header_scripts', 'header_script', __('Header Script')),
@@ -362,7 +466,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalApiKey(): array
+	public static function globalApiKey (): array
 	{
 		return [
 			Field::make('text', 'telegram_api', __('API Telegram')),
@@ -371,7 +475,7 @@ class CommonMeta
 
 	// Meta Field
 
-	public static function heroMeta(): array
+	public static function heroMeta (): array
 	{
 		return [
 			Field::make('text', 'hero_title_left', __('Левая часть заголовка'))
@@ -386,18 +490,20 @@ class CommonMeta
 			Field::make('rich_text', 'hero_text', __('Текст после заголовка')),
 			Field::make('select', 'ak_hero_form', 'Выбор формы')
 				->set_width(30)
-				->add_options(array(
-					'parts/blocks/form-litle' => 'Маленька общая',
-					'parts/blocks/form-online' => 'Для онлайнов',
-					'parts/blocks/form-coach' => 'Для коачинга',
-				)),
+				->add_options(
+					array(
+						'parts/blocks/form-litle' => 'Маленька общая',
+						'parts/blocks/form-online' => 'Для онлайнов',
+						'parts/blocks/form-coach' => 'Для коачинга',
+					)
+				),
 			Field::make('text', 'ak_hero_form_title', __('Заголовок формы'))
 				->set_default_value('Anruf bestellen')
 				->set_width(70),
 		];
 	}
 
-	public static function staticMeta(): array
+	public static function staticMeta (): array
 	{
 		return [
 			Field::make('text', 'statistic_title', __('Заголовок')),
@@ -415,7 +521,7 @@ class CommonMeta
 		];
 	}
 
-	public static function coachingMeta(): array
+	public static function coachingMeta (): array
 	{
 		return [
 			Field::make('text', 'coaching_title', __('Заголовок')),
@@ -423,20 +529,22 @@ class CommonMeta
 		];
 	}
 
-	public static function bigFom(): array
+	public static function bigFom (): array
 	{
 		return [
 			Field::make('text', 'ak_bigform_title', __('Заголовок формы')),
 			Field::make('select', 'ak_complex_global_select', 'Выбор формы')
-				->add_options(array(
-					'parts/blocks/form-main' => 'Большая общая',
-					'parts/blocks/form-main-online' => 'Для онлайнов',
-					'parts/blocks/form-main-coach' => 'Для коачинга',
-				))
+				->add_options(
+					array(
+						'parts/blocks/form-main' => 'Большая общая',
+						'parts/blocks/form-main-online' => 'Для онлайнов',
+						'parts/blocks/form-main-coach' => 'Для коачинга',
+					)
+				)
 		];
 	}
 
-	public static function relaxMeta(): array
+	public static function relaxMeta (): array
 	{
 		return [
 			Field::make('text', 'relax_title', __('Заголовок')),
@@ -445,7 +553,7 @@ class CommonMeta
 		];
 	}
 
-	public static function howWorkMeta(): array
+	public static function howWorkMeta (): array
 	{
 		return [
 			Field::make('text', 'how-work_title_after', __('Заголовок перед аккордеоном')),
@@ -455,7 +563,7 @@ class CommonMeta
 		];
 	}
 
-	public static function messageMeta(): array
+	public static function messageMeta (): array
 	{
 		return [
 			Field::make('text', 'message_title', __('Заголовок')),
@@ -464,14 +572,14 @@ class CommonMeta
 		];
 	}
 
-	public static function richAfterForm(): array
+	public static function richAfterForm (): array
 	{
 		return [
 			Field::make('rich_text', 'rich_after_form', __('Текст после формы')),
 		];
 	}
 
-	public static function localFaq(): array
+	public static function localFaq (): array
 	{
 		return [
 			Field::make('text', 'local_faq_title', __('Заголовок')),
@@ -499,14 +607,14 @@ class CommonMeta
 		];
 	}
 
-	public static function richText(): array
+	public static function richText (): array
 	{
 		return [
 			Field::make('rich_text', 'rich_text', __('Текст')),
 		];
 	}
 
-	public static function mainPriceTab(): array
+	public static function mainPriceTab (): array
 	{
 		return [
 			Field::make('text', 'price_main_title', __('Заголовок')),
@@ -532,14 +640,14 @@ class CommonMeta
 		];
 	}
 
-	public static function richAfterReviews(): array
+	public static function richAfterReviews (): array
 	{
 		return [
 			Field::make('rich_text', 'rich_after_reviews', __('Текст после формы')),
 		];
 	}
 
-	public static function titlePrice(): array
+	public static function titlePrice (): array
 	{
 		return [
 			Field::make('text', 'price_title_1', __('Заголовок 1')),
@@ -550,7 +658,7 @@ class CommonMeta
 		];
 	}
 
-	public static function priceList(): array
+	public static function priceList (): array
 	{
 		return [
 			Field::make('text', 'price_list_title', __('Заголовок')),
@@ -582,7 +690,7 @@ class CommonMeta
 		];
 	}
 
-	public static function richTextTwo(): array
+	public static function richTextTwo (): array
 	{
 		return [
 			Field::make('rich_text', 'rich_text_two', __('Текст после диаграмы'))
@@ -590,7 +698,7 @@ class CommonMeta
 		];
 	}
 
-	public static function richTextThree(): array
+	public static function richTextThree (): array
 	{
 		return [
 			Field::make('rich_text', 'rich_text_three', __('Текст 3'))
@@ -598,7 +706,7 @@ class CommonMeta
 		];
 	}
 
-	public static function diagramMeta(): array
+	public static function diagramMeta (): array
 	{
 		return [
 			Field::make('text', 'diagram_title', __('Заголовок')),
@@ -626,7 +734,7 @@ class CommonMeta
 		];
 	}
 
-	public static function localPriceTab(): array
+	public static function localPriceTab (): array
 	{
 		return [
 			Field::make('text', 'local_price_title', __('Заголовок')),
@@ -663,7 +771,7 @@ class CommonMeta
 		];
 	}
 
-	public static function cooperationLocal(): array
+	public static function cooperationLocal (): array
 	{
 		return [
 			Field::make('text', 'cooperation_title', __('Заголовок')),
@@ -684,7 +792,7 @@ class CommonMeta
 		];
 	}
 
-	public static function microdataStar(): array
+	public static function microdataStar (): array
 	{
 		return [
 			Field::make('text', 'microdata_rating', __('Текущая оценка'))

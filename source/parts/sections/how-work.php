@@ -1,4 +1,5 @@
 <section class="how-work section">
+	<div class="container">
 	<?php if (!empty(carbon_get_post_meta(get_the_ID(), 'how-work_title_after'))) : ?>
 		<h2 class="how-work__title title">
 			<?php echo carbon_get_post_meta(get_the_ID(), 'how-work_title_after'); ?>
@@ -22,4 +23,5 @@
 			<?php echo apply_filters('the_content', carbon_get_post_meta(get_the_ID(), 'how-work_text_before')); ?>
 		</div>
 	<?php endif ?>
+	</div>
 </section>
