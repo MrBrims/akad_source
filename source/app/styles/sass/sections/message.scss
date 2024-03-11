@@ -42,6 +42,9 @@
 	}
 
 }
+.section:last-child.message {
+	margin-bottom: 0;
+}
 
 @media (max-width: 980px) {
 	.message {
