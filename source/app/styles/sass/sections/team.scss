@@ -48,8 +48,11 @@
 
 	&__photo {
 		max-height: 250px;
+		min-height: 180px;
 		width: 180px;
 		object-fit: cover;
+		border-radius: 4px;
+		background-color: $accent;
 	}
 
 	&__item-name {
