@@ -24,7 +24,6 @@ import { scrollVisible } from '~/app/libs/_toTop.js'
 import Fancybox from '@fancyapps/ui'
 import { handleLinkClickAndSendWapp } from '~/app/libs/_whatsappToTG.js'
 
-
 document.addEventListener('DOMContentLoaded', () => {
 	// Lazy load map
 	lazyLoad()

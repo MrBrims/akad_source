@@ -37,7 +37,7 @@
 
 	<div class="wrapper">
 
-		<header class="header lock-padding">
+		<header class="header">
 			<div class="header__top">
 				<div class="container">
 					<div class="header__top-inner">
