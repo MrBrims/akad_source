@@ -11,6 +11,7 @@
 		z-index: -1;
 		position: absolute;
 		inset: 0 -400px;
+		background-color: #F3F8FF;
 		background-image: url(../images/pattern.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -40,6 +41,9 @@
 		}
 	}
 
+}
+.section:last-child.message {
+	margin-bottom: 0;
 }
 
 @media (max-width: 980px) {
