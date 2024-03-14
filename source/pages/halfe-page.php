@@ -21,6 +21,12 @@ get_header();
 							}
 							include get_template_directory() . '/parts/complex_blocks/rich-text.php';
 							break;
+						case 'template_rich_accent':
+							if (!$key['ak_complex_rich_accent']) {
+								break;
+							}
+							include get_template_directory() . '/parts/complex_blocks/rich-text-accent.php';
+							break;
 						case 'template_global_select':
 							if (!$key['ak_complex_global_select']) {
 								break;
@@ -33,6 +39,18 @@ get_header();
 							}
 							include get_template_directory() . '/parts/complex_blocks/table-price.php';
 							break;
+						case 'template_price_lekt':
+							if (!$key['complex_price_lektkor_table']) {
+								break;
+							}
+							include get_template_directory() . '/parts/complex_blocks/price-lekt-template.php';
+							break;
+						case 'template_form_calc':
+							if (!$key['ak_complex_form_calc_title']) {
+								break;
+							}
+							include get_template_directory() . '/parts/complex_blocks/form-calc-template.php';
+							break;
 						case 'template_unic_work':
 							if (!$key['unic_accordeon_work']) {
 								break;
@@ -44,6 +62,18 @@ get_header();
 								break;
 							}
 							include get_template_directory() . '/parts/complex_blocks/unic-guarant-template.php';
+							break;
+						case 'template_unic_diagram':
+							if (!$key['unic_diagram_list']) {
+								break;
+							}
+							include get_template_directory() . '/parts/complex_blocks/unic-diagram-template.php';
+							break;
+						case 'template_trust':
+							if (!$key['ak_complex_trust_title']) {
+								break;
+							}
+							include get_template_directory() . '/parts/complex_blocks/trust-bage-template.php';
 							break;
 					}
 				}

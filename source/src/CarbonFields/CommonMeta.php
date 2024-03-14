@@ -7,7 +7,7 @@ class CommonMeta
 
 	// Global Fields
 
-	public static function globalContact (): array
+	public static function globalContact(): array
 	{
 		return [
 			Field::make('text', 'global_phone', __('Телефон'))
@@ -19,7 +19,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalGifts (): array
+	public static function globalGifts(): array
 	{
 		return [
 			Field::make('image', 'akad_gift_img', __('Изображение акции'))
@@ -28,7 +28,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalInfo (): array
+	public static function globalInfo(): array
 	{
 		return [
 			Field::make('text', 'global_time', __('Время работы'))
@@ -38,7 +38,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalRating (): array
+	public static function globalRating(): array
 	{
 		return [
 			Field::make('text', 'rating_google', __('Рейтинг Google'))
@@ -50,7 +50,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalTeam (): array
+	public static function globalTeam(): array
 	{
 		return [
 			Field::make('complex', 'team_card', __('Слайдер менеджеров'))
@@ -74,7 +74,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalHowWork (): array
+	public static function globalHowWork(): array
 	{
 		return [
 			Field::make('complex', 'accordeon_work', __('Аккордеон Как мы работаем'))
@@ -96,7 +96,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalGuarantMeta (): array
+	public static function globalGuarantMeta(): array
 	{
 		return [
 			Field::make('text', 'guarant_title', __('Заголовок')),
@@ -116,7 +116,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalFaq (): array
+	public static function globalFaq(): array
 	{
 		return [
 			Field::make('text', 'faq_title', __('Заголовок')),
@@ -130,7 +130,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalMainFaq (): array
+	public static function globalMainFaq(): array
 	{
 		return [
 			Field::make('complex', 'main_faq_tab', __('Табы'))
@@ -156,7 +156,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalContactWhatsapp (): array
+	public static function globalContactWhatsapp(): array
 	{
 		return [
 			Field::make('textarea', 'contact_whatsapp_title', __('Заголовок'))
@@ -170,7 +170,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalReviews (): array
+	public static function globalReviews(): array
 	{
 		return [
 			Field::make('text', 'reviews_title', __('Заголовок')),
@@ -201,7 +201,7 @@ class CommonMeta
 		];
 	}
 
-	public static function qualGlobalMeta (): array
+	public static function qualGlobalMeta(): array
 	{
 		return [
 			Field::make('text', 'qualification_title', __('Заголовок')),
@@ -223,7 +223,7 @@ class CommonMeta
 		];
 	}
 
-	public static function bakalavrGlobalMeta (): array
+	public static function bakalavrGlobalMeta(): array
 	{
 		return [
 			Field::make('text', 'bakalavr_title', __('Заголовок')),
@@ -231,7 +231,7 @@ class CommonMeta
 		];
 	}
 
-	public static function teamGlobalMeta (): array
+	public static function teamGlobalMeta(): array
 	{
 		return [
 			Field::make('separator', 'main_team_mp', __('Отдел МП')),
@@ -371,7 +371,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalFooter (): array
+	public static function globalFooter(): array
 	{
 		return [
 			Field::make('image', 'footer_logo', __('Логотип в футере'))
@@ -458,7 +458,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalScripts (): array
+	public static function globalScripts(): array
 	{
 		return [
 			Field::make('header_scripts', 'header_script', __('Header Script')),
@@ -466,7 +466,7 @@ class CommonMeta
 		];
 	}
 
-	public static function globalApiKey (): array
+	public static function globalApiKey(): array
 	{
 		return [
 			Field::make('text', 'telegram_api', __('API Telegram')),
@@ -475,7 +475,7 @@ class CommonMeta
 
 	// Meta Field
 
-	public static function heroMeta (): array
+	public static function heroMeta(): array
 	{
 		return [
 			Field::make('text', 'hero_title_left', __('Левая часть заголовка'))
@@ -495,6 +495,7 @@ class CommonMeta
 						'parts/blocks/form-litle' => 'Маленька общая',
 						'parts/blocks/form-online' => 'Для онлайнов',
 						'parts/blocks/form-coach' => 'Для коачинга',
+						'parts/blocks/form-lektorat' => 'Для лектората',
 					)
 				),
 			Field::make('text', 'ak_hero_form_title', __('Заголовок формы'))
@@ -503,7 +504,7 @@ class CommonMeta
 		];
 	}
 
-	public static function staticMeta (): array
+	public static function staticMeta(): array
 	{
 		return [
 			Field::make('text', 'statistic_title', __('Заголовок')),
@@ -521,7 +522,7 @@ class CommonMeta
 		];
 	}
 
-	public static function coachingMeta (): array
+	public static function coachingMeta(): array
 	{
 		return [
 			Field::make('text', 'coaching_title', __('Заголовок')),
@@ -529,7 +530,7 @@ class CommonMeta
 		];
 	}
 
-	public static function bigFom (): array
+	public static function bigFom(): array
 	{
 		return [
 			Field::make('text', 'ak_bigform_title', __('Заголовок формы')),
@@ -539,12 +540,13 @@ class CommonMeta
 						'parts/blocks/form-main' => 'Большая общая',
 						'parts/blocks/form-main-online' => 'Для онлайнов',
 						'parts/blocks/form-main-coach' => 'Для коачинга',
+						'parts/blocks/form-main-lekt' => 'Для лектората',
 					)
 				)
 		];
 	}
 
-	public static function relaxMeta (): array
+	public static function relaxMeta(): array
 	{
 		return [
 			Field::make('text', 'relax_title', __('Заголовок')),
@@ -553,7 +555,7 @@ class CommonMeta
 		];
 	}
 
-	public static function howWorkMeta (): array
+	public static function howWorkMeta(): array
 	{
 		return [
 			Field::make('text', 'how-work_title_after', __('Заголовок перед аккордеоном')),
@@ -563,7 +565,7 @@ class CommonMeta
 		];
 	}
 
-	public static function messageMeta (): array
+	public static function messageMeta(): array
 	{
 		return [
 			Field::make('text', 'message_title', __('Заголовок')),
@@ -572,14 +574,14 @@ class CommonMeta
 		];
 	}
 
-	public static function richAfterForm (): array
+	public static function richAfterForm(): array
 	{
 		return [
 			Field::make('rich_text', 'rich_after_form', __('Текст после формы')),
 		];
 	}
 
-	public static function localFaq (): array
+	public static function localFaq(): array
 	{
 		return [
 			Field::make('text', 'local_faq_title', __('Заголовок')),
@@ -607,14 +609,14 @@ class CommonMeta
 		];
 	}
 
-	public static function richText (): array
+	public static function richText(): array
 	{
 		return [
 			Field::make('rich_text', 'rich_text', __('Текст')),
 		];
 	}
 
-	public static function mainPriceTab (): array
+	public static function mainPriceTab(): array
 	{
 		return [
 			Field::make('text', 'price_main_title', __('Заголовок')),
@@ -640,14 +642,14 @@ class CommonMeta
 		];
 	}
 
-	public static function richAfterReviews (): array
+	public static function richAfterReviews(): array
 	{
 		return [
 			Field::make('rich_text', 'rich_after_reviews', __('Текст после формы')),
 		];
 	}
 
-	public static function titlePrice (): array
+	public static function titlePrice(): array
 	{
 		return [
 			Field::make('text', 'price_title_1', __('Заголовок 1')),
@@ -658,7 +660,7 @@ class CommonMeta
 		];
 	}
 
-	public static function priceList (): array
+	public static function priceList(): array
 	{
 		return [
 			Field::make('text', 'price_list_title', __('Заголовок')),
@@ -690,7 +692,7 @@ class CommonMeta
 		];
 	}
 
-	public static function richTextTwo (): array
+	public static function richTextTwo(): array
 	{
 		return [
 			Field::make('rich_text', 'rich_text_two', __('Текст после диаграмы'))
@@ -698,7 +700,7 @@ class CommonMeta
 		];
 	}
 
-	public static function richTextThree (): array
+	public static function richTextThree(): array
 	{
 		return [
 			Field::make('rich_text', 'rich_text_three', __('Текст 3'))
@@ -706,7 +708,7 @@ class CommonMeta
 		];
 	}
 
-	public static function diagramMeta (): array
+	public static function diagramMeta(): array
 	{
 		return [
 			Field::make('text', 'diagram_title', __('Заголовок')),
@@ -734,7 +736,7 @@ class CommonMeta
 		];
 	}
 
-	public static function localPriceTab (): array
+	public static function localPriceTab(): array
 	{
 		return [
 			Field::make('text', 'local_price_title', __('Заголовок')),
@@ -771,7 +773,7 @@ class CommonMeta
 		];
 	}
 
-	public static function cooperationLocal (): array
+	public static function cooperationLocal(): array
 	{
 		return [
 			Field::make('text', 'cooperation_title', __('Заголовок')),
@@ -792,7 +794,7 @@ class CommonMeta
 		];
 	}
 
-	public static function microdataStar (): array
+	public static function microdataStar(): array
 	{
 		return [
 			Field::make('text', 'microdata_rating', __('Текущая оценка'))

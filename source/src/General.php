@@ -93,8 +93,7 @@ class General
 		// Список шаблонов страниц, для которых нужно скрыть редактор
 		$hide_editor_on_templates = array(
 			'pages/halfe-page.php',
-			'template-page-1.php',
-			'template-page-2.php',
+			'pages/lektorat-page.php',
 			// добавьте названия шаблонов страниц, для которых нужно скрыть редактор
 		);
 
@@ -444,10 +443,10 @@ class General
 		return implode("\r\n", $out);
 	}
 
-	function geo ()
+	function geo()
 	{
 		$user_agent = $_SERVER["HTTP_USER_AGENT"];
-		function getOS ($user_agent)
+		function getOS($user_agent)
 		{
 			if (strpos($user_agent, "Windows") !== false)
 				$os = "Windows";
@@ -479,7 +478,7 @@ class General
 				$os = "Undefined or Search Bot";
 			return $os;
 		}
-		function getBrowser ($user_agent)
+		function getBrowser($user_agent)
 		{
 			if (strpos($user_agent, "Firefox") !== false)
 				$browser = "Firefox";
@@ -496,7 +495,7 @@ class General
 			return $browser;
 		}
 
-		function getGeo ()
+		function getGeo()
 		{
 			$api = 'https://json.geoiplookup.io/';
 
