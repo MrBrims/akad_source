@@ -14,9 +14,11 @@
 							<?php echo $key['cooperation_card_title']; ?>
 						</h4>
 					</div>
-					<div class="cooperation__text">
-						<?php echo $key['cooperation_card_text']; ?>
-					</div>
+					<?php if (!empty($key['cooperation_card_text'])) : ?>
+						<div class="cooperation__text">
+							<?php echo $key['cooperation_card_text']; ?>
+						</div>
+					<?php endif ?>
 				</div>
 			<?php endforeach; ?>
 		</div>

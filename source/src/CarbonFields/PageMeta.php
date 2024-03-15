@@ -109,6 +109,7 @@ class PageMeta
 			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
 			->add_tab(__('Сотрудничество'), CommonMeta::cooperationLocal())
 			->add_tab(__('Как мы работаем'), CommonMeta::howWorkMeta())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('FAQ'), CommonMeta::localFaq());
 	}
 
