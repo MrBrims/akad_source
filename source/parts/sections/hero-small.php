@@ -1,4 +1,4 @@
-<section class="hero hero-small">
+<section class="hero hero-small<?php if (is_page_template('parts/page-uber-vir.php')) echo ' hero-uber-vir'; ?>">
 	<div class="container">
 		<?php if (!is_front_page() && function_exists('yoast_breadcrumb')) { ?>
 			<div class="single-breadcrumb">

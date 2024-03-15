@@ -11,6 +11,7 @@ import { showMore } from '~/app/libs/_showMore.js'
 import { swiperMudules } from '~/app/libs/_swiperMudules.js'
 import { tippyJs } from '~/app/libs/_tippyJs.js'
 import { tocPage } from '~/app/libs/_tocPage.js'
+import { formCalc } from '~/app/libs/_formCalc.js'
 // import { selectCustom } from '~/app/libs/_selectCustom.js'
 import { lazyLoad } from '~/app/libs/_lazyLoad.js'
 // import { adminIndentWp } from '~/app/libs/_adminIndentWp.js'
@@ -23,7 +24,6 @@ import { revLoad } from '~/app/libs/_revLoad.js'
 import { scrollVisible } from '~/app/libs/_toTop.js'
 import Fancybox from '@fancyapps/ui'
 import { handleLinkClickAndSendWapp } from '~/app/libs/_whatsappToTG.js'
-
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Lazy load map
@@ -92,6 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	//gift
 	gift()
 
-	// Ссылки в футере
-	// footerLinks()
+	// Форма калькулятор
+	formCalc()
 })

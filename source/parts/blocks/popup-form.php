@@ -10,12 +10,7 @@
 				</a>
 			</div>
 			<div class="popup__inner popup-form__inner">
-				<?php
-				if (get_the_ID() == 22452)
-					get_template_part('parts/blocks/form-main-online');
-				else
-					get_template_part('parts/blocks/form-main');
-				?>
+				<?php get_template_part(carbon_get_post_meta(get_the_ID(), 'ak_complex_global_select')); ?>
 			</div>
 		</div>
 	</div>
