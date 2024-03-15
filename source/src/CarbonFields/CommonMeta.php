@@ -805,4 +805,58 @@ class CommonMeta
 				->set_width(30),
 		];
 	}
+
+	public static function bewertungerInt(): array
+	{
+		return [
+			Field::make('complex', 'bewert_fields', __('Интервью'))
+				->set_layout('tabbed-vertical')
+				->setup_labels(['singular_name' => 'интервью'])
+				->add_fields([
+					Field::make('image', 'bewert_field_img', __('Аватар'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(30),
+					Field::make('text', 'bewert_field_name', __('Имя клиента'))
+						->set_width(70),
+					Field::make('text', 'bewert_field_art', __('Art der Arbeit'))
+						->set_width(50),
+					Field::make('text', 'bewert_field_art_name', __('Название Art der Arbeit'))
+						->set_width(50),
+					Field::make('text', 'bewert_field_fach', __('Fachbereich'))
+						->set_width(50),
+					Field::make('text', 'bewert_field_fach_name', __('Название Fachbereich'))
+						->set_width(50),
+					Field::make('textarea', 'bewert_field_text', __('Текст в карточке')),
+					Field::make('complex', 'bewert_field_content', __('Контент интервью'))
+						->set_layout('tabbed-vertical')
+						->setup_labels(['singular_name' => 'контент'])
+						->add_fields('bewert_field_interw', 'Интервьюер', [
+							Field::make('image', 'bewert_field_author_img', __('Иконка автора'))
+								->set_type('image')
+								->set_value_type('url')
+								->set_width(30),
+							Field::make('text', 'bewert_field_author_name', __('Имя автора'))
+								->set_width(70),
+							Field::make('textarea', 'bewert_field_author_quest', __('Вопрос')),
+						])
+						->add_fields('bewert_field_cust', 'Клиент', [
+							Field::make('image', 'bewert_field_cust_img', __('Иконка автора'))
+								->set_type('image')
+								->set_value_type('url')
+								->set_width(30),
+							Field::make('text', 'bewert_field_cust_name', __('Имя автора'))
+								->set_width(70),
+							Field::make('textarea', 'bewert_field_cust_quest', __('Ответ')),
+						])
+				])
+				->set_header_template('
+					<% if (bewert_field_name) { %>
+						<%- bewert_field_name %>
+						<% } else { %>
+						<%- "Name" %>
+					<% } %>
+					')
+		];
+	}
 }

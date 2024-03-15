@@ -119,6 +119,8 @@ class PageMeta
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-uber-bew.php')
 			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Интервью'), CommonMeta::bewertungerInt())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('FAQ'), CommonMeta::localFaq());
 	}
 
