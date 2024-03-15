@@ -1,6 +1,10 @@
 <?php
 if (is_page_template('parts/page-uber-vir.php')) {
 	$classHero = ' hero-uber-vir';
+} else if (is_page_template('parts/page-uber-team.php')) {
+	$classHero = ' hero-uber-team';
+} else {
+	$classHero = '';
 }
 ?>
 <section class="hero hero-small<?php echo $classHero; ?>">
