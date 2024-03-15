@@ -52,10 +52,6 @@
 				</span>
 				<input class="form-main__input input" name="email" type="email" placeholder="E-mail..." required>
 			</div>
-			<div class="form__item-little">
-				<span class="form__text">File <span class="form__tippy" data-tippy-content="ZIP, DOCX oder PDF (&lt;50mb)"></span></span>
-				<input class="form-main__input input" name="file" type="file">
-			</div>
 			<div class="form-litle__item">
 				<span class="form__text">File <span class="form__tippy" data-tippy-content="ZIP, DOCX oder PDF (&lt;50mb)"></span></span>
 				<label class="form__file-custom form-litle__input input">
