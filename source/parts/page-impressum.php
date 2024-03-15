@@ -7,24 +7,20 @@ get_header();
 ?>
 
 <main class="main">
-    <?php get_template_part('parts/sections/hero-kont'); ?>
-    <div class="container">
-        <div class="inner">
-            <div class="content">
-                <?php
-                get_template_part('parts/sections/edulab');
-                get_template_part('parts/sections/main-faq');
-                ?>
-            </div>
-            <aside class="sidebar">
-                <div class="team-vidget">
-                    <?php get_template_part('parts/blocks/form-sidebar'); ?>
-                </div>
-            </aside>
-        </div>
-    </div>
-    <?php 
-    get_template_part('parts/sections/contact'); 
+    <?php
+    get_template_part('parts/sections/hero-small');
+    get_template_part('parts/sections/goals');
+    get_template_part('parts/sections/connect');
+    get_template_part('parts/sections/map-contact');
+    get_template_part('parts/sections/edulab');
+    ?>
+    <div class="container"><?php the_content() ?></div>
+    <?php
+    get_template_part('parts/sections/team-mp');
+    get_template_part('parts/sections/web-widgets');
+    get_template_part('parts/complex_blocks/estimate');
+    get_template_part('parts/sections/reviews');
+	get_template_part('parts/sections/message');
     ?>
 </main>
 

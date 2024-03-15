@@ -1,5 +1,10 @@
 <section class="section connect">
 	<div class="container">
+		<?php if (!is_page_template('parts/page-uber-kont.php')) { ?>
+		<h2 class="estimate__title title">
+			Unsere Kontakte
+		</h2>
+		<?php } ?>
 		<div class="connect__items">
 			<div class="connect__item">
 				<div class="connect__item-inner">
