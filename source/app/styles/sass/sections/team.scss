@@ -16,15 +16,16 @@
 		flex-direction: column;
 		justify-content: space-between;
 
-        &.alt {
-            .team__photo-box, .team__photo {
-                max-height: 180px;
-                width: 180px;
-            }
-            .team__time {
-                margin: unset;
-            }
-        }
+		&.alt {
+			.team__photo-box,
+			.team__photo {
+				max-height: 180px;
+				width: 180px;
+			}
+			.team__time {
+				margin: unset;
+			}
+		}
 	}
 
 	&__item-top {
@@ -57,7 +58,7 @@
 
 	&__item-name {
 		font-size: 20px;
-        font-weight: 700;
+		font-weight: 700;
 		text-transform: uppercase;
 		margin-bottom: 8px;
 		color: $titlecolor;
