@@ -69,13 +69,13 @@
 						</span>
 					</div>
 					<div class="team__item-bottom">
-						<?php if (!empty($key['main_team_ma_phone'])) {?>
-							<a class="team__main-email" href="mailto:<?php echo $key['main_team_ma_mail']; ?>"></a>
+						<?php if (!empty($key['main_team_ma_whatsapp'])) {?>
+							<a class="team__main-whatsapp js-wapp" href="https://wa.me/<?php echo preg_replace('/[^,.0-9]/', '', $key['main_team_mamo_whatsapp']); ?>"></a>
 						<?php } ?>
 						<?php if (!empty($key['main_team_ma_phone'])) {?>
 							<a class="team__main-phone" href="tel:+<?php echo preg_replace('/[^,.0-9]/', '', $key['main_team_ma_phone']); ?>"></a>
 						<?php } ?>
-						<?php if (!empty($key['main_team_mo_phone'])) {?>
+						<?php if (!empty($key['main_team_ma_mail'])) {?>
 							<a class="team__main-email" href="mailto:<?php echo $key['main_team_ma_mail']; ?>"></a>
 						<?php } ?>
 					</div>
