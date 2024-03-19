@@ -7,7 +7,7 @@ get_header();
 ?>
 
 <main class="main">
-	<?php get_template_part('parts/sections/hero-kont'); ?>
+	<?php get_template_part('parts/sections/hero-small'); ?>
 	<div class="container">
 		<div class="inner">
 			<div class="content">
