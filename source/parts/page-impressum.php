@@ -17,6 +17,7 @@ get_header();
     <div class="container"><?php the_content() ?></div>
     <?php
     get_template_part('parts/sections/team-mp');
+    get_template_part('parts/sections/blitz');
     get_template_part('parts/sections/web-widgets');
     get_template_part('parts/complex_blocks/estimate');
     get_template_part('parts/sections/reviews');
