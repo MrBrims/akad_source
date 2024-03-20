@@ -23,7 +23,7 @@
 								</span>
 								<div class="team__box">
 									<span class="team__year-text">
-										Berufserfahrung:
+										Jahre im Unternehmen:
 									</span>
 									<span class="team__year-num">
 										<?php echo $key['main_team_mo_year']; ?>

@@ -148,7 +148,8 @@ class PageMeta
 			->where('post_template', '=', 'parts/page-uber-team.php')
 			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
 			->add_tab(__('Как мы работаем'), CommonMeta::howWorkMeta())
-			->add_tab(__('Статистика'), CommonMeta::staticMeta());
+			->add_tab(__('Статистика'), CommonMeta::staticMeta())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom());
 	}
 
 	public function impressum()
@@ -157,7 +158,8 @@ class PageMeta
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-impressum.php')
 			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
-			->add_tab(__('FAQ'), CommonMeta::localFaq());
+			->add_tab(__('FAQ'), CommonMeta::localFaq())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom());
 	}
 
 	public function wissen()
