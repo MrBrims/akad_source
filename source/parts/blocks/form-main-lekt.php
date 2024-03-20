@@ -14,9 +14,19 @@
 		</div>
 		<div class="form-main__item form__item-middle">
 			<span class="form__text">
-				<span class="form__required-field">*</span> Thema der Arbeit <span class="form__tippy" data-tippy-content="Das ist das Thema Ihrer Arbeit. Es ist sehr wichtig, Ihr Thema jetzt richtig zu schreiben."></span>
+				<?php if (!empty(carbon_get_post_meta(get_the_ID(), 'ak_bigform_check'))) { ?>
+					<span class="form__required-field">*</span>
+					<?php
+					$requiredForm = 'required';
+					$placeThem = 'Wenn Ihr Thema offen steht, geben Sie -';
+					?>
+				<?php } else {
+					$requiredForm = '';
+					$placeThem = 'Thema der Arbeit...';
+				} ?>
+				Thema der Arbeit <span class="form__tippy" data-tippy-content="Das ist das Thema Ihrer Arbeit. Es ist sehr wichtig, Ihr Thema jetzt richtig zu schreiben."></span>
 			</span>
-			<textarea class="form-main__input form-main__terxtarea form-main__theme input" name="theme" placeholder="Thema der Arbeit..." required></textarea>
+			<textarea class="form-main__input form-main__terxtarea form-main__theme input" name="theme" placeholder="<?php echo $placeThem ?>" <?php echo $requiredForm ?>></textarea>
 		</div>
 		<div class="form-main__item form__item-middle">
 			<span class="form__text">
@@ -36,7 +46,7 @@
 			</span>
 			<div class="form-counter">
 				<div data-id="decrement" class="counter-btn">-</div>
-				<input class="count-input input" name="number" type="number" value="30" max="1000" min="0" step="1" />
+				<input class="count-input input" name="number" type="number" value="<?php echo carbon_get_post_meta(get_the_ID(), 'ak_bigform_siten_num'); ?>" max="1000" min="0" step="1" />
 				<div data-id="increment" class="counter-btn">+</div>
 			</div>
 		</div>
@@ -96,7 +106,7 @@
 			</label>
 		</div>
 	</div>
-	<input class="form-main__btn btn" type="submit" value="DAS FORMULAR abschicken">
+	<input class="form-main__btn btn" type="submit" value="<?php echo carbon_get_post_meta(get_the_ID(), 'ak_bigform_btn_text'); ?>">
 	<p class="form-main__protect-title form-main__coaching-protect">
 		IHRE DATEN WERDEN NICHT AN DRITTE WEITERGEGEBEN
 	</p>
