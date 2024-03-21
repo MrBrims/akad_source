@@ -17,11 +17,13 @@
 		justify-content: space-between;
 
 		&.alt {
+
 			.team__photo-box,
 			.team__photo {
 				max-height: 180px;
 				width: 180px;
 			}
+
 			.team__time {
 				margin: unset;
 			}
@@ -206,11 +208,13 @@
 			background-image: url(../images/icons/whatsapp.svg);
 		}
 	}
+
 	&__main-phone {
 		&::before {
 			background-image: url(../images/icons/phone-menu.svg);
 		}
 	}
+
 	&__main-email {
 		&::before {
 			background-image: url(../images/icons/email-menu.svg);
@@ -230,6 +234,14 @@
 	.team {
 		&__items {
 			--elements: 1;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	.team {
+		&__item-inner {
+			flex-direction: column;
 		}
 	}
 }
