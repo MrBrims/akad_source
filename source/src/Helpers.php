@@ -2,8 +2,12 @@
 
 class Helpers
 {
-
-	
+	public static function imageAlt($image_url)
+	{
+		$image_id = attachment_url_to_postid($image_url);
+		$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+		echo $image_alt;
+	}
 
 
 	public static function coach_cond(): string
