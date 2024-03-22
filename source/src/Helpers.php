@@ -2,8 +2,6 @@
 
 class Helpers
 {
-<<<<<<< HEAD
-=======
 	public static function imageAlt($image_url)
 	{
 		$image_id = attachment_url_to_postid($image_url);
@@ -11,8 +9,6 @@ class Helpers
 		echo $image_alt;
 	}
 
-
->>>>>>> origin/source
 	public static function coach_cond(): string
 	{
 		if (get_page_template_slug() == "parts/page-halfe.php") {
@@ -37,6 +33,7 @@ class Helpers
 		];
 		return $whatsArr[$day];
 	}
+	
 	public static function urlPathFromRef (): string
 	{
 		$str = wp_get_referer();
