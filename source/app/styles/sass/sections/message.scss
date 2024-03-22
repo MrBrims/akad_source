@@ -3,6 +3,7 @@
 	@include fluidPaddingB(40px, 70px, 480px, 1024px, 70px);
 	padding-left: 10px;
 	padding-right: 10px;
+	overflow: hidden;
 
 	position: relative;
 
@@ -42,6 +43,7 @@
 	}
 
 }
+
 .section:last-child.message {
 	margin-bottom: 0;
 }

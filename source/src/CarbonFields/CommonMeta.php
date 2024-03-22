@@ -534,6 +534,14 @@ class CommonMeta
 	{
 		return [
 			Field::make('text', 'ak_bigform_title', __('Заголовок формы')),
+			Field::make('checkbox', 'ak_bigform_check', __('Сделать поле  Thema der Arbeit обязательным?'))
+				->set_width(30),
+			Field::make('text', 'ak_bigform_btn_text', __('Текст на кнопке'))
+				->set_default_value('JETZT ANFRAGEN')
+				->set_width(30),
+			Field::make('text', 'ak_bigform_siten_num', __('Количество страниц'))
+				->set_default_value('5')
+				->set_width(30),
 			Field::make('select', 'ak_complex_global_select', 'Выбор формы')
 				->add_options(
 					array(

@@ -57,15 +57,6 @@ class General
 
 		add_filter('nav_menu_css_class', [$this, 'addClassMenuItems'], 1, 3);
 
-		// Подключение фильтра изменения языка shema WebPage в Yoast SEO
-		add_filter('wpseo_schema_webpage', [$this, 'shemaDePage']);
-
-		// Подключение фильтра изменения языка shema WebSite в Yoast SEO
-		add_filter('wpseo_schema_website', [$this, 'shemaDeSite']);
-
-		// Подключение фильтра изменения языка shema Organization в Yoast SEO
-		add_filter('wpseo_schema_organization', [$this, 'shemaDeOrganization']);
-
 		// Загрузка svg
 		add_filter('upload_mimes', [$this, 'svgUploadAllow']);
 		add_filter('wp_check_filetype_and_ext', [$this, 'fix_svg_mime_type'], 10, 5);
@@ -111,44 +102,6 @@ class General
 			// Устанавливаем куку с именем "utm_source" и значением $utm_source на 1 день
 			setcookie('utm_source', json_encode($utm_source), time() + (1 * 24 * 60 * 60), '/');
 		}
-	}
-
-	// Функция изменения языка shema WebPage в Yoast SEO
-	public static function shemaDePage($data)
-	{
-		$data['inLanguage'] = 'de-DE';
-		$data['primaryImageOfPage']['inLanguage'] = 'de-DE';
-		$data['image']['inLanguage'] = 'de-DE';
-		return $data;
-	}
-
-	// Функция изменения языка shema WebSite в Yoast SEO
-	public static function shemaDeSite($data)
-	{
-		$data['inLanguage'] = 'de-DE';
-		return $data;
-	}
-
-	// Функция изменения языка shema Organization в Yoast SEO
-	public static function shemaDeOrganization($data)
-	{
-		$data['logo'] = [
-			'@type'      => 'ImageObject',
-			'@id'        => 'https://akademily.de/#/schema/logo/image/',
-			'inLanguage' => 'de-DE',
-			'url'        => 'https://akademily.de/wp-content/uploads/2024/01/logo.svg',
-			'contentUrl' => 'https://akademily.de/wp-content/uploads/2024/01/logo.svg',
-			'caption'    => 'Akademily',
-		];
-		$data['image'] = [
-			'@type'      => 'ImageObject',
-			'@id'        => 'https://akademily.de/#/schema/logo/image/',
-			'inLanguage' => 'de-DE',
-			'url'        => 'https://akademily.de/wp-content/uploads/2024/01/logo.svg',
-			'contentUrl' => 'https://akademily.de/wp-content/uploads/2024/01/logo.svg',
-			'caption'    => 'Akademily',
-		];
-		return $data;
 	}
 
 	// Разрешает добавлять svg
