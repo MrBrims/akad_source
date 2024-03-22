@@ -75,6 +75,14 @@ class General
 
 		// Подключение js и css для админки
 		add_action('admin_enqueue_scripts', [$this, 'adminStyleScript'], 99);
+
+		add_filter('wpseo_locale', [$this, 'custom_yoast_seo_locale']);
+	}
+
+
+	public function custom_yoast_seo_locale($locale)
+	{
+		return 'en_US'; // Замените 'en_US' на нужный вам языковой код
 	}
 
 	// Подключение js и css для админки

@@ -88,11 +88,15 @@ main
 	float: right
 	margin-left: 20px
 	margin-bottom: 20px
+	max-width: 50%
+	height: 100%
 
 .alignleft
 	float: left
 	margin-right: 20px
 	margin-bottom: 20px
+	max-width: 50%
+	height: 100%
 
 .attachment-post-thumbnail
 	@include fluidMaxHeight(300px, 600px, 480px, 1200px, 500px)
@@ -141,10 +145,13 @@ ul.custom-list
 	.sidebar
 		width: 100%
 
-@media (max-width: 720px)
+@media (max-width: 880px)
 	.alignright,
 	.alignleft
 		max-width: 200px
+		height: 100%
+
+@media (max-width: 720px)
 	.response-img
 		max-width: 100%
 		width: 100%
@@ -153,6 +160,7 @@ ul.custom-list
 		margin-right: 0
 
 @media (max-width: 620px)
+
 	.sidebar
 		max-width: 320px
 		margin: 0 auto
