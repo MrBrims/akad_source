@@ -23,9 +23,9 @@
 									</defs>
 								</svg>
 							</div>
-							<h2 class="faq__inner-title">
+							<p class="faq__inner-title">
 								<?php echo $key['faq_local_head']; ?>
-							</h2>
+							</p>
 						</div>
 						<div class="faq__content">
 							<div style="min-height:0;">
@@ -54,9 +54,9 @@
 									</defs>
 								</svg>
 							</div>
-							<h2 class="faq__inner-title">
+							<p class="faq__inner-title">
 								<?php echo $key['faq_head']; ?>
-							</h2>
+							</p>
 						</div>
 						<div class="faq__content">
 							<div style="min-height:0;">
