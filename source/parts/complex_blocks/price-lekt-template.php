@@ -13,7 +13,7 @@
 				?>
 					<tr>
 						<td>
-							<h4><?php echo $k['complex_price_lektkor_disc'] ?></h4>
+							<h3><?php echo $k['complex_price_lektkor_disc'] ?></h3>
 							<span><?php echo $k['complex_price_lektkor_disc_list'] ?></span>
 						</td>
 						<td class="price-lekt__td-btn">

@@ -2,9 +2,9 @@
 	<section class="guarant">
 		<?php foreach ($key['unic_guarant_card'] as $k) : ?>
 			<div class="guarant__item">
-				<h4 class="guarant__item-title">
+				<div class="guarant__item-title">
 					<?php echo $k['unic_guarant_card_title']; ?>
-				</h4>
+				</div>
 				<?php if (!empty($k['unic_guarant_card_subtitle'])) : ?>
 					<p class="guarant__item-subtitle">
 						<?php echo $k['unic_guarant_card_subtitle']; ?>

@@ -1,8 +1,8 @@
 <div class="sticky-block">
 	<form action="" class="form form-sidebar">
-		<h3 class="form-sidebar__title">
+		<p class="form-sidebar__title">
 			Lassen Sie sich einen <span>unverbindlichen Kostenvoranschlag</span> erstellen
-		</h3>
+		</p>
 		<div class="form__items">
 			<div class="form__item-little">
 				<span class="form__text">

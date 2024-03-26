@@ -1,8 +1,8 @@
 <section class="section edulab">
 	<div class="container">
-		<h3 class="edulab__title">
+		<h2 class="edulab__title">
 			EduLab Limited
-		</h3>
+		</h2>
 		<div class="edulab__inner">
 			<div class="edulab__col">
 				<div class="edulab__item">

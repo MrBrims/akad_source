@@ -27,9 +27,9 @@
 		</div>
 	</div>
 	<input class="form__btn btn" type="submit" value="UNVERBINDLICH ANFRAGEN">
-	<h4 class="form-coach__guarant-title">
+	<p class="form-coach__guarant-title">
 		Unsere Garantien
-	</h4>
+	</p>
 	<div class="form-coach__guarant-items">
 		<div class="form-coach__guarant-item">
 			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">

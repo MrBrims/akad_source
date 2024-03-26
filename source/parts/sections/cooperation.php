@@ -10,9 +10,9 @@
 				<div class="cooperation__item">
 					<div class="cooperation__item-head">
 						<img class="cooperation__item-icon" src="<?php echo $key['cooperation_card_icon']; ?>" alt="icon">
-						<h4 class="cooperation__item-title">
+						<p class="cooperation__item-title">
 							<?php echo $key['cooperation_card_title']; ?>
-						</h4>
+						</p>
 					</div>
 					<?php if (!empty($key['cooperation_card_text'])) : ?>
 						<div class="cooperation__text">
