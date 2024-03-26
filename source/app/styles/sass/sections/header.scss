@@ -85,22 +85,23 @@
     height: 60px;
     background-color: #325D9C;
     transition: all .3s ease-out;
-		position: relative;
-		&::before {
-			// Garland for the holidays
-			// content: "";
-			// position: absolute;
-			// width: 100%;
-			// max-width: 1920px;
-			// height: 51px;
-			// bottom: -50px;
-			// left: 50%;
-			// transform: translateX(-50%);
-			// background-image: url(../images/ny/garland.svg);
-			// background-size: cover;
-			// background-repeat: no-repeat;
-			// background-position: center;
-		}
+    position: relative;
+
+    &::before {
+      // Garland for the holidays
+      // content: "";
+      // position: absolute;
+      // width: 100%;
+      // max-width: 1920px;
+      // height: 51px;
+      // bottom: -50px;
+      // left: 50%;
+      // transform: translateX(-50%);
+      // background-image: url(../images/ny/garland.svg);
+      // background-size: cover;
+      // background-repeat: no-repeat;
+      // background-position: center;
+    }
   }
 
   &__bottom-inner {
@@ -167,7 +168,7 @@
       --offset: -38;
       stroke-dasharray: var(--length) var(--total-length);
       stroke-dashoffset: var(--offset);
-      transition: all .8s cubic-bezier(.645, .045, .355, 1);
+      transition: all .2s cubic-bezier(.645, .045, .355, 1);
     }
 
     circle {
