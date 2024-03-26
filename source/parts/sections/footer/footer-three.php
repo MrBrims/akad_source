@@ -12,11 +12,11 @@
 			</h4>
 			<?php echo apply_filters('the_content', carbon_get_theme_option('footer_lekt_links')); ?>
 		</div>
-		<div class="footer__three-and">
+		<!-- <div class="footer__three-and">
 			<h4 class="footer__title">
 				Andere Dienste
 			</h4>
 			<?php echo apply_filters('the_content', carbon_get_theme_option('footer_and_links')); ?>
-		</div>
+		</div> -->
 	</div>
 </div>

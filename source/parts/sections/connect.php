@@ -1,9 +1,9 @@
 <section class="section connect">
 	<div class="container">
 		<?php if (!is_page_template('parts/page-uber-kont.php')) { ?>
-		<h2 class="estimate__title title">
-			Unsere Kontakte
-		</h2>
+			<h2 class="estimate__title title">
+				Unsere Kontakte
+			</h2>
 		<?php } ?>
 		<div class="connect__items">
 			<div class="connect__item">
@@ -11,9 +11,9 @@
 					<div class="connect__item-img">
 						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/phone.svg" alt="img">
 					</div>
-					<h4 class="connect__item-title">
+					<p class="connect__item-title">
 						Telefon:
-					</h4>
+					</p>
 					<div class="connect__item-box">
 						<a class="connect__item-phone connect__item-link" href="tel:+<?php echo preg_replace("/[^,.0-9]/", '', carbon_get_theme_option('global_phone')); ?>">
 							<?php echo carbon_get_theme_option('global_phone'); ?>
@@ -29,9 +29,9 @@
 					<div class="connect__item-img">
 						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/mail.svg" alt="img">
 					</div>
-					<h4 class="connect__item-title">
+					<p class="connect__item-title">
 						E-Mail:
-					</h4>
+					</p>
 					<div class="connect__item-box">
 						<a class="connect__item-mail connect__item-link" href="mailto:<?php echo carbon_get_theme_option('global_email'); ?>">
 							<?php echo carbon_get_theme_option('global_email'); ?>
@@ -47,9 +47,9 @@
 					<div class="connect__item-img">
 						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/ans.svg" alt="img">
 					</div>
-					<h4 class="connect__item-title">
+					<p class="connect__item-title">
 						Anschrift:
-					</h4>
+					</p>
 					<div class="connect__item-box">
 						<span class="connect__item-address">
 							<?php echo carbon_get_theme_option('global__adress'); ?>
@@ -70,9 +70,9 @@
 					<div class="connect__item-img">
 						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/whats.svg" alt="img">
 					</div>
-					<h4 class="connect__item-title">
+					<p class="connect__item-title">
 						E-Mail:
-					</h4>
+					</p>
 					<div class="connect__item-box">
 						<span class="connect__item-time">
 							<?php echo carbon_get_theme_option('global_time'); ?>

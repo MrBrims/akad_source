@@ -15,10 +15,11 @@
         max-width: 160px;
     }
 
-    .banner-content__text h4 {
+    &__title {
         color: #F70431;
         font-weight: 500;
         margin-bottom: 15px;
+        font-size: 22px;
     }
 
     &__text p {
@@ -40,6 +41,7 @@
         flex-direction: column;
         gap: 0;
         text-align: center;
+
         &__btn {
             margin-bottom: 25px;
         }

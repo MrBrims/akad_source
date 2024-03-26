@@ -9,9 +9,9 @@
 	</p>
 	<?php foreach ((carbon_get_theme_option('guarant_card')) as $key) : ?>
 		<div class="guarant__item">
-			<h4 class="guarant__item-title">
+			<p class="guarant__item-title">
 				<?php echo $key['guarant_card_title']; ?>
-			</h4>
+			</p>
 			<p class="guarant__item-subtitle">
 				<?php echo $key['guarant_card_subtitle']; ?>
 			</p>

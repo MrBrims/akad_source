@@ -2,9 +2,9 @@
 	<div class="container">
 		<div class="form-calc__inner">
 			<div class="form-calc__left">
-				<h3 class="form-calc__title">
+				<h2 class="form-calc__title">
 					<?php echo $key['ak_complex_form_calc_title'] ?>
-				</h3>
+				</h2>
 				<div class="form-calc__help">
 					<span class="form-calc__help-name">
 						<?php echo $key['ak_complex_form_calc_help'] ?>
