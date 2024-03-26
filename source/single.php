@@ -23,7 +23,7 @@ while (have_posts()) {
 			<?php } ?>
 			<div class="inner">
 				<div class="content">
-					<?php the_post_thumbnail('thumbnail'); ?>
+					<?php the_post_thumbnail(); ?>
 					<div class="meta-single">
 						<div class="meta-single__item meta-single__cat">
 							<?php the_category(', '); ?>
