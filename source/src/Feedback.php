@@ -623,6 +623,11 @@ class Feedback
 			return 'Форма без ID';
 		}
 	}
+
+	public function postDataToApi ()
+	{
+		
+	}
 }
 
 new Feedback();
