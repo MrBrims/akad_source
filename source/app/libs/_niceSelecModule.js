@@ -21,8 +21,6 @@ export function niceSelectVanilla() {
 					option.textContent = value
 					select.appendChild(option)
 				})
-				// NiceSelect.bind(select)
-				// NiceSelect.destroy(select)
 				nice.update()
 				const selectNice = document.querySelector(
 					'.spec-select-wrap .nice-select'
