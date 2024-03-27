@@ -66,6 +66,29 @@ class General
 
 		// Подключение js и css для админки
 		add_action('admin_enqueue_scripts', [$this, 'adminStyleScript'], 99);
+		add_action('rest_api_init', [$this, 'akadJson']);
+	}
+
+	public function akadJson()
+	{
+		function getJson()
+		{
+			// Путь к JSON
+			$fileDir = DE_URI . '/data/spec.json';
+
+			// Извлечение содержимого
+			$fileContent = file_get_contents($fileDir);
+
+			// Парсинг и присвоение переменной
+			$jsonContent = json_decode($fileContent, true);
+
+			return $jsonContent;
+		}
+
+		register_rest_route('my-namespace/v2', '/spec/', array(
+			'methods' => 'GET',
+			'callback' => 'getJson',
+		));
 	}
 
 	// Подключение js и css для админки
@@ -140,29 +163,6 @@ class General
 
 		return $data;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	public function themeScriptsAndStyles()
 	{

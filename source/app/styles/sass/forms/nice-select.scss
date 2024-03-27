@@ -16,14 +16,43 @@
   word-break: break-all;
 }
 
+.wrapper-selec {
+  position: relative;
+  height: 40px;
+}
+
+.spec-select-wrap {
+  // position: relative;
+  // height: 40px;
+  // display: flex;
+  // align-items: center;
+  // cursor: pointer;
+
+  select {
+    // display: none;
+  }
+
+  .nice-select {
+    // position: absolute;
+    // top: -1px;
+    // left: -1px;
+    // width: 183px;
+  }
+}
+
 select.custom-select {
   position: absolute;
-  height: 40px;
-  clip: rect(1px, 1px, 1px, 1px);
-  overflow: hidden;
-  white-space: nowrap;
-  width: 1px;
-  z-index: -1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  cursor: pointer;
+  color: #445664;
+  // height: 40px;
+  // clip: rect(1px, 1px, 1px, 1px);
+  // overflow: hidden;
+  // white-space: nowrap;
+  // width: 1px;
+  // z-index: -1000;
 }
 
 .nice-select .list {
