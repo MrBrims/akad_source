@@ -74,12 +74,17 @@ class Feedback
 					'post_status' => 'publish',
 					'post_title' => $this->subject,
 					'post_content' => $this->message,
+					'meta_input' => [
+						'lead_json' => [
+							'hui' => 'hui',
+						]
+					],
 				]
 			);
 			if ($id) {
 				$this->sendToTG($id);
 				$this->sendFileToTG($id);
-				$this->sendToClient($id);
+				// $this->sendToClient($id);
 
 				wp_send_json_success(
 					[
@@ -624,9 +629,8 @@ class Feedback
 		}
 	}
 
-	public function postDataToApi ()
+	public function getDataJson ($data)
 	{
-		
 	}
 }
 
