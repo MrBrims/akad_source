@@ -6,9 +6,8 @@ source/package-lock.json
 debug.log
 **/src/Feedback**.php
 **/src/PrivateConstants.php
-source/.vscode
-.vscode
 wp-content/themes/**
+wp-content/plugins/**
 wp-content/cache/**
 wp-content/wp-rocket-config/**
 !**/src/Feedback.php
