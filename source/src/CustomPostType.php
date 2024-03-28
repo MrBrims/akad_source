@@ -52,7 +52,40 @@ class CustomPostType
             'show_in_menu' => true,
             'menu_icon' => 'dashicons-feedback',
             'rewrite' => false,
+            'supports' => [
+                'title',
+                'editor',
+                // 'author',
+                // 'thumbnail',
+                // 'excerpt',
+                // 'trackbacks',
+                'custom-fields',
+                // 'comments',
+                // 'revisions',
+                // 'page-attributes',
+                // 'post-formats'
+            ],
+            // 'rest_auth_callback' => 'rest_check_authentication_required',
         ]);
+
+        register_meta( 'post', 'lead_json', array(
+            'type' => 'object',
+            'description' => 'хуй',
+            'single' => true,
+            'show_in_rest' => array(
+                'schema' => array(
+                    'type'       => 'object',
+                    'properties' => array(
+                        'version' => array(
+                            'type' => 'string',
+                        ),
+                        'artist'  => array(
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ));
     }
 }
 
