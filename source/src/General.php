@@ -71,7 +71,7 @@ class General
 
 	public function akadJson()
 	{
-		function getJson()
+		function getJsonSpec()
 		{
 			// Путь к JSON
 			$fileDir = DE_URI . '/data/spec.json';
@@ -85,9 +85,28 @@ class General
 			return $jsonContent;
 		}
 
+		function getJsonType()
+		{
+			// Путь к JSON
+			$fileDir = DE_URI . '/data/types.json';
+
+			// Извлечение содержимого
+			$fileContent = file_get_contents($fileDir);
+
+			// Парсинг и присвоение переменной
+			$jsonContent = json_decode($fileContent, true);
+
+			return $jsonContent;
+		}
+
 		register_rest_route('my-namespace/v2', '/spec/', array(
 			'methods' => 'GET',
-			'callback' => 'getJson',
+			'callback' => 'getJsonSpec',
+		));
+
+		register_rest_route('my-namespace/v2', '/type/', array(
+			'methods' => 'GET',
+			'callback' => 'getJsonType',
 		));
 	}
 

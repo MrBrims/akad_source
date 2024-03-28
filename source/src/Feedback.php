@@ -17,7 +17,7 @@ class Feedback
 	private $message;
 	private $fc_source;
 	private $score;
-	public function __construct()
+	public function __construct ()
 	{
 		add_filter('determine_current_user', [$this, 'jsonBasicAuthHandler'], 20);
 		add_filter('rest_authentication_errors', [$this, 'jsonBasicAuthError']);
@@ -31,16 +31,16 @@ class Feedback
 		add_action('save_post', [$this, 'sendBitrix24'], 10, 3);
 	}
 
-	public function mailer()
+	public function mailer ()
 	{
-		if (empty($_POST)) {
+		if (empty ($_POST)) {
 			wp_send_json_error(
 				[
 					'message' => __('<p class="warning">Empty form!</p>')
 				]
 			);
 		} else {
-			if (!empty($_POST['recaptcha_response'])) {
+			if (!empty ($_POST['recaptcha_response'])) {
 				$url = RECAPTCHA_URL;
 				$key = RECAPTCHA_KEY;
 				$recaptcha = $_POST['recaptcha_response'];
@@ -92,7 +92,7 @@ class Feedback
 		return true;
 	}
 
-	public function sendBitrix24($postId, $post, $update)
+	public function sendBitrix24 ($postId, $post, $update)
 	{
 		if (wp_is_post_revision($postId) || $update) {
 			return false;
@@ -111,7 +111,7 @@ class Feedback
 		$email = '';
 		preg_match_all('/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i', $content, $emailMatches);
 		$emailMatches = reset($emailMatches);
-		if (!empty($emailMatches)) {
+		if (!empty ($emailMatches)) {
 			$email = $emailMatches[0];
 		}
 
@@ -119,7 +119,7 @@ class Feedback
 		$name = '';
 		preg_match_all('/(Vorname.*\n|Name.*\n|Nickname.*\n)/', $content, $nameMatches);
 		$nameMatches = reset($nameMatches);
-		if (!empty($nameMatches)) {
+		if (!empty ($nameMatches)) {
 			$name = explode(':', $nameMatches[0]);
 			$name = strip_tags(trim(end($name)));
 		}
@@ -128,7 +128,7 @@ class Feedback
 		$phone = '';
 		preg_match_all('/(phone.*\n|whatsapp.*\n|telefonnummer.*\n)/i', $content, $phoneMatches);
 		$phoneMatches = reset($phoneMatches);
-		if (!empty($phoneMatches)) {
+		if (!empty ($phoneMatches)) {
 			$phone = explode(':', $phoneMatches[0]);
 			$phone = trim(end($phone));
 			$phone = preg_replace("/[^,.0-9]/", '', $phone);
@@ -138,7 +138,7 @@ class Feedback
 		$message = '';
 		preg_match_all('/(message.*\n)/i', $post->post_content, $messageMatches);
 		$messageMatches = reset($messageMatches);
-		if (!empty($messageMatches)) {
+		if (!empty ($messageMatches)) {
 			$message = explode(':', $messageMatches[0]);
 			$message = strip_tags(trim(end($message)));
 		}
@@ -147,7 +147,7 @@ class Feedback
 		$utmSource = '';
 		preg_match_all('/(Utm_source.*\n)/i', $content, $utmSourceMatches);
 		$utmSourceMatches = reset($utmSourceMatches);
-		if (!empty($utmSourceMatches)) {
+		if (!empty ($utmSourceMatches)) {
 			$utmSource = explode(':', $utmSourceMatches[0]);
 			$utmSource = strip_tags(trim(end($utmSource)));
 		}
@@ -156,7 +156,7 @@ class Feedback
 		$utmMedium = '';
 		preg_match_all('/(utm_medium.*\n)/i', $content, $utmMediumMatches);
 		$utmMediumMatches = reset($utmMediumMatches);
-		if (!empty($utmMediumMatches)) {
+		if (!empty ($utmMediumMatches)) {
 			$utmMedium = explode(':', $utmMediumMatches[0]);
 			$utmMedium = strip_tags(trim(end($utmMedium)));
 		}
@@ -165,7 +165,7 @@ class Feedback
 		$utmCampaign = '';
 		preg_match_all('/(utm_campaign.*\n)/i', $content, $utmCampaignMatches);
 		$utmCampaignMatches = reset($utmCampaignMatches);
-		if (!empty($utmCampaignMatches)) {
+		if (!empty ($utmCampaignMatches)) {
 			$utmCampaign = explode(':', $utmCampaignMatches[0]);
 			$utmCampaign = strip_tags(trim(end($utmCampaign)));
 		}
@@ -174,7 +174,7 @@ class Feedback
 		$utmContent = '';
 		preg_match_all('/(utm_content.*\n)/i', $content, $utmContentMatches);
 		$utmContentMatches = reset($utmContentMatches);
-		if (!empty($utmContentMatches)) {
+		if (!empty ($utmContentMatches)) {
 			$utmContent = explode(':', $utmContentMatches[0]);
 			$utmContent = strip_tags(trim(end($utmContent)));
 		}
@@ -183,7 +183,7 @@ class Feedback
 		$utmTerm = '';
 		preg_match_all('/.*utm_term\s?\:\s?([^\n]+)/i', $content, $utmTermMatches, PREG_SET_ORDER);
 		$utmTermMatches = reset($utmTermMatches);
-		if (!empty($utmTermMatches)) {
+		if (!empty ($utmTermMatches)) {
 			$utmTerm = strip_tags(trim($utmTermMatches[1]));
 		}
 
@@ -191,7 +191,7 @@ class Feedback
 		$workType = '';
 		preg_match_all('/type\s?:\s?(.*)\n|arbeit\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
 		$tempVar = reset($tempVar);
-		if (!empty($tempVar[1])) {
+		if (!empty ($tempVar[1])) {
 			$workType = strip_tags(trim($tempVar[1]));
 		} elseif ($tempVar[2]) {
 			$workType = strip_tags(trim($tempVar[2]));
@@ -201,7 +201,7 @@ class Feedback
 		$workSpec = '';
 		preg_match_all('/specialization\s?:\s?(.*)\n|discipline\s?:\s?(.*)\n|fachbereich\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
 		$tempVar = reset($tempVar);
-		if (!empty($tempVar[1])) {
+		if (!empty ($tempVar[1])) {
 			$workSpec = strip_tags(trim($tempVar[1]));
 		} elseif ($tempVar[2]) {
 			$workSpec = strip_tags(trim($tempVar[2]));
@@ -211,7 +211,7 @@ class Feedback
 		$workTheme = '';
 		preg_match_all('/theme\s?:\s?(.*)\n|thema\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
 		$tempVar = reset($tempVar);
-		if (!empty($tempVar[1])) {
+		if (!empty ($tempVar[1])) {
 			$workTheme = strip_tags(trim($tempVar[1]));
 		} elseif ($tempVar[2]) {
 			$workTheme = strip_tags(trim($tempVar[2]));
@@ -221,7 +221,7 @@ class Feedback
 		$deadline = '';
 		preg_match_all('/deadline\s?:\s?(.*)\n|abgabetermin\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
 		$tempVar = reset($tempVar);
-		if (!empty($tempVar[1])) {
+		if (!empty ($tempVar[1])) {
 			$deadline = strip_tags(trim($tempVar[1]));
 		} elseif ($tempVar[2]) {
 			$deadline = strip_tags(trim($tempVar[2]));
@@ -231,9 +231,9 @@ class Feedback
 		$pageNum = '';
 		preg_match_all('/seitenanzahl\s?:\s?(.*)\n|number\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
 		$tempVar = reset($tempVar);
-		if (!empty($tempVar[1])) {
+		if (!empty ($tempVar[1])) {
 			$pageNum = strip_tags(trim($tempVar[1]));
-		} elseif (!empty($tempVar[2])) {
+		} elseif (!empty ($tempVar[2])) {
 			$pageNum = strip_tags(trim($tempVar[2]));
 		}
 
@@ -282,7 +282,7 @@ class Feedback
 		} while ($status_code != 200 && $attempts < $max_attempts);
 	}
 
-	public function sendMail($to, $name = '', $subj = 'Notification', $msg = 'Form sent')
+	public function sendMail ($to, $name = '', $subj = 'Notification', $msg = 'Form sent')
 	{
 		$mail = new PHPMailer(true);
 		try {
@@ -310,7 +310,7 @@ class Feedback
 		return true;
 	}
 
-	public function sendToClient($id)
+	public function sendToClient ($id)
 	{
 		$sbjToClient = 'Vielen Dank, dass Sie Akademily.de gewählt haben!';
 		$msgToClient = '<p><strong>Hallo,</strong></p>
@@ -349,17 +349,17 @@ class Feedback
 		return $res;
 	}
 
-	public function jsonBasicAuthHandler($user)
+	public function jsonBasicAuthHandler ($user)
 	{
 		global $wp_json_basic_auth_error;
 
 		$wp_json_basic_auth_error = null;
 
-		if (!empty($user)) {
+		if (!empty ($user)) {
 			return $user;
 		}
 
-		if (!isset($_SERVER['PHP_AUTH_USER'])) {
+		if (!isset ($_SERVER['PHP_AUTH_USER'])) {
 			return $user;
 		}
 
@@ -382,9 +382,9 @@ class Feedback
 		return $user->ID;
 	}
 
-	public function jsonBasicAuthError($error)
+	public function jsonBasicAuthError ($error)
 	{
-		if (!empty($error)) {
+		if (!empty ($error)) {
 			return $error;
 		}
 
@@ -393,7 +393,7 @@ class Feedback
 		return $wp_json_basic_auth_error;
 	}
 
-	private function sendToTG($id)
+	private function sendToTG ($id)
 	{
 		$text = "<b>{$this->title}</b>\r\n\n";
 		$text .= "{$this->subject}\r\n\n";
@@ -422,7 +422,7 @@ class Feedback
 		return true;
 	}
 
-	public function sendFileToTG($id)
+	public function sendFileToTG ($id)
 	{
 		// Проверка на наличие файла
 		if ($_FILES['file']['name'] !== '') {
@@ -450,7 +450,7 @@ class Feedback
 		}
 	}
 
-	public function sendWapp()
+	public function sendWapp ()
 	{
 		$channel = json_decode(stripslashes($_COOKIE['fc_utm']))->utm_channel;
 		$clientGeo = json_decode(stripslashes($_COOKIE['geo']));
@@ -473,7 +473,7 @@ class Feedback
 		return $res;
 	}
 
-	public function getChannel($ch)
+	public function getChannel ($ch)
 	{
 		if ($ch == 'cpc') {
 			return 'K';
@@ -486,7 +486,7 @@ class Feedback
 		}
 	}
 
-	public function getTitle($ch)
+	public function getTitle ($ch)
 	{
 		if ($ch == 'cpc') {
 			return 'Новая заявка! 💰';
@@ -499,7 +499,7 @@ class Feedback
 		}
 	}
 
-	public function getSubject($ch)
+	public function getSubject ($ch)
 	{
 		return sprintf(
 			'%s | %s | %s',
@@ -509,7 +509,7 @@ class Feedback
 		);
 	}
 
-	public function messageFromForm()
+	public function messageFromForm ()
 	{
 		$mess = '';
 		foreach ($_POST as $key => $value) {
@@ -523,43 +523,43 @@ class Feedback
 		return $mess;
 	}
 
-	public function messageFromCookie()
+	public function messageFromCookie ()
 	{
 		$mess = '';
-		if (isset($_COOKIE['refer'])) {
+		if (isset ($_COOKIE['refer'])) {
 			$mess .= sprintf('<p>%s : %s<br></p>', 'Refer', stripslashes($_COOKIE['refer'])); //Вывод
 		}
-		if (isset($_COOKIE['is_mobile'])) {
+		if (isset ($_COOKIE['is_mobile'])) {
 			$mess .= sprintf('<p>%s : %s<br></p>', 'Is_Mobile', stripslashes($_COOKIE['is_mobile'])); //Вывод
 		}
-		if (isset($_COOKIE['browser'])) {
+		if (isset ($_COOKIE['browser'])) {
 			$mess .= sprintf('<p>%s : %s<br></p>', 'Browser', stripslashes($_COOKIE['browser'])); //Вывод
 		}
-		if (isset($_COOKIE['os'])) {
+		if (isset ($_COOKIE['os'])) {
 			$mess .= sprintf('<p>%s : %s</p>', 'OS', stripslashes($_COOKIE['os'])); //Вывод
 		}
-		if (isset($_COOKIE['cookieCook'])) {
+		if (isset ($_COOKIE['cookieCook'])) {
 			$mess .= sprintf('<p>%s : %s</p>', 'Cookie_Cook', stripslashes($_COOKIE['cookieCook'])); //Вывод
 		}
-		if (isset($_COOKIE['time_passed'])) {
+		if (isset ($_COOKIE['time_passed'])) {
 			$mess .= sprintf('<p>%s : %s</p>', 'Time_Passed', stripslashes($_COOKIE['time_passed'])); //Вывод
 		}
-		if (isset($_COOKIE['fc_page'])) {
+		if (isset ($_COOKIE['fc_page'])) {
 			$mess .= sprintf('<p>%s : %s</p>', 'Fc_Page', stripslashes($_COOKIE['fc_page'])); //Вывод
 		}
-		if (isset($_COOKIE['lc_page'])) {
+		if (isset ($_COOKIE['lc_page'])) {
 			$mess .= sprintf('<p>%s : %s</p>', 'Lc_Page', stripslashes($_COOKIE['lc_page'])); //Вывод
 		}
-		if (isset($_COOKIE['user_agent'])) {
+		if (isset ($_COOKIE['user_agent'])) {
 			$mess .= sprintf('<p>%s : %s</p>', 'User_Agent', stripslashes($_COOKIE['user_agent'])); //Вывод
 		}
 		return $mess;
 	}
 
-	public function messageFromGeo()
+	public function messageFromGeo ()
 	{
 		$mess = '';
-		if (isset($_COOKIE['geo'])) {
+		if (isset ($_COOKIE['geo'])) {
 			$decCookie = json_decode(stripslashes($_COOKIE['geo'])); //Декодируем JSON из кук
 			foreach ($decCookie as $key => $value) {
 				$string = (is_array($value)) ? implode(', ', $value) : $value; //Преобразование
@@ -569,10 +569,10 @@ class Feedback
 		return $mess;
 	}
 
-	public function messageFromUtm()
+	public function messageFromUtm ()
 	{
 		$mess = '';
-		if (isset($_COOKIE['fc_utm'])) {
+		if (isset ($_COOKIE['fc_utm'])) {
 			$decCookie = json_decode(stripslashes($_COOKIE['fc_utm'])); //Декодируем JSON из кук
 			foreach ($decCookie as $key => $value) {
 				$string = (is_array($value)) ? implode(', ', $value) : $value; //Преобразование
@@ -586,15 +586,15 @@ class Feedback
 		return $mess;
 	}
 
-	public function messageFromRating()
+	public function messageFromRating ()
 	{
 		$this->score = 'Рейтинг неизвестен';
-		if (!empty($_POST['recaptchaResponse'])) {
+		if (!empty ($_POST['recaptchaResponse'])) {
 			$recaptcha = $_POST['recaptchaResponse'];
 			$recaptcha = file_get_contents(RECAPTCHA_URL . '?secret=' . RECAPTCHA_KEY . '&response=' . $recaptcha);
 			$recaptcha = json_decode($recaptcha);
 
-			if ($recaptcha !== null && isset($recaptcha->score)) {
+			if ($recaptcha !== null && isset ($recaptcha->score)) {
 				$this->score = 'Рейтинг: ' . $recaptcha->score;
 				if ($recaptcha->score < 0.5) {
 					$this->score = 'Возможно спам, рейтинг: ' . $recaptcha->score;
@@ -606,7 +606,7 @@ class Feedback
 		return sprintf('<p>%s</p>', $this->score); //Дописываем рейтинг
 	}
 
-	public static function formNameFromID(): string
+	public static function formNameFromID (): string
 	{
 		$formArr = array(
 			'calculator' => 'Заявка с калькулятора',
@@ -617,15 +617,11 @@ class Feedback
 			'sidebar-form' => 'Форма в сайдбаре'
 		);
 
-		if (!empty($_POST['form_type']) && array_key_exists($_POST['form_type'], $formArr)) {
+		if (!empty ($_POST['form_type']) && array_key_exists($_POST['form_type'], $formArr)) {
 			return $formArr[$_POST['form_type']];
 		} else {
 			return 'Форма без ID';
 		}
-	}
-
-	public function postDataToApi()
-	{
 	}
 }
 
