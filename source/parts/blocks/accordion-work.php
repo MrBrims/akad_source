@@ -1,7 +1,7 @@
 <div class="accordion accordion-work">
 	<?php foreach ((carbon_get_theme_option('accordeon_work')) as $key) : ?>
 		<div class="accordion__item accordion-work__item">
-			<img class="accordion-work__img" src="<?php echo $key['accordeon_work_image']; ?>" alt="accordeon images">
+			<img class="accordion-work__img" src="<?php echo $key['accordeon_work_image']; ?>" alt="<?php Helpers::imageAlt($key['accordeon_work_image']); ?>">
 			<div class="accordion-work__inner">
 				<div class="accordion__header accordion-work__head">
 					<?php if (!empty($key['accordeon_work_title'])) : ?>

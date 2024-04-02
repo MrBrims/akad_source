@@ -9,9 +9,9 @@
 			</p>
 		</hgroup>
 		<div class="estimate__items">
-			<img class="estimate__item" src="<?php echo get_template_directory_uri() ?>/resources/images/estimate/estimate-1.webp" alt="estimate">
-			<img class="estimate__item" src="<?php echo get_template_directory_uri() ?>/resources/images/estimate/estimate-2.webp" alt="estimate">
-			<img class="estimate__item" src="<?php echo get_template_directory_uri() ?>/resources/images/estimate/estimate-3.webp" alt="estimate">
+			<img class="estimate__item" src="<?php echo get_template_directory_uri() ?>/resources/images/estimate/estimate-1.webp" alt="estimate one">
+			<img class="estimate__item" src="<?php echo get_template_directory_uri() ?>/resources/images/estimate/estimate-2.webp" alt="estimate two">
+			<img class="estimate__item" src="<?php echo get_template_directory_uri() ?>/resources/images/estimate/estimate-3.webp" alt="estimate three">
 		</div>
 		<a class="popup-link estimate__btn btn" href="#popup-form">JETZT KOSTENLOSES ANGEBOT ANFORDERN</a>
 	</div>

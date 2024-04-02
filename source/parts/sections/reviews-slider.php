@@ -8,7 +8,7 @@
                 <div class="soc-rev__wrapper swiper-wrapper">
                     <?php foreach ((carbon_get_theme_option('soc_reviews')) as $key) : ?>
                         <div class="soc-rev__slide swiper-slide">
-                            <img class="soc-rev__slide-img" src="<?php echo $key['soc_reviews_img']; ?>" alt="social reviews">
+                            <img class="soc-rev__slide-img" src="<?php echo $key['soc_reviews_img']; ?>" alt="<?php Helpers::imageAlt($key['soc_reviews_img']); ?>">
                         </div>
                     <?php endforeach; ?>
                 </div>

@@ -13,7 +13,7 @@
 				<p class="guarant__item-text">
 					<?php echo $k['unic_guarant_card_text']; ?>
 				</p>
-				<img class="guarant__item-img" src="<?php echo $k['unic_guarant_card_img']; ?>" alt="guarant icons">
+				<img class="guarant__item-img" src="<?php echo $k['unic_guarant_card_img']; ?>" alt="<?php Helpers::imageAlt($k['unic_guarant_card_img']); ?>">
 			</div>
 		<?php endforeach; ?>
 	</section>

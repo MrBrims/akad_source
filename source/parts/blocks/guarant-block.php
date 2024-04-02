@@ -81,7 +81,7 @@
 	<div class="guarant-block__guarant-pay">
 		<?php foreach ((carbon_get_theme_option('footer_pay')) as $key) : ?>
 			<div>
-				<img class="guarant-block__guarant-img" src="<?php echo $key['footer_pay_icons']; ?>" alt="pay">
+				<img class="guarant-block__guarant-img" src="<?php echo $key['footer_pay_icons']; ?>" alt="<?php Helpers::imageAlt($key['footer_pay_icons']); ?>">
 			</div>
 		<?php endforeach; ?>
 	</div>

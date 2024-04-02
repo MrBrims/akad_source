@@ -7,7 +7,7 @@
 		<div class="footer__soc">
 			<?php foreach ((carbon_get_theme_option('footer_soc')) as $key) : ?>
 				<a class="footer__soc-link" href="<?php echo $key['footer_link_soc']; ?>">
-					<img class="footer__soc-icon" src="<?php echo $key['footer_icon_soc']; ?>" alt="social">
+					<img class="footer__soc-icon" src="<?php echo $key['footer_icon_soc']; ?>" alt="<?php Helpers::imageAlt($key['footer_icon_soc']); ?>">
 				</a>
 			<?php endforeach; ?>
 		</div>
@@ -30,7 +30,7 @@
 		<div class="footer__pay-items">
 			<?php foreach ((carbon_get_theme_option('footer_pay')) as $key) : ?>
 				<div class="footer__pay-item">
-					<img class="footer__pay-img" src="<?php echo $key['footer_pay_icons']; ?>" alt="pay">
+					<img class="footer__pay-img" src="<?php echo $key['footer_pay_icons']; ?>" alt="<?php Helpers::imageAlt($key['footer_pay_icons']); ?>">
 				</div>
 			<?php endforeach; ?>
 		</div>

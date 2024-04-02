@@ -8,7 +8,7 @@
 		<div class="qualification__items">
 			<?php foreach ((carbon_get_theme_option('qualification_card')) as $key) : ?>
 				<div class="qualification__item">
-					<img class="qualification__item-icons" src="<?php echo $key['qualification_card_img']; ?>" alt="icons">
+					<img class="qualification__item-icons" src="<?php echo $key['qualification_card_img']; ?>" alt="<?php Helpers::imageAlt($key['qualification_card_img']); ?>">
 					<p class="qualification__item-text">
 						<?php echo $key['qualification_card_title']; ?>
 					</p>

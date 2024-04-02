@@ -15,7 +15,7 @@
 	</div>
 	<div class="footer__bottom-right">
 		<?php foreach ((carbon_get_theme_option('footer_icons_trust')) as $key) : ?>
-			<img class="footer__bottom-icon" src="<?php echo $key['footer_icon_trust']; ?>" alt="trust">
+			<img class="footer__bottom-icon" src="<?php echo $key['footer_icon_trust']; ?>" alt="<?php Helpers::imageAlt($key['footer_icon_trust']); ?>">
 		<?php endforeach; ?>
 	</div>
 </div>

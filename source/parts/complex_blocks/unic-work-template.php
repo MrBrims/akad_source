@@ -2,7 +2,7 @@
 	<div class="accordion accordion-work section-accordion">
 		<?php foreach ($key['unic_accordeon_work'] as $k) : ?>
 			<div class="accordion__item accordion-work__item">
-				<img class="accordion-work__img" src="<?php echo $k['unic_accordeon_work_image']; ?>" alt="accordeon images">
+				<img class="accordion-work__img" src="<?php echo $k['unic_accordeon_work_image']; ?>" alt="<?php Helpers::imageAlt($k['unic_accordeon_work_image']); ?>">
 				<div class="accordion-work__inner">
 					<div class="accordion__header accordion-work__head">
 						<?php if (!empty($k['unic_accordeon_work_title'])) : ?>

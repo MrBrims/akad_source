@@ -9,7 +9,7 @@
 			<div class="connect__item">
 				<div class="connect__item-inner">
 					<div class="connect__item-img">
-						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/phone.svg" alt="img">
+						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/phone.svg" alt="phone icon">
 					</div>
 					<p class="connect__item-title">
 						Telefon:
@@ -27,7 +27,7 @@
 			<div class="connect__item">
 				<div class="connect__item-inner">
 					<div class="connect__item-img">
-						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/mail.svg" alt="img">
+						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/mail.svg" alt="mail icon">
 					</div>
 					<p class="connect__item-title">
 						E-Mail:
@@ -45,7 +45,7 @@
 			<div class="connect__item">
 				<div class="connect__item-inner">
 					<div class="connect__item-img">
-						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/ans.svg" alt="img">
+						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/ans.svg" alt="contact icon">
 					</div>
 					<p class="connect__item-title">
 						Anschrift:
@@ -68,7 +68,7 @@
 			<div class="connect__item">
 				<div class="connect__item-inner">
 					<div class="connect__item-img">
-						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/whats.svg" alt="img">
+						<img src="<?php echo get_template_directory_uri(); ?>/resources/images/contact/whats.svg" alt="whatsApp icon">
 					</div>
 					<p class="connect__item-title">
 						E-Mail:
