@@ -40,7 +40,7 @@ class Shortcodes
 	{
 		return '
         <div class="banner-content">
-            <div class="banner-content__img"><img src="https://akademily.de/wp-content/themes/akademily/resources/images/icons/help-com.svg" alt="" width="100%"></div>
+            <div class="banner-content__img"><img src="https://akademily.de/wp-content/themes/akademily/resources/images/icons/help-com.svg" alt="trust bage" width="100%"></div>
             <div class="banner-content__text">
             <div class="banner-content__title">Brauchen Sie Hilfe?</div>
             <p>Vertrauen Sie Ihre Arbeit echten Profis an!</p>

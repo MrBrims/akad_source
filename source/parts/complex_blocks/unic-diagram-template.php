@@ -10,7 +10,7 @@
 				</li>
 			<?php endforeach; ?>
 		</ul>
-		<img class="diagram__img" src="<?php echo $key['unic_diagram_img']; ?>" alt="diagram">
+		<img class="diagram__img" src="<?php echo $key['unic_diagram_img']; ?>" alt="<?php Helpers::imageAlt($key['unic_diagram_img']); ?>">
 		<h2 class="diagram__subtitle">
 			<?php echo $key['unic_diagram_subtitle']; ?>
 		</h2>
@@ -18,7 +18,7 @@
 			<?php foreach ($key['unic_diagram_items'] as $k) : ?>
 				<div class="diagram__item">
 					<div class="diagram__item-box">
-						<img class="diagram__item-icon" src="<?php echo $k['unic_diagram_items_img']; ?>" alt="diagram icon">
+						<img class="diagram__item-icon" src="<?php echo $k['unic_diagram_items_img']; ?>" alt="<?php Helpers::imageAlt($k['unic_diagram_items_img']); ?>">
 					</div>
 					<div class="diagram__item-text">
 						<?php echo $k['unic_diagram_items_text']; ?>

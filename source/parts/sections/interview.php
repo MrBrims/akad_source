@@ -47,7 +47,7 @@
 								<div class="interview__content-inner">
 									<div class="interview__content-head">
 										<div class="interview__content-imgbox">
-											<img class="interview__content-img" src="<?php echo $k['bewert_field_author_img']; ?>" alt="icon">
+											<img class="interview__content-img" src="<?php echo $k['bewert_field_author_img']; ?>" alt="<?php Helpers::imageAlt($k['bewert_field_author_img']); ?>">
 										</div>
 										<div class="interview__content-name">
 											<?php echo $k['bewert_field_author_name']; ?>
@@ -66,7 +66,7 @@
 								<div class="interview__content-inner">
 									<div class="interview__content-head">
 										<div class="interview__content-imgbox">
-											<img class="interview__content-img" src="<?php echo $k['bewert_field_cust_img']; ?>" alt="icon">
+											<img class="interview__content-img" src="<?php echo $k['bewert_field_cust_img']; ?>" alt="<?php Helpers::imageAlt($k['bewert_field_cust_img']); ?>">
 										</div>
 										<div class="interview__content-name">
 											<?php echo $k['bewert_field_cust_name']; ?>

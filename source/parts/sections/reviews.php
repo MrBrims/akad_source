@@ -14,7 +14,7 @@
 					<?php foreach ((carbon_get_theme_option('soc_reviews')) as $key) : ?>
 						<div class="soc-rev__slide swiper-slide">
 							<a class="soc-rev__slide-link" href="<?php echo $key['soc_reviews_img']; ?>" data-fancybox="gallery">
-								<img class="soc-rev__slide-img" src="<?php echo $key['soc_reviews_img']; ?>" alt="social reviews">
+								<img class="soc-rev__slide-img" src="<?php echo $key['soc_reviews_img']; ?>" alt="<?php Helpers::imageAlt($key['soc_reviews_img']); ?>">
 							</a>
 						</div>
 					<?php endforeach; ?>

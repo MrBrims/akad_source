@@ -29,7 +29,7 @@
 				<?php foreach ((carbon_get_theme_option('footer_rev')) as $key) : ?>
 					<a href="<?php echo $key['footer_rev_link']; ?>">
 						<div class="footer__reviews-item">
-							<img class="footer__reviews-img" src="<?php echo $key['footer_rev_icons']; ?>" alt="reviews">
+							<img class="footer__reviews-img" src="<?php echo $key['footer_rev_icons']; ?>" alt="<?php Helpers::imageAlt($key['footer_rev_icons']); ?>">
 						</div>
 					</a>
 				<?php endforeach; ?>
@@ -42,7 +42,7 @@
 			<div class="footer__plagiat-items">
 				<?php foreach ((carbon_get_theme_option('footer_icons_plag')) as $key) : ?>
 					<div class="footer__plagiat-item">
-						<img class="footer__plagiat-img" src="<?php echo $key['footer_icon_plag']; ?>" alt="plagiat">
+						<img class="footer__plagiat-img" src="<?php echo $key['footer_icon_plag']; ?>" alt="<?php Helpers::imageAlt($key['footer_icon_plag']); ?>">
 					</div>
 				<?php endforeach; ?>
 			</div>

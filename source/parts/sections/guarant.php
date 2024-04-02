@@ -18,7 +18,7 @@
 			<p class="guarant__item-text">
 				<?php echo $key['guarant_card_text']; ?>
 			</p>
-			<img class="guarant__item-img" src="<?php echo $key['guarant_card_img']; ?>" alt="guarant icons">
+			<img class="guarant__item-img" src="<?php echo $key['guarant_card_img']; ?>" alt="<?php Helpers::imageAlt($key['guarant_card_img']); ?>">
 		</div>
 	<?php endforeach; ?>
 </section>

@@ -66,7 +66,7 @@
 										<div class="main-faq__inner">
 											<div class="main-faq__head">
 												<div class="main-faq__inner-icon">
-													<img src="<?php echo get_template_directory_uri() ?>/resources/images/icons/pluse-new.svg" alt="pluse">
+													<img src="<?php echo get_template_directory_uri() ?>/resources/images/icons/pluse-new.svg" alt="pluse two">
 												</div>
 												<p class="main-faq__inner-title" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
 													<?php echo $k['local_faq_head']; ?>
