@@ -8,7 +8,7 @@
 				<?php foreach ((carbon_get_theme_option('team_card')) as $key) : ?>
 					<div class="team__slide swiper-slide">
 						<div class="team__slide-inner">
-							<img class="swiper-lazy team__img" src="<?php echo $key['team_card_img']; ?>">
+							<img class="swiper-lazy team__img" src="<?php echo $key['team_card_img']; ?>" alt="<?php Helpers::imageAlt($key['team_card_img']); ?>">
 							<div class="team__content">
 								<div class="team__name">
 									<?php echo $key['team_card_name']; ?>
