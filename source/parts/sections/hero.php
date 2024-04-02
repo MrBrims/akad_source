@@ -25,7 +25,7 @@
 					<?php endif ?>
 					<?php get_template_part(carbon_get_post_meta(get_the_ID(), 'ak_hero_form')); ?>
 				</div>
-				<img class="hero__decore-img" src="<?php echo carbon_get_post_meta(get_the_ID(), 'hero_img'); ?>">
+				<img class="hero__decore-img" src="<?php echo carbon_get_post_meta(get_the_ID(), 'hero_img'); ?>" alt="<?php Helpers::imageAlt(carbon_get_post_meta(get_the_ID(), 'hero_img')); ?>">
 			</div>
 		</div>
 		<?php
