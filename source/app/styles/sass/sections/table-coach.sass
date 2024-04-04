@@ -41,22 +41,24 @@
 @media (max-width:910px)
 	.table-coach
 
-		td,
 		tr
-			display: inline-block
-
-		tr
-			margin-bottom: 10px
+			display: flex
+			margin-bottom: 35px
 			width: 100%
+			flex-wrap: wrap
+			gap: 10px
+			background-color: #f3f8ff
+			padding: 5px
+			border: 2px solid #bbd1dc
 
-		td
-			margin-bottom: 5px
+		tr:last-child
+			margin-bottom: 0
 
 		td:first-child
 			width: 100%
 
 		td:not(:first-child)
-			width: calc(50% - 2.1px)
+			width: calc(50% - 5px)
 
 @media (max-width:620px)
 	.table-coach
