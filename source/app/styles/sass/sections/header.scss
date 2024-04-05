@@ -115,32 +115,46 @@
   &__logo-link {
     background-image: url(../images/logo-wrapper.svg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 275px;
     background-position: center center;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
     height: 112px;
-    width: 350px;
+    width: 270px;
     position: relative;
-    top: 18px;
+    top: 8px;
     left: -17px;
     transition: all .1s ease-out;
   }
 
   &__logo-img {
-    max-width: 230px;
-    max-width: 230px;
+    max-width: 200px;
     position: relative;
-    top: -16px;
+    top: -12px;
   }
 
   &__menu-wrapper {
     width: 100%;
     display: flex;
+    align-items: center;
     position: relative;
     height: 60px;
+  }
+
+  &__btn-popup {
+    position: relative;
+    margin-left: 30px;
+    width: 108px;
+    height: 40px;
+
+    &::before {
+      content: "Anfrage";
+      font-size: 16px;
+      font-family: $titlefont;
+      padding-bottom: 2px;
+    }
   }
 
   &__btn-check {
@@ -240,7 +254,7 @@
   .header {
     &__logo-link {
       left: -32px;
-      top: 16px;
+      top: 8px;
       width: 333px;
     }
 
@@ -251,6 +265,16 @@
 
     &__btn-wrappper {
       display: block;
+    }
+
+    &__btn-popup {
+      margin-left: auto;
+      margin-right: 70px;
+      width: 235px;
+
+      &::before {
+        content: "Unverbindliche Anfrage";
+      }
     }
   }
 }
@@ -297,6 +321,10 @@
     &__btn-wrappper {
       top: -10px;
     }
+
+    &__btn-popup {
+      height: 30px;
+    }
   }
 }
 
@@ -322,6 +350,29 @@
     &__logo-img {
       max-width: 143px;
       top: -9px;
+    }
+
+  }
+}
+
+@media (max-width: 580px) {
+  .header {
+    &__btn-popup {
+      width: 105px;
+      margin-right: 55px;
+
+      &::before {
+        content: "Anfrage";
+      }
+    }
+
+  }
+}
+
+@media (max-width: 380px) {
+  .header {
+    &__btn-popup {
+      width: 80px;
     }
 
   }
