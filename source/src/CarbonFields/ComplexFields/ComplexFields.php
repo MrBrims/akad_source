@@ -14,6 +14,7 @@ require 'components/unic-diagram.php';
 require 'components/trust-bage.php';
 require 'components/price-lektorat.php';
 require 'components/form-calc.php';
+require 'components/table-coaching.php';
 
 class ComplexFields
 {
@@ -70,6 +71,7 @@ class ComplexFields
 					')
 					->add_fields('template_trust', 'Блок с кнопкой', get_ak_complex_trust())
 					->add_fields('template_form_calc', 'Форма калькулятор', get_ak_complex_form_calc())
+					->add_fields('template_tabl_coach', 'Конструктор таблиц', get_ak_complex_table_coach())
 			])
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
 			->add_tab(__('Большая форма'), CommonMeta::bigFom())

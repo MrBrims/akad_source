@@ -75,6 +75,12 @@ get_header();
 							}
 							include get_template_directory() . '/parts/complex_blocks/trust-bage-template.php';
 							break;
+						case 'template_tabl_coach':
+							if (!$key['ak_complex_table_coaching_row']) {
+								break;
+							}
+							include get_template_directory() . '/parts/complex_blocks/table-coach-template.php';
+							break;
 					}
 				}
 				get_template_part('parts/sections/main-faq');

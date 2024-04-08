@@ -14,9 +14,10 @@
 		</div>
 		<div class="form-litle__item form-litle__item-full">
 			<span class="form__text">
-				<span class="form__required-field">*</span> Thema der Arbeit <span class="form__tippy" data-tippy-content="Das ist das Thema Ihrer Arbeit. Es ist sehr wichtig, Ihr Thema jetzt richtig zu schreiben."></span>
+				<!-- <span class="form__required-field">*</span>  -->
+				Thema der Arbeit <span class="form__tippy" data-tippy-content="Das ist das Thema Ihrer Arbeit. Es ist sehr wichtig, Ihr Thema jetzt richtig zu schreiben."></span>
 			</span>
-			<input class="form-litle__input input" name="theme" type="text" placeholder="Thema der Arbeit..." required>
+			<input class="form-litle__input input" name="theme" type="text" placeholder="Thema der Arbeit...">
 		</div>
 		<div class="form-litle__item">
 			<span class="form__text">
@@ -24,7 +25,7 @@
 			</span>
 			<div class="form-counter">
 				<div data-id="decrement" class="counter-btn">-</div>
-				<input class="count-input input" name="number" type="number" value="30" max="1000" min="0" step="1" />
+				<input class="count-input input" name="number" type="number" value="5" max="1000" min="0" step="1" />
 				<div data-id="increment" class="counter-btn">+</div>
 			</div>
 		</div>
