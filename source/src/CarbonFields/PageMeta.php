@@ -157,7 +157,7 @@ class PageMeta
 		Container::make('post_meta', __('Настройки страницы'))
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-impressum.php')
-			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Первый экран'), CommonMeta::heroSmall())
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
 			->add_tab(__('Большая форма'), CommonMeta::bigFom());
 	}
