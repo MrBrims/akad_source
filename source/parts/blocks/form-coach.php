@@ -16,7 +16,9 @@
 			<span class="form__text">
 				Phone <span class="form__tippy" data-tippy-content="Erfahrungsgemäß lassen sich viele Fragen am besten telefonisch klären. Falls Sie einen Rückruf wünschen, geben Sie bitte hier Ihre Telefonummer an"></span>
 			</span>
-			<input class="form-litle__input phone-input input" name="phone" type="tel">
+			<label class="form-litle__label-tel">
+				<input class="form-litle__input phone-input input" name="phone" type="tel" placeholder="WhatsApp">
+			</label>
 		</div>
 		<div class="form-litle__item">
 			<span class="form__text">File <span class="form__tippy" data-tippy-content="ZIP, DOCX oder PDF (&lt;50mb)"></span></span>

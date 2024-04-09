@@ -5,7 +5,7 @@ import { tabs } from '~/app/libs/_tabs.js'
 // import { accordionNoClose } from '~/app/libs/_accordionNoClose.js'
 import { inputDateCustom } from '~/app/libs/_inputDateCustom.js'
 import { inputNumberCastom } from '~/app/libs/_inputNumberCastom.js'
-import { inputPhoneCustom } from '~/app/libs/_inputPhoneCustom.js'
+// import { inputPhoneCustom } from '~/app/libs/_inputPhoneCustom.js'
 import { niceSelectVanilla } from '~/app/libs/_niceSelecModule.js'
 import { showMore } from '~/app/libs/_showMore.js'
 import { swiperMudules } from '~/app/libs/_swiperMudules.js'
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	fileLabel()
 
 	// Custom phone input
-	inputPhoneCustom()
+	// inputPhoneCustom()
 
 	// Custom Select
 	niceSelectVanilla()
