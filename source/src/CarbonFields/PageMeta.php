@@ -106,7 +106,7 @@ class PageMeta
 		Container::make('post_meta', __('Настройки страницы'))
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-uber-vir.php')
-			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Первый экран'), CommonMeta::heroSmall())
 			->add_tab(__('Сотрудничество'), CommonMeta::cooperationLocal())
 			->add_tab(__('Как мы работаем'), CommonMeta::howWorkMeta())
 			->add_tab(__('Большая форма'), CommonMeta::bigFom())
@@ -118,7 +118,7 @@ class PageMeta
 		Container::make('post_meta', __('Настройки страницы'))
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-uber-bew.php')
-			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Первый экран'), CommonMeta::heroSmall())
 			->add_tab(__('Интервью'), CommonMeta::bewertungerInt())
 			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('FAQ'), CommonMeta::localFaq());
@@ -129,7 +129,7 @@ class PageMeta
 		Container::make('post_meta', __('Настройки страницы'))
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-uber-kont.php')
-			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Первый экран'), CommonMeta::heroSmall())
 			->add_tab(__('FAQ'), CommonMeta::localFaq());
 	}
 
@@ -146,7 +146,7 @@ class PageMeta
 		Container::make('post_meta', __('Настройки страницы'))
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-uber-team.php')
-			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Первый экран'), CommonMeta::heroSmall())
 			->add_tab(__('Как мы работаем'), CommonMeta::howWorkMeta())
 			->add_tab(__('Статистика'), CommonMeta::staticMeta())
 			->add_tab(__('Большая форма'), CommonMeta::bigFom());

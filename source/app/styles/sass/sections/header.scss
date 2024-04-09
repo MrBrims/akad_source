@@ -147,7 +147,7 @@
     position: relative;
     margin-left: 30px;
     width: 108px;
-    height: 40px;
+    height: 50px;
 
     &::before {
       content: "Anfrage";
@@ -234,11 +234,11 @@
     .header__bottom,
     .header__bottom-inner,
     .header__menu-wrapper {
-      height: 40px;
+      height: 50px;
     }
 
     .header__btn-wrappper {
-      top: -11px;
+      top: -7px;
     }
   }
 }
@@ -302,28 +302,31 @@
     &__bottom,
     &__bottom-inner,
     &__menu-wrapper {
-      height: 40px;
+      height: 50px;
     }
 
     &__logo-link {
-      left: -26px;
-      top: 16px;
-      width: 260px;
-      background-size: 260px;
-      height: 80px;
+      background-size: contain;
+      background-image: none;
+      background-color: #fff;
+      height: 50px;
+      border: 3px solid $accent;
+      left: 0;
+      top: 0;
+      width: 170px;
     }
 
     &__logo-img {
-      max-width: 165px;
-      top: -11px;
+      max-width: 143px;
+      top: -3px;
     }
 
     &__btn-wrappper {
-      top: -10px;
+      top: -6px;
     }
 
     &__btn-popup {
-      height: 30px;
+      height: 50px;
     }
   }
 }
@@ -333,25 +336,6 @@
     &__top-time {
       display: none;
     }
-  }
-}
-
-@media (max-width: 780px) {
-  .header {
-
-    &__logo-link {
-      background-size: 204px;
-      height: 60px;
-      left: -19px;
-      top: 8px;
-      width: 200px;
-    }
-
-    &__logo-img {
-      max-width: 143px;
-      top: -9px;
-    }
-
   }
 }
 

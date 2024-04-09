@@ -47,7 +47,9 @@
 			<span class="form__text">
 				<span class="form__required-field">*</span> Phone <span class="form__tippy" data-tippy-content="Erfahrungsgemäß lassen sich viele Fragen am besten telefonisch klären. Falls Sie einen Rückruf wünschen, geben Sie bitte hier Ihre Telefonummer an"></span>
 			</span>
-			<input class="form-litle__input phone-input input" name="phone" type="tel" required>
+			<label class="form-litle__label-tel">
+				<input class="form-litle__input phone-input input" name="phone" type="tel" required placeholder="WhatsApp">
+			</label>
 		</div>
 		<div class="form-litle__item">
 			<span class="form__text">File <span class="form__tippy" data-tippy-content="ZIP, DOCX oder PDF (&lt;50mb)"></span></span>
