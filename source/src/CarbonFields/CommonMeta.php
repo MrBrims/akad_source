@@ -175,8 +175,27 @@ class CommonMeta
 		return [
 			Field::make('text', 'reviews_title', __('Заголовок')),
 			Field::make('complex', 'soc_reviews', __('Отзывы с соц. сетей'))
+				->set_width(30)
 				->set_layout('tabbed-horizontal')
-				->setup_labels(['singular_name' => 'отзыв'])
+				->setup_labels(['singular_name' => 'Отзыв'])
+				->add_fields([
+					Field::make('image', 'soc_reviews_img', __('Картинка'))
+						->set_type('image')
+						->set_value_type('url'),
+				]),
+			Field::make('complex', 'soc_reviews_coach', __('Отзывы для Coaching'))
+				->set_width(30)
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'Отзыв'])
+				->add_fields([
+					Field::make('image', 'soc_reviews_img', __('Картинка'))
+						->set_type('image')
+						->set_value_type('url'),
+				]),
+			Field::make('complex', 'soc_reviews_lektor', __('Отзывы для Lektorat'))
+				->set_width(30)
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'Отзыв'])
 				->add_fields([
 					Field::make('image', 'soc_reviews_img', __('Картинка'))
 						->set_type('image')

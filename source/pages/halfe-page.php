@@ -69,6 +69,12 @@ get_header();
 							}
 							include get_template_directory() . '/parts/complex_blocks/unic-diagram-template.php';
 							break;
+						case 'template_unic_review':
+							if (!$key['unic_review_type']) {
+								break;
+							}
+							include get_template_directory() . '/parts/sections/reviews.php';
+							break;
 						case 'template_trust':
 							if (!$key['ak_complex_trust_title']) {
 								break;
