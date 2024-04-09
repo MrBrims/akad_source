@@ -523,6 +523,18 @@ class CommonMeta
 		];
 	}
 
+	public static function heroSmall(): array
+	{
+		return [
+			Field::make('text', 'herosmall_title', __('Заголовок'))
+				->set_width(70),
+			Field::make('image', 'herosmall_bg', __('Фон шапки'))
+				->set_type('image')
+				->set_value_type('url')
+				->set_width(30),
+		];
+	}
+
 	public static function staticMeta(): array
 	{
 		return [

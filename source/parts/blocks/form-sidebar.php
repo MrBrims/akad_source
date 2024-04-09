@@ -44,7 +44,9 @@
 				<span class="form__text">
 					<span class="form__required-field">*</span> Phone <span class="form__tippy" data-tippy-content="Erfahrungsgemäß lassen sich viele Fragen am besten telefonisch klären. Falls Sie einen Rückruf wünschen, geben Sie bitte hier Ihre Telefonummer an"></span>
 				</span>
-				<input class="form-main__input phone-input input" name="phone" type="tel" required>
+				<label class="form-litle__label-tel">
+					<input class="form-main__input phone-input input" name="phone" type="tel" required placeholder="WhatsApp">
+				</label>
 			</div>
 			<div class="form__item-little">
 				<span class="form__text">
