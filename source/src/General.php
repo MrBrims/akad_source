@@ -22,7 +22,7 @@ class General
 		16 => 'Миронова Д.'
 	];
 
-	public function __construct()
+	public function __construct ()
 	{
 		add_action('wp_enqueue_scripts', [$this, 'themeScriptsAndStyles']);
 
@@ -69,9 +69,9 @@ class General
 		add_action('rest_api_init', [$this, 'akadJson']);
 	}
 
-	public function akadJson()
+	public function akadJson ()
 	{
-		function getJsonSpec()
+		function getJsonSpec ()
 		{
 			// Путь к JSON
 			$fileDir = DE_URI . '/data/spec.json';
@@ -85,7 +85,7 @@ class General
 			return $jsonContent;
 		}
 
-		function getJsonType()
+		function getJsonType ()
 		{
 			// Путь к JSON
 			$fileDir = DE_URI . '/data/types.json';
@@ -102,26 +102,29 @@ class General
 		register_rest_route('my-namespace/v2', '/spec/', array(
 			'methods' => 'GET',
 			'callback' => 'getJsonSpec',
-		));
+		)
+		);
 
 		register_rest_route('my-namespace/v2', '/type/', array(
 			'methods' => 'GET',
 			'callback' => 'getJsonType',
-		));
+		)
+		);
 	}
 
 	// Подключение js и css для админки
-	public function adminStyleScript()
+	public function adminStyleScript ()
 	{
 		wp_enqueue_style('style-admin', get_template_directory_uri() . '/resources/css/admin.css');
 		wp_enqueue_script('script-admin', get_template_directory_uri() . '/resources/js/admin.js');
 	}
 
 	// Скрыть стандартный редактор для страниц указанный в массиве
-	public function hide_editor()
+	public function hide_editor ()
 	{
 		$post_id = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : null);
-		if (!$post_id) return;
+		if (!$post_id)
+			return;
 
 		// Список шаблонов страниц, для которых нужно скрыть редактор
 		$hide_editor_on_templates = array(
@@ -137,7 +140,7 @@ class General
 	}
 
 	// Добавление utm_source в куки
-	public static function utmSource()
+	public static function utmSource ()
 	{
 		if (isset($_GET['utm_source'])) {
 			$utm_source = $_GET['utm_source'];
@@ -147,13 +150,13 @@ class General
 	}
 
 	// Разрешает добавлять svg
-	public function svgUploadAllow($mimes)
+	public function svgUploadAllow ($mimes)
 	{
 		$mimes['svg'] = 'image/svg+xml';
 		return $mimes;
 	}
 	# Исправление MIME типа для SVG файлов.
-	function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
+	function fix_svg_mime_type ($data, $file, $filename, $mimes, $real_mime = '')
 	{
 
 		// WP 5.1 +
@@ -170,12 +173,12 @@ class General
 			// разрешим
 			if (current_user_can('manage_options')) {
 
-				$data['ext']  = 'svg';
+				$data['ext'] = 'svg';
 				$data['type'] = 'image/svg+xml';
 			}
 			// запретим
 			else {
-				$data['ext']  = false;
+				$data['ext'] = false;
 				$data['type'] = false;
 			}
 		}
@@ -183,7 +186,7 @@ class General
 		return $data;
 	}
 
-	public function themeScriptsAndStyles()
+	public function themeScriptsAndStyles ()
 	{
 		// wp_enqueue_script('bootstrap', DE_URI . '/assets/js/bootstrap.bundle.min.js', [], '1.7', true);
 		// wp_enqueue_script('swiper', DE_URI . '/assets/js/swiper-bundle.min.js', [], '1.7', true);
@@ -200,13 +203,13 @@ class General
 		wp_enqueue_style('new', DE_URI . '/resources/css/app.min.css', [], $version);
 	}
 
-	public function removeCode()
+	public function removeCode ()
 	{
 		wp_dequeue_style('wp-block-library');
 	}
 
 	// Add class menu items
-	public function addClassMenuItems($classes, $item, $args)
+	public function addClassMenuItems ($classes, $item, $args)
 	{
 		if (isset($args->add_li_class)) {
 			$classes[] = $args->add_li_class;
@@ -215,7 +218,7 @@ class General
 	}
 
 
-	public function settingsAdminWP()
+	public function settingsAdminWP ()
 	{
 		register_nav_menu('top-menu', 'Top menu');
 		register_nav_menu('mobile-menu', 'Mobile menu');
@@ -226,12 +229,12 @@ class General
 		add_theme_support('post-thumbnails', ['post']);
 	}
 
-	public function locale(): string
+	public function locale (): string
 	{
 		return 'de-DE';
 	}
 
-	public function managerStatsNotice()
+	public function managerStatsNotice ()
 	{
 		if ($_SERVER['REQUEST_URI'] !== '/wp-admin/edit.php?post_type=requests') {
 			return;
@@ -240,7 +243,7 @@ class General
 		global $wpdb;
 
 		$data = $wpdb->get_results("SELECT DISTINCT meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_manager'");
-?>
+		?>
 		<div class="notice notice-success">
 			<h3>Количество заявок у менеджеров</h3>
 			<div class="flex-column">
@@ -252,22 +255,25 @@ class General
                             ON p.ID = pm.post_id AND pm.meta_value = '{$item->meta_value}' AND pm.meta_key = '_manager'
                         WHERE p.post_status = 'publish'
                     ");
-				?>
-					<a class="button" href="/wp-admin/edit.php?s&post_status=all&post_type=requests&action=-1&m=0&manager=<?= $item->meta_value; ?>&filter_action=Фильтр&paged=1&action2=-1">
-						<span><?= sprintf('%s - %d', $this->managers[$item->meta_value], count($result)); ?></span>
+					?>
+					<a class="button"
+						href="/wp-admin/edit.php?s&post_status=all&post_type=requests&action=-1&m=0&manager=<?= $item->meta_value; ?>&filter_action=Фильтр&paged=1&action2=-1">
+						<span>
+							<?= sprintf('%s - %d', $this->managers[$item->meta_value], count($result)); ?>
+						</span>
 					</a>
-				<?php
+					<?php
 				}
 				?>
 			</div>
 			<br />
 		</div>
-	<?php
+		<?php
 	}
 
-	public function requestsCustomFilter($postType)
+	public function requestsCustomFilter ($postType)
 	{
-	?>
+		?>
 		<select name="manager">
 			<?php foreach ($this->managers as $key => $value) { ?>
 				<option value="<?= $key; ?>" <?= selected($key, @$_GET['manager'], 0); ?>>
@@ -275,10 +281,10 @@ class General
 				</option>
 			<?php } ?>
 		</select>
-<?php
+		<?php
 	}
 
-	public function handlerFilter($query)
+	public function handlerFilter ($query)
 	{
 		$cs = function_exists('get_current_screen') ? get_current_screen() : null;
 
@@ -298,14 +304,14 @@ class General
 		}
 	}
 
-	public function addCustomColumn($columns)
+	public function addCustomColumn ($columns)
 	{
 		$myColumns['manager'] = 'Менеджер';
 
 		return array_slice($columns, 0, 2) + $myColumns + $columns;
 	}
 
-	public function addHandlerCustomColumn($columnName, $postId)
+	public function addHandlerCustomColumn ($columnName, $postId)
 	{
 		if ($columnName === 'manager') {
 			if (get_post_meta($postId, '_manager', true)) {
@@ -346,7 +352,7 @@ class General
 	// Mein persönliches Skype:         live:.cid.ad237ccbf347238
 
 
-	public static function managers($type = false): string
+	public static function managers ($type = false): string
 	{
 		$dd = getdate();
 		$name = '';
@@ -392,13 +398,13 @@ class General
 		return $name;
 	}
 
-	public function set_tocken()
+	public function set_tocken ()
 	{
 		$token = bin2hex(random_bytes(32));
 		setcookie('csrf_token', $token, time() + 3600, '/');
 	}
 
-	public static function get_utm()
+	public static function get_utm ()
 	{
 		$out = array();
 		$keys = array('utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term');
@@ -415,10 +421,10 @@ class General
 		return implode("\r\n", $out);
 	}
 
-	function geo()
+	function geo ()
 	{
 		$user_agent = $_SERVER["HTTP_USER_AGENT"];
-		function getOS($user_agent)
+		function getOS ($user_agent)
 		{
 			if (strpos($user_agent, "Windows") !== false)
 				$os = "Windows";
@@ -450,7 +456,7 @@ class General
 				$os = "Undefined or Search Bot";
 			return $os;
 		}
-		function getBrowser($user_agent)
+		function getBrowser ($user_agent)
 		{
 			if (strpos($user_agent, "Firefox") !== false)
 				$browser = "Firefox";
@@ -467,7 +473,7 @@ class General
 			return $browser;
 		}
 
-		function getGeo()
+		function getGeo ()
 		{
 			$api = 'https://json.geoiplookup.io/';
 
@@ -497,19 +503,6 @@ class General
 		}
 		//  куки
 		$utm = $_GET;
-		// органика - директ - реклама
-		if (isset($utm['utm_source']) || strpos($_COOKIE['fc_page'], 'utm_source') !== false || strpos($_SERVER["REQUEST_URI"], 'utm_source') !== false) {
-			$utm['utm_channel'] = 'cpc';
-		} elseif (!isset($_SERVER["HTTP_REFERER"]) || (stripslashes($_COOKIE['refer']) === 'none')) {
-			$utm['utm_channel'] = 'direct';
-		} else {
-			$utm['utm_channel'] = 'organic';
-		}
-		// запись утм
-		if (!isset($_COOKIE['fc_utm'])) {
-			setcookie('fc_utm', json_encode($utm), time() + 60 * 60 * 24 * 3, '/');
-		}
-		setcookie('lc_utm', json_encode($utm), time() + 60 * 60 * 24, '/');
 
 		// Страница
 		if (!strpos($_SERVER['REQUEST_URI'], 'wp-json')) {
@@ -518,6 +511,21 @@ class General
 			}
 			setcookie('lc_page', (((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']), time() + 60 * 60 * 24, '/');
 		}
+
+		// органика - директ - реклама
+		if (isset($utm['utm_source']) || strpos($_COOKIE['fc_page'], 'utm_source') !== false || strpos($_SERVER["REQUEST_URI"], 'utm_source') !== false) {
+			$utm['utm_channel'] = 'cpc';
+		} elseif (!isset($_SERVER["HTTP_REFERER"]) || (stripslashes($_COOKIE['refer']) === 'none')) {
+			$utm['utm_channel'] = 'direct';
+		} else {
+			$utm['utm_channel'] = 'organic';
+		}
+		
+		// запись утм
+		if (!isset($_COOKIE['fc_utm'])) {
+			setcookie('fc_utm', json_encode($utm), time() + 60 * 60 * 24 * 3, '/');
+		}
+		setcookie('lc_utm', json_encode($utm), time() + 60 * 60 * 24, '/');
 
 		//OS
 		if (!isset($_COOKIE['os'])) {
