@@ -668,5 +668,4 @@ class Feedback
 	{
 	}
 }
-
 new Feedback();
