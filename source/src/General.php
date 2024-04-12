@@ -473,26 +473,6 @@ class General
 			return $browser;
 		}
 
-		function getGeo ()
-		{
-			$api = 'https://json.geoiplookup.io/';
-
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_URL, $api);
-			$response = curl_exec($ch);
-			curl_close($ch);
-
-			$response = json_decode($response);
-
-			$geo = [
-				'ip' => $response->ip,
-				'country_name' => $response->country_name,
-				'region' => $response->region,
-				'city' => $response->city
-			];
-			return $geo;
-		}
 		// реферальная ссылка
 		if (!isset($_COOKIE['refer'])) {
 			if (isset($_SERVER["HTTP_REFERER"]) && !strpos($_SERVER["HTTP_REFERER"], $_SERVER['HTTP_HOST'])) {
@@ -538,10 +518,6 @@ class General
 		// mobile
 		if (!isset($_COOKIE['is_mobile'])) {
 			setcookie('is_mobile', (wp_is_mobile() ? 'yes' : 'no'), time() + 60 * 60 * 24, '/');
-		}
-		// GEO параметры
-		if (!isset($_COOKIE['geo'])) {
-			setcookie('geo', json_encode(getGeo()), time() + 60 * 60 * 24, '/');
 		}
 		if (!isset($_COOKIE['user_agent'])) {
 			setcookie('user_agent', $user_agent, time() + 60 * 60 * 24, '/');
