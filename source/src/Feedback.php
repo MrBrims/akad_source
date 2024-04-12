@@ -97,7 +97,7 @@ class Feedback
 		return true;
 	}
 
-	public function sendBitrix24 ($postId, $post, $update)
+	public static function sendBitrix24 ($postId, $post, $update)
 	{
 		if (wp_is_post_revision($postId) || $update) {
 			return false;
@@ -287,7 +287,7 @@ class Feedback
 		} while ($status_code != 200 && $attempts < $max_attempts);
 	}
 
-	public function sendMail ($to, $name = '', $subj = 'Notification', $msg = 'Form sent')
+	private static function sendMail ($to, $name = '', $subj = 'Notification', $msg = 'Form sent')
 	{
 		$mail = new PHPMailer(true);
 		try {
@@ -315,7 +315,7 @@ class Feedback
 		return true;
 	}
 
-	public function sendToClient ($id)
+	private function sendToClient ($id)
 	{
 		$sbjToClient = 'Vielen Dank, dass Sie Akademily.de gewählt haben!';
 		$msgToClient = '<p><strong>Hallo,</strong></p>
@@ -354,7 +354,7 @@ class Feedback
 		return $res;
 	}
 
-	public function jsonBasicAuthHandler ($user)
+	public static function jsonBasicAuthHandler ($user)
 	{
 		global $wp_json_basic_auth_error;
 
@@ -387,7 +387,7 @@ class Feedback
 		return $user->ID;
 	}
 
-	public function jsonBasicAuthError ($error)
+	public static function jsonBasicAuthError ($error)
 	{
 		if (!empty ($error)) {
 			return $error;
@@ -427,7 +427,7 @@ class Feedback
 		return true;
 	}
 
-	public function sendFileToTG ($id)
+	private static function sendFileToTG ($id)
 	{
 		// Проверка на наличие файла
 		if ($_FILES['file']['name'] !== '') {
@@ -454,11 +454,35 @@ class Feedback
 			}
 		}
 	}
+	private static function getGeo ()
+	{
+		$client_ip = $_SERVER['REMOTE_ADDR'];
+		// проверка для локалки
+		// $client_ip = '84.244.8.172';
 
+		$api = 'https://json.geoiplookup.io/' . $client_ip;
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_URL, $api);
+
+		$response = curl_exec($ch);
+		curl_close($ch);
+
+		$response = json_decode($response);
+
+		$geo = (object) [
+			'ip' => $response->ip,
+			'country_name' => $response->country_name,
+			'region' => $response->region
+		];
+		return $geo;
+	}
+	
 	public function sendWapp ()
 	{
 		$channel = json_decode(stripslashes($_COOKIE['fc_utm']))->utm_channel;
-		$clientGeo = json_decode(stripslashes($_COOKIE['geo']));
+		$clientGeo = $this->getGeo();
 		date_default_timezone_set('Europe/Minsk');
 		$clickTime = new DateTime();
 
@@ -471,14 +495,13 @@ class Feedback
 
 		$data = [
 			'parse_mode' => 'html',
-			'chat_id' => TG_CHANNEL_INFO_ID,
+			'chat_id' => TG_CHANNEL_ID,
 			'text' => $text
 		];
-		$res = file_get_contents("https://api.telegram.org/bot" . TG_BOT_TOKEN . "/sendMessage?" . http_build_query($data));
+		$res = file_get_contents("https://api.telegram.org/bot" . TG_TOKEN . "/sendMessage?" . http_build_query($data));
 		return $res;
 	}
-
-	public function getChannel ($ch)
+	private static function getChannel ($ch)
 	{
 		if ($ch == 'cpc') {
 			return 'K';
@@ -491,7 +514,7 @@ class Feedback
 		}
 	}
 
-	public function getTitle ($ch)
+	private static function getTitle ($ch)
 	{
 		if ($ch == 'cpc') {
 			return 'Новая заявка! 💰';
@@ -504,7 +527,7 @@ class Feedback
 		}
 	}
 
-	public function getSubject ($ch)
+	private function getSubject ($ch)
 	{
 		return sprintf(
 			'%s | %s | %s',
@@ -514,7 +537,7 @@ class Feedback
 		);
 	}
 
-	public function messageFromForm ()
+	private static function messageFromForm ()
 	{
 		$mess = '';
 		foreach ($_POST as $key => $value) {
@@ -528,7 +551,7 @@ class Feedback
 		return $mess;
 	}
 
-	public function messageFromCookie ()
+	private static function messageFromCookie ()
 	{
 		$mess = '';
 		if (isset ($_COOKIE['refer'])) {
@@ -561,12 +584,24 @@ class Feedback
 		return $mess;
 	}
 
-	public function messageFromGeo ()
+	// private static function messageFromGeo ()
+	// {
+	// 	$mess = '';
+	// 	if (isset ($_COOKIE['geo'])) {
+	// 		$decCookie = json_decode(stripslashes($_COOKIE['geo'])); //Декодируем JSON из кук
+	// 		foreach ($decCookie as $key => $value) {
+	// 			$string = (is_array($value)) ? implode(', ', $value) : $value; //Преобразование
+	// 			$mess .= sprintf('<p>%s : %s</p>', ucfirst($key), $string); //Вывод
+	// 		}
+	// 	}
+	// 	return $mess;
+	// }
+	private function messageFromGeo ()
 	{
 		$mess = '';
-		if (isset ($_COOKIE['geo'])) {
-			$decCookie = json_decode(stripslashes($_COOKIE['geo'])); //Декодируем JSON из кук
-			foreach ($decCookie as $key => $value) {
+		$clientGeo = $this->getGeo();
+		if (isset($clientGeo)) {
+			foreach ($clientGeo as $key => $value) {
 				$string = (is_array($value)) ? implode(', ', $value) : $value; //Преобразование
 				$mess .= sprintf('<p>%s : %s</p>', ucfirst($key), $string); //Вывод
 			}
@@ -574,7 +609,7 @@ class Feedback
 		return $mess;
 	}
 
-	public function messageFromUtm ()
+	private function messageFromUtm ()
 	{
 		$mess = '';
 		if (isset ($_COOKIE['fc_utm'])) {
@@ -591,7 +626,7 @@ class Feedback
 		return $mess;
 	}
 
-	public function messageFromRating ()
+	private function messageFromRating ()
 	{
 		$this->score = 'Рейтинг неизвестен';
 		if (!empty ($_POST['recaptchaResponse'])) {
@@ -611,7 +646,7 @@ class Feedback
 		return sprintf('<p>%s</p>', $this->score); //Дописываем рейтинг
 	}
 
-	public static function formNameFromID (): string
+	private static function formNameFromID (): string
 	{
 		$formArr = array(
 			'calculator' => 'Заявка с калькулятора',
@@ -629,7 +664,7 @@ class Feedback
 		}
 	}
 
-	public function getDataJson ($data)
+	private static function getDataJson ($data)
 	{
 	}
 }
