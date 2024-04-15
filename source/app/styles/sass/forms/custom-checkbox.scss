@@ -6,8 +6,8 @@
   clip: rect(0 0 0 0);
 
   &:checked+.style-checkbox {
-    background-color: $accent;
-    border: none;
+    // background-color: $accent;
+    // border: none;
     background-image: url(../images/icons/checkbox.svg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -16,9 +16,9 @@
 }
 
 .style-checkbox {
-  width: 16px;
-  height: 16px;
-  border: 1px solid #e5e5e5;
+  width: 18px;
+  height: 18px;
+  border: 1.3px solid #04B856;
   border-radius: 2px;
   flex-shrink: 0;
   margin-right: 10px;

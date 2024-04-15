@@ -43,6 +43,10 @@
 		margin-bottom: 8px;
 	}
 
+	&__marking {
+		font-size: 9px;
+	}
+
 	&__file-custom-big {
 		position: relative;
 		color: #445664;
@@ -66,9 +70,11 @@
 	&__file-custom {
 		position: relative;
 		color: #bbd1dc;
+
 		&.loaded {
 			color: #000000;
 		}
+
 		input {
 			display: none;
 		}

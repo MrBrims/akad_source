@@ -62,9 +62,9 @@
 		</div>
 		<div class="form-main__item form__item-middle">
 			<span class="form__text">
-				<span class="form__required-field">*</span> E-mail <span class="form__tippy " data-tippy-content="Bitte geben Sie Ihre echte E-Mail-Adresse an, damit wir die höchste Qualität Ihrer Arbeit sicherstellen können."></span>
+				<span class="form__required-field">*</span> E-Mail <span class="form__tippy " data-tippy-content="Bitte geben Sie Ihre echte E-Mail-Adresse an, damit wir die höchste Qualität Ihrer Arbeit sicherstellen können."></span>
 			</span>
-			<input class="form-main__input input" name="email" type="email" placeholder="E-mail..." required>
+			<input class="form-main__input input" name="email" type="email" placeholder="E-Mail..." required>
 		</div>
 		<div class="form-main__item form__item-middle">
 			<span class="form__text">
@@ -88,10 +88,18 @@
 			</label>
 		</div>
 	</div>
-	<input class="form-main__btn btn" type="submit" value="DAS FORMULAR abschicken">
-	<p class="form-main__text-protect">
-		Die Hinweise aus der <span>Datenschutzerklärung</span> und den <span>AGB</span> habe ich gelesen und akzeptiere diese.
+	<p class="form-main__protect-title form-main__coaching-protect">
+		Ihre Anfrage ist unverbindlich.<br>
+		Ihre Daten werden streng vertraulich behandelt und nicht an Dritte weitergegeben.
 	</p>
+	<p class="form-main__text-protect">
+		<label class="form-litle__check-inner form-main__check">
+			<input class="custom-checkbox" type="checkbox" name="Kontakt nur über WhatsApp" checked>
+			<span class="style-checkbox"></span>
+			<span class="form-litle__check-text">Die Hinweise aus der <a href="https://akademily.de/datenschutz/" target="_blank">Datenschutzerklärung</a> und den <a href="https://akademily.de/agb/" target="_blank">AGB</a> habe ich gelesen und akzeptiere diese.</span>
+		</label>
+	</p>
+	<input class="form-main__btn btn" type="submit" value="DAS FORMULAR abschicken">
 	<input type="hidden" name="form_type" value="big-form">
 	<input type="hidden" name="coaching_condition" value="<?php echo Helpers::coach_cond(); ?>">
 	<input type="hidden" name="page_link" value="<?php echo get_permalink(); ?>">

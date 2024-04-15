@@ -1,7 +1,7 @@
 <div class="sticky-block">
 	<form action="" class="form form-sidebar">
 		<p class="form-sidebar__title">
-			Lassen Sie sich einen <span>unverbindlichen Kostenvoranschlag</span> erstellen
+			LASSEN SIE SICH EINEN <span>UNVERBINDLICHEN KOSTENVORSCHLAG</span> ERSTELLEN
 		</p>
 		<div class="form__items">
 			<div class="form__item-little">
@@ -12,19 +12,19 @@
 			</div>
 			<div class="form__item-little">
 				<span class="form__text">
-					<span class="form__required-field">*</span> Fachrichtung <span class="form__tippy" data-tippy-content="Wählen Sie bitte die Fachrichtung Ihrer Arbeit aus. Wenn keine Fachrichtung passend ist, wählen Sie „Andere Fachrichtung” Je mehrere Informationen Sie eingeben, desto besser."></span>
+					<span class="form__required-field">*</span> Fachrichtung <span class="form__tippy" data-tippy-content="Wählen Sie bitte die Fachrichtung Ihrer Arbeit aus. Wenn keine Fachrichtung passend ist, wählen Sie 'Andere' aus. "></span>
 				</span>
 				<?php echo get_template_part('parts/blocks/fach-select') ?>
 			</div>
 			<div class="form__item-little">
 				<span class="form__text">
-					<span class="form__required-field">*</span> Thema der Arbeit <span class="form__tippy" data-tippy-content="Das ist das Thema Ihrer Arbeit. Es ist sehr wichtig, Ihr Thema jetzt richtig zu schreiben."></span>
+					Thema der Arbeit <span class="form__tippy" data-tippy-content="Geben Sie bitte das Thema Ihrer Arbeit an."></span>
 				</span>
-				<input class="input" name="theme" placeholder="Thema der Arbeit..." required>
+				<input class="input" name="theme" placeholder="Thema der Arbeit...">
 			</div>
 			<div class="form__item-sidebar">
 				<span class="form__text">
-					<span class="form__required-field">*</span> Seitenanzahl
+					<span class="form__required-field">*</span> Seitenanzahl <span class="form__tippy" data-tippy-content="Geben Sie bitte die Anzahl der Seiten an."></span>
 				</span>
 				<div class="form-counter">
 					<div data-id="decrement" class="counter-btn">-</div>
@@ -34,7 +34,7 @@
 			</div>
 			<div class="form__item-sidebar">
 				<span class="form__text">
-					<span class="form__required-field">*</span> Liefertermin
+					<span class="form__required-field">*</span> Liefertermin <span class="form__tippy" data-tippy-content="Geben Sie bitte an, wann Sie die Arbeit erhalten möchten."></span>
 				</span>
 				<label class="form__date-custom">
 					<input class="form-main__input date-input input" name="deadline" type="text" placeholder="<?php echo date("d.m.Y"); ?>" onfocus="(this.value='<?php echo date('d.m.Y'); ?>')" readonly required>
@@ -42,31 +42,41 @@
 			</div>
 			<div class="form__item-little">
 				<span class="form__text">
-					<span class="form__required-field">*</span> Phone <span class="form__tippy" data-tippy-content="Erfahrungsgemäß lassen sich viele Fragen am besten telefonisch klären. Falls Sie einen Rückruf wünschen, geben Sie bitte hier Ihre Telefonummer an"></span>
+					<span class="form__required-field">*</span> Phone <span class="form__tippy" data-tippy-content="Erfahrungsgemäß lassen sich viele Fragen am besten telefonisch klären. Falls Sie einen Rückruf wünschen, geben Sie bitte hier Ihre Telefonummer an."></span>
 				</span>
 				<label class="form-litle__label-tel">
 					<input class="form-main__input phone-input input" name="phone" type="tel" required placeholder="WhatsApp">
 				</label>
+				<label class="form-litle__check-inner">
+					<input class="custom-checkbox" type="checkbox" name="Kontakt nur über WhatsApp" checked>
+					<span class="style-checkbox"></span>
+					<span class="form-litle__check-text">Kontakt nur über WhatsApp</span>
+				</label>
 			</div>
 			<div class="form__item-little">
 				<span class="form__text">
-					<span class="form__required-field">*</span> E-mail <span class="form__tippy " data-tippy-content="Bitte geben Sie Ihre echte E-Mail-Adresse an, damit wir die höchste Qualität Ihrer Arbeit sicherstellen können."></span>
+					<span class="form__required-field">*</span> E-Mail <span class="form__tippy " data-tippy-content="Bitte geben Sie Ihre echte E-Mail-Adresse an. Vor dem Absenden überprüfen Sie bitte die angegebene E-Mail-Adresse noch einmal."></span>
 				</span>
-				<input class="form-main__input input" name="email" type="email" placeholder="E-mail..." required>
+				<input class="form-main__input input" name="email" type="email" placeholder="E-Mail..." required>
 			</div>
 			<div class="form-litle__item">
-				<span class="form__text">File <span class="form__tippy" data-tippy-content="ZIP, DOCX oder PDF (&lt;50mb)"></span></span>
+				<span class="form__text">Dateien anhängen <span class="form__tippy" data-tippy-content="Hängen Sie Ihre Dateien an, falls sie vorhaden sind."></span></span>
 				<label class="form__file-custom form-litle__input input">
 					<input name="file" type="file">
-					<span>File</span>
+					<span>ZIP, DOCX oder PDF (&lt;50mb)</span>
 				</label>
 			</div>
 		</div>
-		<p class="form-sidebar__guarant">
-			Ihre Daten werden nicht an Dritte weitergegeben
+		<p class="form-main__protect-title form-main__coaching-protect">
+			Ihre Anfrage ist unverbindlich.<br>
+			Ihre Daten werden streng vertraulich behandelt und nicht an Dritte weitergegeben.
 		</p>
-		<p class="form-sidebar__check">
-			Die Hinweise aus der <a href="https://akademily.de/datenschutz/">Datenschutzerklärung</a> und den <a href="https://akademily.de/agb/">AGB</a> habe ich gelesen und akzeptiere diese
+		<p class="form-main__text-protect">
+			<label class="form-litle__check-inner form-main__check">
+				<input class="custom-checkbox" type="checkbox" name="Kontakt nur über WhatsApp" checked>
+				<span class="style-checkbox"></span>
+				<span class="form-litle__check-text">Die Hinweise aus der <a href="https://akademily.de/datenschutz/" target="_blank">Datenschutzerklärung</a> und den <a href="https://akademily.de/agb/" target="_blank">AGB</a> habe ich gelesen und akzeptiere diese.</span>
+			</label>
 		</p>
 		<input class="form-sidebar__btn btn" type="submit" value="Abschicken">
 
