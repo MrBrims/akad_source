@@ -33,7 +33,7 @@ class PageMeta
 			->add_tab(__('Коучинг'), CommonMeta::coachingMeta())
 			->add_tab(__('Без забот'), CommonMeta::relaxMeta())
 			->add_tab(__('Как мы работаем'), CommonMeta::howWorkMeta())
-			->add_tab(__('Большая форма'), CommonMeta::messageMeta())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('Текст после формы'), CommonMeta::richAfterForm())
 			->add_tab(__('Прайс'), CommonMeta::mainPriceTab())
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
@@ -96,6 +96,7 @@ class PageMeta
 			->add_tab(__('Текст'), CommonMeta::richText())
 			->add_tab(__('Текст 2'), CommonMeta::richTextTwo())
 			->add_tab(__('Прайс'), CommonMeta::localPriceTab())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('Как мы работаем'), CommonMeta::howWorkMeta())
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
 			->add_tab(__('Звездочки в сниппете'), CommonMeta::microdataStar());
@@ -170,6 +171,7 @@ class PageMeta
 			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
 			->add_tab(__('Как мы работаем'), CommonMeta::howWorkMeta())
 			->add_tab(__('FAQ'), CommonMeta::localFaq())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('Звездочки в сниппете'), CommonMeta::microdataStar());
 	}
 
@@ -178,7 +180,8 @@ class PageMeta
 		Container::make('post_meta', __('Настройки страницы'))
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-faq.php')
-			->add_tab(__('Первый экран'), CommonMeta::heroMeta());
+			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom());
 	}
 
 	public function newPrice()
@@ -189,6 +192,7 @@ class PageMeta
 			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
 			->add_tab(__('Текст'), CommonMeta::richText())
 			->add_tab(__('Текст 2'), CommonMeta::richTextTwo())
+			->add_tab(__('Большая форма'), CommonMeta::bigFom())
 			->add_tab(__('Заголовки таблиц'), CommonMeta::titlePrice())
 			->add_tab(__('FAQ'), CommonMeta::localFaq());
 	}

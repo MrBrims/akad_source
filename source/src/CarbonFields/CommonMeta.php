@@ -560,7 +560,7 @@ class CommonMeta
 						'parts/blocks/form-main' => 'Большая общая',
 						'parts/blocks/form-main-online' => 'Для онлайнов',
 						'parts/blocks/form-main-coach' => 'Для коачинга',
-						'parts/blocks/form-main-lekt' => 'Для лектората',
+						'parts/blocks/form-main-lekt' => 'Для лектората + общая',
 					)
 				)
 		];

@@ -14,9 +14,9 @@
 		</div>
 		<div class="form-main__item form__item-middle">
 			<span class="form__text">
-				<span class="form__required-field">*</span> E-mail <span class="form__tippy " data-tippy-content="Bitte geben Sie Ihre echte E-Mail-Adresse an, damit wir die höchste Qualität Ihrer Arbeit sicherstellen können."></span>
+				<span class="form__required-field">*</span> E-Mail <span class="form__tippy " data-tippy-content="Bitte geben Sie Ihre echte E-Mail-Adresse an, damit wir die höchste Qualität Ihrer Arbeit sicherstellen können."></span>
 			</span>
-			<input class="form-main__input input" name="email" type="email" placeholder="E-mail..." required>
+			<input class="form-main__input input" name="email" type="email" placeholder="E-Mail..." required>
 		</div>
 		<div class="form-main__item form__item-full">
 			<div class="form-main__item-box">

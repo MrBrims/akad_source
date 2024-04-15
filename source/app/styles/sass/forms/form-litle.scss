@@ -40,6 +40,23 @@
         font-size: 11px;
     }
 
+    &__protect-text {
+        position: relative;
+        font-size: 12px;
+        padding-left: 30px;
+
+        &::before {
+            content: "";
+            @include bgbefore;
+            left: 0;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-image: url(../images/icons/shield.svg);
+            background-size: contain;
+        }
+    }
+
     &__guarant {
         display: block;
         width: fit-content;
