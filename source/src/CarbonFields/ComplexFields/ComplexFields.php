@@ -11,6 +11,7 @@ require 'components/table-price.php';
 require 'components/unic-work.php';
 require 'components/unic-guarant.php';
 require 'components/unic-diagram.php';
+require 'components/unic-reviews.php';
 require 'components/trust-bage.php';
 require 'components/price-lektorat.php';
 require 'components/form-calc.php';
@@ -64,11 +65,12 @@ class ComplexFields
 					->add_fields('template_unic_diagram', 'Диаграмма', get_ak_complex_diagram())
 					->set_header_template('
 					<% if (unic_diagram_title) { %>
-					<%- unic_diagram_title %>
-			  	<% } else { %>
-					<%- "Name" %>
+						<%- unic_diagram_title %>
+						<% } else { %>
+						<%- "Name" %>
 					<% } %>
 					')
+					->add_fields('template_unic_review', 'Отзывы', get_ak_complex_review())
 					->add_fields('template_trust', 'Блок с кнопкой', get_ak_complex_trust())
 					->add_fields('template_form_calc', 'Форма калькулятор', get_ak_complex_form_calc())
 					->add_fields('template_tabl_coach', 'Конструктор таблиц', get_ak_complex_table_coach())
