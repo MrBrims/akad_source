@@ -7,6 +7,7 @@ class PageMeta
 {
 	public function __construct()
 	{
+		add_action('carbon_fields_register_fields', [$this, 'defaultPage']);
 		add_action('carbon_fields_register_fields', [$this, 'homePageMeta']);
 		add_action('carbon_fields_register_fields', [$this, 'halfePageMeta']);
 		add_action('carbon_fields_register_fields', [$this, 'ghostPageMeta']);
@@ -21,6 +22,14 @@ class PageMeta
 		add_action('carbon_fields_register_fields', [$this, 'wissen']);
 		add_action('carbon_fields_register_fields', [$this, 'mainFaq']);
 		add_action('carbon_fields_register_fields', [$this, 'newPrice']);
+	}
+
+	public function defaultPage()
+	{
+		Container::make('post_meta', __('Настройки страницы'))
+			->where('post_type', '=', 'page')
+			->where('post_template', '=', '')
+			->add_tab(__('Первый экран'), CommonMeta::heroSmall());
 	}
 
 	public function homePageMeta()
@@ -180,7 +189,7 @@ class PageMeta
 		Container::make('post_meta', __('Настройки страницы'))
 			->where('post_type', '=', 'page')
 			->where('post_template', '=', 'parts/page-faq.php')
-			->add_tab(__('Первый экран'), CommonMeta::heroMeta())
+			->add_tab(__('Первый экран'), CommonMeta::heroSmall())
 			->add_tab(__('Большая форма'), CommonMeta::bigFom());
 	}
 
