@@ -28,7 +28,7 @@ class PageMeta
 	{
 		Container::make('post_meta', __('Настройки страницы'))
 			->where('post_type', '=', 'page')
-			->where('post_template', '=', '')
+			->where('post_template', '=', 'default')
 			->add_tab(__('Первый экран'), CommonMeta::heroSmall());
 	}
 
