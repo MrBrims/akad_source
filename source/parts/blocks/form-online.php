@@ -58,7 +58,7 @@
 			</label>
 		</div>
 		<label class="form-litle__check-inner">
-			<input class="custom-checkbox" type="checkbox" name="Kontakt nur über WhatsApp" checked>
+			<input class="custom-checkbox" type="checkbox" name="Kontakt nur über WhatsApp">
 			<span class="style-checkbox"></span>
 			<span class="form-litle__check-text">Kontakt nur über WhatsApp</span>
 		</label>
