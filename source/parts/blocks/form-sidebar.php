@@ -28,7 +28,7 @@
 				</span>
 				<div class="form-counter">
 					<div data-id="decrement" class="counter-btn">-</div>
-					<input class="count-input input" name="number" type="number" value="30" max="1000" min="0" step="1" />
+					<input class="count-input input" name="number" type="number" value="5" max="1000" min="0" step="1" />
 					<div data-id="increment" class="counter-btn">+</div>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 					<input class="form-main__input phone-input input" name="phone" type="tel" required placeholder="WhatsApp">
 				</label>
 				<label class="form-litle__check-inner">
-					<input class="custom-checkbox" type="checkbox" name="Kontakt nur über WhatsApp" checked>
+					<input class="custom-checkbox" type="checkbox" name="Kontakt nur über WhatsApp">
 					<span class="style-checkbox"></span>
 					<span class="form-litle__check-text">Kontakt nur über WhatsApp</span>
 				</label>

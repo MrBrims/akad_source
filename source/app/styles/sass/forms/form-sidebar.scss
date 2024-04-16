@@ -24,6 +24,11 @@
         margin-bottom: 20px;
     }
 
+    .date-input,
+    .date-input::placeholder {
+        font-size: 13px;
+    }
+
     &__guarant,
     &__check {
         color: #445664;

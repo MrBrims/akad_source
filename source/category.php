@@ -1,7 +1,10 @@
-<?php get_header(); ?>
+<?php get_header();
+$termId = get_queried_object_id();
+$thumbUrl = carbon_get_term_meta($termId, 'term_hero_bg');
+?>
 
 <main class="main">
-	<section class="hero hero-single">
+	<section class="hero hero-single hero-category" style="background-image:url(<?php echo $thumbUrl; ?>);">
 		<div class="container">
 			<h1 class="hero-single__title">
 				<?php echo single_cat_title(); ?>
