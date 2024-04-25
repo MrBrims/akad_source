@@ -1,6 +1,7 @@
 <?php get_header();
 $termId = get_queried_object_id();
 $thumbUrl = carbon_get_term_meta($termId, 'term_hero_bg');
+$category = get_queried_object();
 ?>
 
 <main class="main">
@@ -29,7 +30,7 @@ $thumbUrl = carbon_get_term_meta($termId, 'term_hero_bg');
 				// 	'screen_reader_text' => ' ',
 				// 	'aria_label' => '',
 				// ]); 
-				echo do_shortcode('[ajax_load_more post_type="post" sticky_posts="true" posts_per_page="5"]');
+				echo do_shortcode('[ajax_load_more post_type="post" sticky_posts="true" posts_per_page="5" category="' . $category->slug . '"]');
 				?>
 			</div>
 			<aside class="sidebar">
