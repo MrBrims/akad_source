@@ -1,7 +1,7 @@
 <section class="section edulab">
 	<div class="container">
 		<h2 class="edulab__title">
-			EduLab Limited
+			MEXPI LIMITED
 		</h2>
 		<div class="edulab__inner">
 			<div class="edulab__col">
@@ -10,7 +10,7 @@
 						Reg.number:
 					</span>
 					<span>
-						3193099
+						07916503
 					</span>
 				</div>
 				<div class="edulab__item">
@@ -18,7 +18,7 @@
 						Geschäftsführer:
 					</span>
 					<span>
-						Valery Salauyou
+						Pavel Shparkovich
 					</span>
 				</div>
 				<div class="edulab__item">
