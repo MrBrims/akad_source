@@ -97,7 +97,7 @@ class Feedback
 		return true;
 	}
 
-	public static function sendBitrix24 ($postId, $post, $update)
+	public function sendBitrix24 ($postId, $post, $update)
 	{
 		if (wp_is_post_revision($postId) || $update) {
 			return false;
@@ -287,7 +287,7 @@ class Feedback
 		} while ($status_code != 200 && $attempts < $max_attempts);
 	}
 
-	private static function sendMail ($to, $name = '', $subj = 'Notification', $msg = 'Form sent')
+	public function sendMail ($to, $name = '', $subj = 'Notification', $msg = 'Form sent')
 	{
 		$mail = new PHPMailer(true);
 		try {
@@ -315,7 +315,7 @@ class Feedback
 		return true;
 	}
 
-	private function sendToClient ($id)
+	public function sendToClient ($id)
 	{
 		$sbjToClient = 'Vielen Dank, dass Sie Akademily.de gewählt haben!';
 		$msgToClient = '<p><strong>Hallo,</strong></p>
@@ -354,7 +354,7 @@ class Feedback
 		return $res;
 	}
 
-	public static function jsonBasicAuthHandler ($user)
+	public function jsonBasicAuthHandler ($user)
 	{
 		global $wp_json_basic_auth_error;
 
@@ -387,7 +387,7 @@ class Feedback
 		return $user->ID;
 	}
 
-	public static function jsonBasicAuthError ($error)
+	public function jsonBasicAuthError ($error)
 	{
 		if (!empty ($error)) {
 			return $error;
@@ -398,7 +398,7 @@ class Feedback
 		return $wp_json_basic_auth_error;
 	}
 
-	private function sendToTG ($id)
+	public function sendToTG ($id)
 	{
 		$text = "<b>{$this->title}</b>\r\n\n";
 		$text .= "{$this->subject}\r\n\n";
@@ -427,11 +427,11 @@ class Feedback
 		return true;
 	}
 
-	private static function sendFileToTG ($id)
+	public function sendFileToTG ($id)
 	{
 		// Проверка на наличие файла
 		if ($_FILES['file']['name'] !== '') {
-			$uploaddir = '../../loads/' . $id . '/';
+			$uploaddir = '../loads/' . $id . '/';
 			// Проверка на существование директории
 			if (!file_exists($uploaddir)) {
 				mkdir($uploaddir, 0777, true);
@@ -454,7 +454,7 @@ class Feedback
 			}
 		}
 	}
-	private static function getGeo ()
+	public function getGeo ()
 	{
 		$client_ip = $_SERVER['REMOTE_ADDR'];
 		// проверка для локалки
@@ -501,7 +501,7 @@ class Feedback
 		$res = file_get_contents("https://api.telegram.org/bot" . TG_TOKEN . "/sendMessage?" . http_build_query($data));
 		return $res;
 	}
-	private static function getChannel ($ch)
+	public function getChannel ($ch)
 	{
 		if ($ch == 'cpc') {
 			return 'K';
@@ -514,7 +514,7 @@ class Feedback
 		}
 	}
 
-	private static function getTitle ($ch)
+	public function getTitle ($ch)
 	{
 		if ($ch == 'cpc') {
 			return 'Новая заявка! 💰';
@@ -527,7 +527,7 @@ class Feedback
 		}
 	}
 
-	private function getSubject ($ch)
+	public function getSubject ($ch)
 	{
 		return sprintf(
 			'%s | %s | %s',
@@ -537,7 +537,7 @@ class Feedback
 		);
 	}
 
-	private static function messageFromForm ()
+	public function messageFromForm ()
 	{
 		$mess = '';
 		foreach ($_POST as $key => $value) {
@@ -551,7 +551,7 @@ class Feedback
 		return $mess;
 	}
 
-	private static function messageFromCookie ()
+	public function messageFromCookie ()
 	{
 		$mess = '';
 		if (isset ($_COOKIE['refer'])) {
@@ -596,7 +596,7 @@ class Feedback
 	// 	}
 	// 	return $mess;
 	// }
-	private function messageFromGeo ()
+	public function messageFromGeo ()
 	{
 		$mess = '';
 		$clientGeo = $this->getGeo();
@@ -609,7 +609,7 @@ class Feedback
 		return $mess;
 	}
 
-	private function messageFromUtm ()
+	public function messageFromUtm ()
 	{
 		$mess = '';
 		if (isset ($_COOKIE['fc_utm'])) {
@@ -626,7 +626,7 @@ class Feedback
 		return $mess;
 	}
 
-	private function messageFromRating ()
+	public function messageFromRating ()
 	{
 		$this->score = 'Рейтинг неизвестен';
 		if (!empty ($_POST['recaptchaResponse'])) {
@@ -646,7 +646,7 @@ class Feedback
 		return sprintf('<p>%s</p>', $this->score); //Дописываем рейтинг
 	}
 
-	private static function formNameFromID (): string
+	public function formNameFromID (): string
 	{
 		$formArr = array(
 			'calculator' => 'Заявка с калькулятора',
@@ -664,7 +664,7 @@ class Feedback
 		}
 	}
 
-	private static function getDataJson ($data)
+	public function getDataJson ($data)
 	{
 	}
 }
