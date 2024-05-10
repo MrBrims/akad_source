@@ -297,7 +297,7 @@ class Feedback
 		return $res;
 	}
 
-	public static function jsonBasicAuthHandler ($user)
+	public function jsonBasicAuthHandler ($user)
 	{
 		global $wp_json_basic_auth_error;
 
@@ -330,7 +330,7 @@ class Feedback
 		return $user->ID;
 	}
 
-	public static function jsonBasicAuthError ($error)
+	public function jsonBasicAuthError ($error)
 	{
 		if (!empty($error)) {
 			return $error;
