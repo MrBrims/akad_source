@@ -10,13 +10,15 @@ require_once 'PHPMailer/PHPMailer.php';
 
 class Feedback
 {
-	private $ch;
-	private $channel;
-	private $title;
-	private $subject;
-	private $message;
-	private $fc_source;
-	private $score;
+	public $ch;
+	public $channel;
+	public $title;
+	public $subject;
+	public $fc_source;
+	public $score;
+	public $id;
+	public $postMeta = [];
+
 	public function __construct ()
 	{
 		add_filter('determine_current_user', [$this, 'jsonBasicAuthHandler'], 20);
@@ -28,272 +30,205 @@ class Feedback
 		add_action('wp_ajax_sendWapp', [$this, 'sendWapp']);
 		add_action('wp_ajax_nopriv_sendWapp', [$this, 'sendWapp']);
 
-		add_action('save_post', [$this, 'sendBitrix24'], 10, 3);
+		// add_action('save_post', [$this, 'sendBitrix24'], 10, 3);
 	}
 
 	public function mailer ()
 	{
-		if (empty ($_POST)) {
+		if (empty($_POST)) {
 			wp_send_json_error(
 				[
-					'message' => __('<p class="warning">Empty form!</p>')
+					'message' => __('Empty form!')
 				]
 			);
+			// } else {
+			// 	if (!empty($_POST['recaptcha_response'])) {
+			// 		$url = RECAPTCHA_URL;
+			// 		$key = RECAPTCHA_KEY;
+			// 		$recaptcha = $_POST['recaptcha_response'];
+
+			// 		$recaptcha = file_get_contents($url . '?secret=' . $key . '&response=' . $recaptcha);
+			// 		$recaptcha = json_decode($recaptcha);
+
+			// 		if ($recaptcha->score < 0.1) {
+			// 			wp_send_json_error(
+			// 				[
+			// 					'message' => __('<p class="warning">You are robot \0-0/!</p>')
+			// 				]
+			// 			);
+			// 		}
+		}
+		// $this->sanitizeData();
+		$this->ch = json_decode(stripslashes($_COOKIE['fc_utm']))->utm_channel;
+		$this->channel = $this->getChannel($this->ch);
+		$this->title = $this->getTitle($this->ch);
+		$this->subject = $this->getSubject($this->channel);
+		$this->postMetaCookies();
+		$this->postMetaUtm();
+		$this->postMetaGeo();
+
+		$res = new stdClass();
+		$res->ToCRM = $this->sendToCRM();
+
+		if (isset($res->ToCRM->id)) {
+			$this->id = $res->ToCRM->id;
+			$res->ToCRM->ok = true;
 		} else {
-			if (!empty ($_POST['recaptcha_response'])) {
-				$url = RECAPTCHA_URL;
-				$key = RECAPTCHA_KEY;
-				$recaptcha = $_POST['recaptcha_response'];
-
-				$recaptcha = file_get_contents($url . '?secret=' . $key . '&response=' . $recaptcha);
-				$recaptcha = json_decode($recaptcha);
-
-				if ($recaptcha->score < 0.1) {
-					wp_send_json_error(
-						[
-							'message' => __('<p class="warning">You are robot \0-0/!</p>')
-						]
-					);
-				}
-			}
-
-			$this->ch = json_decode(stripslashes($_COOKIE['fc_utm']))->utm_channel;
-			$this->channel = $this->getChannel($this->ch);
-			$this->subject = $this->getSubject($this->channel);
-			$this->title = $this->getTitle($this->ch);
-			$this->message = '';
-			$this->message .= $this->messageFromForm();
-			$this->message .= $this->messageFromCookie();
-			$this->message .= $this->messageFromGeo();
-			$this->message .= $this->messageFromUtm();
-			$this->message .= $this->messageFromRating();
-
-			$id = wp_insert_post(
-				[
-					'post_type' => 'requests',
-					'post_status' => 'publish',
-					'post_title' => $this->subject,
-					'post_content' => $this->message,
-					'meta_input' => [
-						'lead_json' => [
-							'hui' => 'hui',
-						]
-					],
-				]
-			);
-			if ($id) {
-				$this->sendToTG($id);
-				$this->sendFileToTG($id);
-				// $this->sendToClient($id);
-
-				wp_send_json_success(
-					[
-						'id' => $id,
-						'message' => __('Thank you!')
-					]
-				);
-			}
-		}
-		return true;
-	}
-
-	public static function sendBitrix24 ($postId, $post, $update)
-	{
-		if (wp_is_post_revision($postId) || $update) {
-			return false;
+			$this->id = 1;
+			$res->ToCRM->ok = false;
+			$res->ToCRM->id = 1;
 		}
 
-		if ($post->post_type !== 'requests') {
-			return false;
-		}
+		$res->ToTG = $this->sendToTG($this->id);
+		$res->FileToTG = $this->sendFileToTG($this->id);
+		// $res->FbAds = $this->facebookAds($this->id);
+		// $res->ToClient = $this->sendToClient($this->id);
 
-		$content = wpautop($post->post_content);
-		$contFormated = str_replace('<p>', '', $content);
-		$contFormated = str_replace('</p>', '[BR]', $contFormated);
-		$contFormated = str_replace('<br>', '[BR]', $contFormated);
-
-		// Email
-		$email = '';
-		preg_match_all('/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i', $content, $emailMatches);
-		$emailMatches = reset($emailMatches);
-		if (!empty ($emailMatches)) {
-			$email = $emailMatches[0];
-		}
-
-		// Name
-		$name = '';
-		preg_match_all('/(Vorname.*\n|Name.*\n|Nickname.*\n)/', $content, $nameMatches);
-		$nameMatches = reset($nameMatches);
-		if (!empty ($nameMatches)) {
-			$name = explode(':', $nameMatches[0]);
-			$name = strip_tags(trim(end($name)));
-		}
-
-		// Phone
-		$phone = '';
-		preg_match_all('/(phone.*\n|whatsapp.*\n|telefonnummer.*\n)/i', $content, $phoneMatches);
-		$phoneMatches = reset($phoneMatches);
-		if (!empty ($phoneMatches)) {
-			$phone = explode(':', $phoneMatches[0]);
-			$phone = trim(end($phone));
-			$phone = preg_replace("/[^,.0-9]/", '', $phone);
-		}
-
-		// Message
-		$message = '';
-		preg_match_all('/(message.*\n)/i', $post->post_content, $messageMatches);
-		$messageMatches = reset($messageMatches);
-		if (!empty ($messageMatches)) {
-			$message = explode(':', $messageMatches[0]);
-			$message = strip_tags(trim(end($message)));
-		}
-
-		// UTM_SOURCE
-		$utmSource = '';
-		preg_match_all('/(Utm_source.*\n)/i', $content, $utmSourceMatches);
-		$utmSourceMatches = reset($utmSourceMatches);
-		if (!empty ($utmSourceMatches)) {
-			$utmSource = explode(':', $utmSourceMatches[0]);
-			$utmSource = strip_tags(trim(end($utmSource)));
-		}
-
-		// UTM_MEDIUM
-		$utmMedium = '';
-		preg_match_all('/(utm_medium.*\n)/i', $content, $utmMediumMatches);
-		$utmMediumMatches = reset($utmMediumMatches);
-		if (!empty ($utmMediumMatches)) {
-			$utmMedium = explode(':', $utmMediumMatches[0]);
-			$utmMedium = strip_tags(trim(end($utmMedium)));
-		}
-
-		// UTM_CAMPAIGN
-		$utmCampaign = '';
-		preg_match_all('/(utm_campaign.*\n)/i', $content, $utmCampaignMatches);
-		$utmCampaignMatches = reset($utmCampaignMatches);
-		if (!empty ($utmCampaignMatches)) {
-			$utmCampaign = explode(':', $utmCampaignMatches[0]);
-			$utmCampaign = strip_tags(trim(end($utmCampaign)));
-		}
-
-		// UTM_CONTENT
-		$utmContent = '';
-		preg_match_all('/(utm_content.*\n)/i', $content, $utmContentMatches);
-		$utmContentMatches = reset($utmContentMatches);
-		if (!empty ($utmContentMatches)) {
-			$utmContent = explode(':', $utmContentMatches[0]);
-			$utmContent = strip_tags(trim(end($utmContent)));
-		}
-
-		// UTM_TERM
-		$utmTerm = '';
-		preg_match_all('/.*utm_term\s?\:\s?([^\n]+)/i', $content, $utmTermMatches, PREG_SET_ORDER);
-		$utmTermMatches = reset($utmTermMatches);
-		if (!empty ($utmTermMatches)) {
-			$utmTerm = strip_tags(trim($utmTermMatches[1]));
-		}
-
-		// workType
-		$workType = '';
-		preg_match_all('/type\s?:\s?(.*)\n|arbeit\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
-		$tempVar = reset($tempVar);
-		if (!empty ($tempVar[1])) {
-			$workType = strip_tags(trim($tempVar[1]));
-		} elseif ($tempVar[2]) {
-			$workType = strip_tags(trim($tempVar[2]));
-		}
-
-		// workSpec
-		$workSpec = '';
-		preg_match_all('/specialization\s?:\s?(.*)\n|discipline\s?:\s?(.*)\n|fachbereich\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
-		$tempVar = reset($tempVar);
-		if (!empty ($tempVar[1])) {
-			$workSpec = strip_tags(trim($tempVar[1]));
-		} elseif ($tempVar[2]) {
-			$workSpec = strip_tags(trim($tempVar[2]));
-		}
-
-		// workTheme
-		$workTheme = '';
-		preg_match_all('/theme\s?:\s?(.*)\n|thema\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
-		$tempVar = reset($tempVar);
-		if (!empty ($tempVar[1])) {
-			$workTheme = strip_tags(trim($tempVar[1]));
-		} elseif ($tempVar[2]) {
-			$workTheme = strip_tags(trim($tempVar[2]));
-		}
-
-		// deadline
-		$deadline = '';
-		preg_match_all('/deadline\s?:\s?(.*)\n|abgabetermin\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
-		$tempVar = reset($tempVar);
-		if (!empty ($tempVar[1])) {
-			$deadline = strip_tags(trim($tempVar[1]));
-		} elseif ($tempVar[2]) {
-			$deadline = strip_tags(trim($tempVar[2]));
-		}
-
-		// pageNum
-		$pageNum = '';
-		preg_match_all('/seitenanzahl\s?:\s?(.*)\n|number\s?:\s?(.*)\n/i', $content, $tempVar, PREG_SET_ORDER);
-		$tempVar = reset($tempVar);
-		if (!empty ($tempVar[1])) {
-			$pageNum = strip_tags(trim($tempVar[1]));
-		} elseif (!empty ($tempVar[2])) {
-			$pageNum = strip_tags(trim($tempVar[2]));
-		}
-
-		$queryParams = [
-			'FIELDS[TITLE]' => sprintf('Заявка с сайта #%s', $post->ID),
-			'FIELDS[NAME]' => $name,
-			'FIELDS[LAST_NAME]' => '',
-			'FIELDS[EMAIL][0][VALUE]' => $email,
-			'FIELDS[EMAIL][0][VALUE_TYPE]' => 'WORK',
-			'FIELDS[PHONE][0][VALUE]' => $phone,
-			'FIELDS[PHONE][0][VALUE_TYPE]' => 'WORK',
-			'FIELDS[SOURCE_ID]' => 'WEB',
-			'FIELDS[SOURCE_DESCRIPTION]' => $post->post_title,
-			'FIELDS[UTM_SOURCE]' => $utmSource,
-			'FIELDS[UTM_MEDIUM]' => $utmMedium,
-			'FIELDS[UTM_CAMPAIGN]' => $utmCampaign,
-			'FIELDS[UTM_CONTENT]' => $utmContent,
-			'FIELDS[UTM_TERM]' => $utmTerm,
-			'FIELDS[COMMENTS]' => $contFormated,
-			'FIELDS[UF_CRM_1672151965]' => $workType,
-			'FIELDS[UF_CRM_1672152040]' => $workSpec,
-			'FIELDS[UF_CRM_1672151668]' => $workTheme,
-			'FIELDS[UF_CRM_1672151599]' => $deadline,
-			'FIELDS[UF_CRM_1672214552]' => $pageNum,
+		$result = [
+			'ToCRM' => [
+				'ok' => $res->ToCRM->ok,
+				'id' => $res->ToCRM->id
+			],
+			'ToTG' => [
+				'ok' => $res->ToTG->ok
+			],
+			'FileToTG' => [
+				'ok' => $res->FileToTG->ok
+			]
 		];
-
-		$url = BITRIX_API;
-		$queryData = http_build_query($queryParams);
-		$max_attempts = 3; // Максимальное количество попыток отправки данных
-		$attempts = 0; // Счетчик попыток
-
-		do {
-			$curl = curl_init();
-			curl_setopt_array($curl, [
-				CURLOPT_SSL_VERIFYPEER => 0,
-				CURLOPT_POST => 1,
-				CURLOPT_HEADER => 0,
-				CURLOPT_RETURNTRANSFER => 1,
-				CURLOPT_URL => $url,
-				CURLOPT_POSTFIELDS => $queryData,
-			]);
-			$response = curl_exec($curl);
-			$status_code = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
-			curl_close($curl);
-			$attempts++;
-		} while ($status_code != 200 && $attempts < $max_attempts);
+		wp_send_json($result);
 	}
 
-	private static function sendMail ($to, $name = '', $subj = 'Notification', $msg = 'Form sent')
+	public function sendToCRM ()
+	{
+		try {
+			$headers = array(
+				'Content-Type: multipart/form-data',
+				'Authorization:Basic ' . base64_encode(CRM_LOGIN . ':' . CRM_PASSWORD),
+			);
+
+			// Prepare POST data
+			// $data = $_POST;
+			$data = array_merge($_POST, $this->postMeta);
+			if (!empty($_FILES['file']['tmp_name'])) {
+				$fileUpload = new CURLFile($_FILES['file']['tmp_name'], $_FILES['file']['type'], $_FILES['file']['name']);
+				$data['file'] = $fileUpload;
+			}
+
+			$ch = curl_init(CRM_URL);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 300);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+			$response = curl_exec($ch);
+			$resDec = json_decode($response);
+			if ($resDec === true || $resDec === null) {
+				$resDec = (object) [
+					'ok' => false,
+					'status' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
+					'error' => curl_error($ch),
+					'res' => $response,
+				];
+			} else {
+				$resDec = json_decode($response);
+				$resDec->ok = true;
+				$resDec->status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			}
+
+			curl_close($ch);
+			return $resDec;
+		} catch (Exception $e) {
+			return (object) [
+				'ok' => false,
+				'status' => 0,
+				'error' => $e->getMessage(),
+				'res' => '',
+			];
+		}
+	}
+
+	private function sendToTG ($id)
+	{
+		$text = "<b>{$this->title}</b>\r\n\n";
+		$text .= "{$this->subject}\r\n\n";
+		$text .= "<b>🥸 :</b> " . $_POST['name'] . "\r\n";
+		$text .= "<b>📨 :</b> " . $_POST['email'] . "\r\n";
+		$text .= "<b>📞 :</b> " . $_POST['phone'] . "\r\n";
+		$text .= "<b>📌 :</b> " . $_POST['type'] . "\r\n";
+		$text .= "<b>📎 :</b> " . $_POST['specialization'] . "\r\n";
+		$text .= "<b>✍️ :</b> " . $_POST['theme'] . "\r\n";
+		$text .= "<b>🗒 :</b> " . $_POST['number'] . "\r\n";
+		$text .= "<b>🔥 :</b> " . $_POST['deadline'] . "\r\n";
+		if ($this->fc_source !== null) {
+			$text .= "<b>👣 :</b> " . $this->fc_source . "\r\n";
+		}
+		$text .= "<b>🗃 :</b> " . $id . "\r\n";
+		$text .= "<b>⌚️ :</b> " . date('d.m.Y H:i:s') . "\r\n\n";
+		$text .= "{$this->score} \r\n";
+		// $text .= "<a href='https://akademily.de/wp-admin/post.php?post=" . $id . "&action=edit'><b>Клац</b></a>";
+
+		$data = [
+			'parse_mode' => 'html',
+			'chat_id' => TG_CHAT_ID,
+			'text' => $text
+		];
+		$response = json_decode(file_get_contents("https://api.telegram.org/bot" . TG_TOKEN . "/sendMessage?" . http_build_query($data)));
+		return $response;
+	}
+
+	public function sendFileToTG ($id)
+	{
+		// Проверка на наличие файла
+		if ($_FILES['file']['name'] !== '') {
+			$uploaddir = '../loads/' . $id . '/';
+			// Проверка на существование директории
+			if (!file_exists($uploaddir)) {
+				mkdir($uploaddir, 0777, true);
+			}
+			// Загрузка
+			$uploadfile = $uploaddir . basename($_FILES['file']['name']);
+			if (is_uploaded_file($_FILES['file']['tmp_name']) && move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+				$data = [
+					'chat_id' => TG_CHAT_ID,
+					'caption' => "🗃 : " . $id,
+					'document' => new CURLFile($uploadfile)
+				];
+
+				$ch = curl_init("https://api.telegram.org/bot" . TG_TOKEN . "/sendDocument");
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_POST, true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+				$response = curl_exec($ch);
+				$resDec = json_decode($response);
+				if ($resDec === true || $resDec === null) {
+					$resDec = (object) [
+						'ok' => false,
+						'status' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
+						'error' => curl_error($ch),
+						'res' => $response,
+					];
+				} else {
+					$resDec = json_decode($response);
+					$resDec->ok = true;
+					$resDec->status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+				}
+
+				curl_close($ch);
+				return $resDec;
+			}
+		}
+	}
+
+	public function sendMail ($to, $name = '', $subj = 'Notification', $msg = 'Form sent', $file = false)
 	{
 		$mail = new PHPMailer(true);
 		try {
 			// $mail->SMTPDebug = SMTP::DEBUG_SERVER; //Enable verbose debug output
 			$mail->isSMTP();
-			$mail->Host = 'mail.akademily.de';
+			$mail->Host = 'smtp.gmail.com';
 			$mail->SMTPAuth = true;
 			$mail->Username = MAIL_BOT_ADDRESS;
 			$mail->Password = MAIL_BOT_PASSWORD;
@@ -304,18 +239,26 @@ class Feedback
 			$mail->setFrom(MAIL_BOT_ADDRESS, 'Akademily');
 			$mail->addAddress($to, $name);
 
+			if ($file !== false) {
+				$mail->addAttachment(DE_PATH . '/assets/docs/Warum wählt man uns.pdf');         //Add attachments
+			}
 			$mail->isHTML(true);
 			$mail->Subject = $subj;
 			$mail->Body = $msg;
 
 			$mail->send();
+			$response = new stdClass();
+			$response->ok = true;
+			$response->message = 'Email sent successfully';
 		} catch (Exception $e) {
-			wp_send_json_error(['message' => $e->getMessage()]);
+			$response = new stdClass();
+			$response->ok = false;
+			$response->message = $e->getMessage();
 		}
-		return true;
+		return $response;
 	}
 
-	private function sendToClient ($id)
+	public function sendToClient ($id)
 	{
 		$sbjToClient = 'Vielen Dank, dass Sie Akademily.de gewählt haben!';
 		$msgToClient = '<p><strong>Hallo,</strong></p>
@@ -350,7 +293,7 @@ class Feedback
 		<p style="text-align: center;"><em>Mit freundlichen Grüßen,<em></p>
 		<p style="text-align: center;"><em>Ihr Team von Akademily!<em></p>';
 
-		$res = $this->sendMail($_POST['email'], $_POST['name'], $sbjToClient, $msgToClient);
+		$res = $this->sendMail($_POST['email'], $_POST['name'], $sbjToClient, $msgToClient, false);
 		return $res;
 	}
 
@@ -360,11 +303,11 @@ class Feedback
 
 		$wp_json_basic_auth_error = null;
 
-		if (!empty ($user)) {
+		if (!empty($user)) {
 			return $user;
 		}
 
-		if (!isset ($_SERVER['PHP_AUTH_USER'])) {
+		if (!isset($_SERVER['PHP_AUTH_USER'])) {
 			return $user;
 		}
 
@@ -389,7 +332,7 @@ class Feedback
 
 	public static function jsonBasicAuthError ($error)
 	{
-		if (!empty ($error)) {
+		if (!empty($error)) {
 			return $error;
 		}
 
@@ -398,87 +341,6 @@ class Feedback
 		return $wp_json_basic_auth_error;
 	}
 
-	private function sendToTG ($id)
-	{
-		$text = "<b>{$this->title}</b>\r\n\n";
-		$text .= "{$this->subject}\r\n\n";
-		$text .= "<b>🥸 :</b> " . $_POST['name'] . "\r\n";
-		$text .= "<b>📨 :</b> " . $_POST['email'] . "\r\n";
-		$text .= "<b>📞 :</b> " . $_POST['phone'] . "\r\n";
-		$text .= "<b>📌 :</b> " . $_POST['type'] . "\r\n";
-		$text .= "<b>📎 :</b> " . $_POST['specialization'] . "\r\n";
-		$text .= "<b>✍️ :</b> " . $_POST['theme'] . "\r\n";
-		$text .= "<b>🗒 :</b> " . $_POST['number'] . "\r\n";
-		$text .= "<b>🔥 :</b> " . $_POST['deadline'] . "\r\n";
-		if ($this->fc_source !== null) {
-			$text .= "<b>👣 :</b> " . $this->fc_source . "\r\n";
-		}
-		$text .= "<b>🗃 :</b> " . $id . "\r\n";
-		$text .= "<b>⌚️ :</b> " . date('d.m.Y H:i:s') . "\r\n\n";
-		$text .= "{$this->score} \r\n";
-		$text .= "<a href='https://akademily.de/wp-admin/post.php?post=" . $id . "&action=edit'><b>Клац</b></a>";
-
-		$data = [
-			'parse_mode' => 'html',
-			'chat_id' => TG_CHAT_ID,
-			'text' => $text
-		];
-		file_get_contents("https://api.telegram.org/bot" . TG_TOKEN . "/sendMessage?" . http_build_query($data));
-		return true;
-	}
-
-	private static function sendFileToTG ($id)
-	{
-		// Проверка на наличие файла
-		if ($_FILES['file']['name'] !== '') {
-			$uploaddir = '../../loads/' . $id . '/';
-			// Проверка на существование директории
-			if (!file_exists($uploaddir)) {
-				mkdir($uploaddir, 0777, true);
-			}
-			// Загрузка
-			$uploadfile = $uploaddir . basename($_FILES['file']['name']);
-			if (is_uploaded_file($_FILES['file']['tmp_name']) && move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
-				$data = [
-					'chat_id' => TG_CHAT_ID,
-					'caption' => "🗃 : " . $id,
-					'document' => new \CURLFile($uploadfile)
-				];
-				// Отправка
-				$ch = curl_init("https://api.telegram.org/bot" . TG_TOKEN . "/sendDocument");
-				curl_setopt($ch, CURLOPT_POST, 1);
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				$fileResult = curl_exec($ch);
-				curl_close($ch);
-			}
-		}
-	}
-	private static function getGeo ()
-	{
-		$client_ip = $_SERVER['REMOTE_ADDR'];
-		// проверка для локалки
-		// $client_ip = '84.244.8.172';
-
-		$api = 'https://json.geoiplookup.io/' . $client_ip;
-
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_URL, $api);
-
-		$response = curl_exec($ch);
-		curl_close($ch);
-
-		$response = json_decode($response);
-
-		$geo = (object) [
-			'ip' => $response->ip,
-			'country_name' => $response->country_name,
-			'region' => $response->region
-		];
-		return $geo;
-	}
-	
 	public function sendWapp ()
 	{
 		$channel = json_decode(stripslashes($_COOKIE['fc_utm']))->utm_channel;
@@ -486,7 +348,7 @@ class Feedback
 		date_default_timezone_set('Europe/Minsk');
 		$clickTime = new DateTime();
 
-		$text = "<b>Akademily.de WhatsApp клик 🥸</b>\r\n\n";
+		$text = "<b>UG-GWC.de WhatsApp клик 🥸</b>\r\n\n";
 		$text .= "<b>👣 : {$channel}</b>\r\n";
 		$text .= "<b>📱 : {$clientGeo->ip}</b>\r\n\n";
 		$text .= "<b>🌐 : {$clientGeo->country_name}</b>\r\n";
@@ -501,7 +363,32 @@ class Feedback
 		$res = file_get_contents("https://api.telegram.org/bot" . TG_TOKEN . "/sendMessage?" . http_build_query($data));
 		return $res;
 	}
-	private static function getChannel ($ch)
+
+	public function getGeo ()
+	{
+		$client_ip = $_SERVER['REMOTE_ADDR'];
+		// проверка для локалки
+		// $client_ip = '84.244.8.172';
+
+		$api = 'https://json.geoiplookup.io/' . $client_ip;
+
+		$ch = curl_init($api);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		$response = curl_exec($ch);
+		curl_close($ch);
+
+		$response = json_decode($response);
+
+		$geo = (object) [
+			'ip' => $response->ip,
+			'country_name' => $response->country_name,
+			'region' => $response->region,
+		];
+		return $geo;
+	}
+
+	public function getChannel ($ch)
 	{
 		if ($ch == 'cpc') {
 			return 'K';
@@ -510,11 +397,15 @@ class Feedback
 		} elseif ($ch == 'media') {
 			return 'M';
 		} else {
-			return 'O';
+			if (isset($_GET['utm_source'])) {
+				return 'K';
+			} else {
+				return 'O';
+			}
 		}
 	}
 
-	private static function getTitle ($ch)
+	public function getTitle ($ch)
 	{
 		if ($ch == 'cpc') {
 			return 'Новая заявка! 💰';
@@ -527,145 +418,90 @@ class Feedback
 		}
 	}
 
-	private function getSubject ($ch)
+	public function getSubject ($ch)
 	{
-		return sprintf(
+		$title = sprintf(
 			'%s | %s | %s',
 			$ch,
 			Helpers::urlPathFromRef(),
 			$this->formNameFromID()
 		);
+		$this->postMeta['subject'] = $title;
+		return $title;
 	}
 
-	private static function messageFromForm ()
-	{
-		$mess = '';
-		foreach ($_POST as $key => $value) {
-			if (in_array($key, ['form-id', 'action', 'recaptchaResponse'])) {
-				continue;
-			}
-
-			$string = (is_array($value)) ? implode(', ', $value) : $value; //Преобразование
-			$mess .= sprintf('<p>%s : %s<br></p>', ucfirst($key), $string); //Вывод
-		}
-		return $mess;
-	}
-
-	private static function messageFromCookie ()
-	{
-		$mess = '';
-		if (isset ($_COOKIE['refer'])) {
-			$mess .= sprintf('<p>%s : %s<br></p>', 'Refer', stripslashes($_COOKIE['refer'])); //Вывод
-		}
-		if (isset ($_COOKIE['is_mobile'])) {
-			$mess .= sprintf('<p>%s : %s<br></p>', 'Is_Mobile', stripslashes($_COOKIE['is_mobile'])); //Вывод
-		}
-		if (isset ($_COOKIE['browser'])) {
-			$mess .= sprintf('<p>%s : %s<br></p>', 'Browser', stripslashes($_COOKIE['browser'])); //Вывод
-		}
-		if (isset ($_COOKIE['os'])) {
-			$mess .= sprintf('<p>%s : %s</p>', 'OS', stripslashes($_COOKIE['os'])); //Вывод
-		}
-		if (isset ($_COOKIE['cookieCook'])) {
-			$mess .= sprintf('<p>%s : %s</p>', 'Cookie_Cook', stripslashes($_COOKIE['cookieCook'])); //Вывод
-		}
-		if (isset ($_COOKIE['time_passed'])) {
-			$mess .= sprintf('<p>%s : %s</p>', 'Time_Passed', stripslashes($_COOKIE['time_passed'])); //Вывод
-		}
-		if (isset ($_COOKIE['fc_page'])) {
-			$mess .= sprintf('<p>%s : %s</p>', 'Fc_Page', stripslashes($_COOKIE['fc_page'])); //Вывод
-		}
-		if (isset ($_COOKIE['lc_page'])) {
-			$mess .= sprintf('<p>%s : %s</p>', 'Lc_Page', stripslashes($_COOKIE['lc_page'])); //Вывод
-		}
-		if (isset ($_COOKIE['user_agent'])) {
-			$mess .= sprintf('<p>%s : %s</p>', 'User_Agent', stripslashes($_COOKIE['user_agent'])); //Вывод
-		}
-		return $mess;
-	}
-
-	// private static function messageFromGeo ()
-	// {
-	// 	$mess = '';
-	// 	if (isset ($_COOKIE['geo'])) {
-	// 		$decCookie = json_decode(stripslashes($_COOKIE['geo'])); //Декодируем JSON из кук
-	// 		foreach ($decCookie as $key => $value) {
-	// 			$string = (is_array($value)) ? implode(', ', $value) : $value; //Преобразование
-	// 			$mess .= sprintf('<p>%s : %s</p>', ucfirst($key), $string); //Вывод
-	// 		}
-	// 	}
-	// 	return $mess;
-	// }
-	private function messageFromGeo ()
-	{
-		$mess = '';
-		$clientGeo = $this->getGeo();
-		if (isset($clientGeo)) {
-			foreach ($clientGeo as $key => $value) {
-				$string = (is_array($value)) ? implode(', ', $value) : $value; //Преобразование
-				$mess .= sprintf('<p>%s : %s</p>', ucfirst($key), $string); //Вывод
-			}
-		}
-		return $mess;
-	}
-
-	private function messageFromUtm ()
-	{
-		$mess = '';
-		if (isset ($_COOKIE['fc_utm'])) {
-			$decCookie = json_decode(stripslashes($_COOKIE['fc_utm'])); //Декодируем JSON из кук
-			foreach ($decCookie as $key => $value) {
-				$string = (is_array($value)) ? implode(', ', $value) : $value; //Преобразование
-				$mess .= sprintf('<p>%s : %s</p>', ucfirst($key), $string); //Вывод
-
-				if ($key == 'utm_source') {
-					$this->fc_source = $value;
-				}
-			}
-		}
-		return $mess;
-	}
-
-	private function messageFromRating ()
-	{
-		$this->score = 'Рейтинг неизвестен';
-		if (!empty ($_POST['recaptchaResponse'])) {
-			$recaptcha = $_POST['recaptchaResponse'];
-			$recaptcha = file_get_contents(RECAPTCHA_URL . '?secret=' . RECAPTCHA_KEY . '&response=' . $recaptcha);
-			$recaptcha = json_decode($recaptcha);
-
-			if ($recaptcha !== null && isset ($recaptcha->score)) {
-				$this->score = 'Рейтинг: ' . $recaptcha->score;
-				if ($recaptcha->score < 0.5) {
-					$this->score = 'Возможно спам, рейтинг: ' . $recaptcha->score;
-				}
-			} else {
-				$this->score = 'Рейтинг неизвестен';
-			}
-		}
-		return sprintf('<p>%s</p>', $this->score); //Дописываем рейтинг
-	}
-
-	private static function formNameFromID (): string
+	public function formNameFromID (): string
 	{
 		$formArr = array(
-			'calculator' => 'Заявка с калькулятора',
-			'hero-form' => 'Форма в шапке',
-			'blitz-form' => 'Блиц форма',
+			'form-author' => 'Форма авторов',
+			'form-big' => 'Большая форма',
+			'form-medium' => 'Средняя форма',
+			'form-first' => 'Форма 1 экран',
+			'form-small' => 'Малая форма',
+			'form-care' => 'Форма заботы',
+			'form-popup' => 'Форма попап',
+			'form-bigpromo' => 'Форма промо',
+			'blitz-form' => 'Форма блиц',
+			'hero-form' => 'Форма 1 экран',
 			'big-form' => 'Большая форма',
 			'middle-form' => 'Средняя форма',
-			'sidebar-form' => 'Форма в сайдбаре'
+			'sidebar-form' => 'Боковая форма',
 		);
 
-		if (!empty ($_POST['form_type']) && array_key_exists($_POST['form_type'], $formArr)) {
-			return $formArr[$_POST['form_type']];
+		if (!empty($_POST['form-id']) && array_key_exists($_POST['form-id'], $formArr)) {
+			return $formArr[$_POST['form-id']];
 		} else {
 			return 'Форма без ID';
 		}
 	}
 
-	private static function getDataJson ($data)
+	public function postMetaCookies ()
 	{
+		foreach ($_COOKIE as $key => $value) {
+			if (
+				in_array($key, [
+					'browser',
+					'cookieCook',
+					'fc_page',
+					'lc_page',
+					'gift',
+					'is_mobile',
+					'os',
+					'refer',
+					'time_passed',
+					'user_agent',
+				])
+			) {
+				$this->postMeta[$key] = $value;
+			}
+		}
+	}
+
+	public function postMetaGeo ()
+	{
+		$clientGeo = $this->getGeo();
+		if (isset($clientGeo)) {
+			foreach ($clientGeo as $key => $value) {
+				$this->postMeta[$key] = $value;
+			}
+		}
+	}
+
+	public function postMetaUtm ()
+	{
+		if (isset($_COOKIE['fc_utm'])) {
+			$decCookie = json_decode(stripslashes($_COOKIE['fc_utm'])); //Декодируем JSON из кук
+			foreach ($decCookie as $key => $value) {
+				if ($key == 'utm_source') {
+					$this->fc_source = $value;
+				}
+				$this->postMeta[$key] = $value;
+			}
+		} elseif (isset($_GET['utm_source'])) {
+			$this->fc_source = $_GET['utm_source'] . ' (из GET)';
+			$this->postMeta['utm_source'] = $_GET['utm_source'] . ' (из GET)';
+		}
 	}
 }
+
 new Feedback();
