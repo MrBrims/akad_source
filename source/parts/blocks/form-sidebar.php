@@ -73,14 +73,14 @@
 		</p>
 		<p class="form-main__text-protect">
 			<label class="form-litle__check-inner form-main__check">
-				<input class="custom-checkbox" type="checkbox" name="Kontakt nur über WhatsApp" checked>
+				<input class="custom-checkbox" type="checkbox" name="on-wapp" checked>
 				<span class="style-checkbox"></span>
 				<span class="form-litle__check-text">Die Hinweise aus der <a href="https://akademily.de/datenschutz/" target="_blank">Datenschutzerklärung</a> und den <a href="https://akademily.de/agb/" target="_blank">AGB</a> habe ich gelesen und akzeptiere diese.</span>
 			</label>
 		</p>
 		<input class="form-sidebar__btn btn" type="submit" value="Abschicken">
 
-		<input type="hidden" name="form_type" value="sidebar-form">
+		<input type="hidden" name="form-id" value="sidebar-form">
 		<input type="hidden" name="coaching_condition" value="<?php echo Helpers::coach_cond(); ?>">
 		<input type="hidden" name="page_link" value="<?php echo get_permalink(); ?>">
 		<input type="hidden" name="recaptcha_response" id="recaptchaResponse">

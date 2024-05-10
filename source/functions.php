@@ -1,5 +1,4 @@
 <?php
-
 /** Constants */
 define('DE_PATH', __DIR__);
 define('DE_URI', get_template_directory_uri());
