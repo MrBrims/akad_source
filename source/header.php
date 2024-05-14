@@ -6,24 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
 	<meta name="ahrefs-site-verification" content="6b9c0c683d94d02847a03035e120f7761fb17cb6e7ade600f7319a99f4c3bd90">
-	<?php if (is_single()) : ?>
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "Article",
-				"inLanguage": "de",
-				"headline": "<?php the_title(); ?>",
-				"datePublished": "<?php the_date() ?>",
-				"dateModified": "<?php the_modified_date(); ?>",
-				"author": [{
-					"@type": "Person",
-					"name": "<?php the_author(); ?>",
-					"url": "<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>"
-				}]
-			}
-		</script>
-	<?php endif; ?>
-
 	<style>
 		.popup {
 			opacity: 0;
