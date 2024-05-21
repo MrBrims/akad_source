@@ -507,7 +507,7 @@ class General
 		// органика - директ - реклама
 		if (isset($utm['utm_source']) || strpos($_SERVER["REQUEST_URI"], 'utm_source') !== false) {
 			$utm['utm_channel'] = 'cpc';
-		} elseif (!isset($_SERVER["HTTP_REFERER"]) || (stripslashes($_COOKIE['refer']) === 'none')) {
+		} elseif (!isset($_SERVER["HTTP_REFERER"]) || isset($_COOKIE['refer']) && (stripslashes($_COOKIE['refer']) === 'none')) {
 			$utm['utm_channel'] = 'direct';
 		} else {
 			$utm['utm_channel'] = 'organic';

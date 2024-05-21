@@ -91,11 +91,13 @@ class Feedback
 			],
 			'ToTG' => [
 				'ok' => $res->ToTG->ok
-			],
-			'FileToTG' => [
-				'ok' => $res->FileToTG->ok
 			]
 		];
+		if (!is_null($res->FileToTG)) {
+			$result['FileToTG'] = [
+				'ok' => isset($res->FileToTG->ok) ? $res->FileToTG->ok : false
+			];
+		}
 		wp_send_json($result);
 	}
 
@@ -153,17 +155,15 @@ class Feedback
 	{
 		$text = "<b>{$this->title}</b>\r\n\n";
 		$text .= "{$this->subject}\r\n\n";
-		$text .= "<b>🥸 :</b> " . $_POST['name'] . "\r\n";
-		$text .= "<b>📨 :</b> " . $_POST['email'] . "\r\n";
-		$text .= "<b>📞 :</b> " . $_POST['phone'] . "\r\n";
-		$text .= "<b>📌 :</b> " . $_POST['type'] . "\r\n";
-		$text .= "<b>📎 :</b> " . $_POST['specialization'] . "\r\n";
-		$text .= "<b>✍️ :</b> " . $_POST['theme'] . "\r\n";
-		$text .= "<b>🗒 :</b> " . $_POST['number'] . "\r\n";
-		$text .= "<b>🔥 :</b> " . $_POST['deadline'] . "\r\n";
-		if ($this->fc_source !== null) {
-			$text .= "<b>👣 :</b> " . $this->fc_source . "\r\n";
-		}
+		$text .= "<b>🥸 :</b> " . ($_POST['name'] ?? '') . "\r\n";
+		$text .= "<b>📨 :</b> " . ($_POST['email'] ?? '') . "\r\n";
+		$text .= "<b>📞 :</b> " . ($_POST['phone'] ?? '') . "\r\n";
+		$text .= "<b>📌 :</b> " . ($_POST['type'] ?? '') . "\r\n";
+		$text .= "<b>📎 :</b> " . ($_POST['specialization'] ?? '') . "\r\n";
+		$text .= "<b>✍️ :</b> " . ($_POST['theme'] ?? '') . "\r\n";
+		$text .= "<b>🗒 :</b> " . ($_POST['number'] ?? '') . "\r\n";
+		$text .= "<b>🔥 :</b> " . ($_POST['deadline'] ?? '') . "\r\n";
+		$text .= "<b>👣 :</b> " . ($this->fc_source ?? '') . "\r\n";
 		$text .= "<b>🗃 :</b> " . $id . "\r\n";
 		$text .= "<b>⌚️ :</b> " . date('d.m.Y H:i:s') . "\r\n\n";
 		$text .= "{$this->score} \r\n";
