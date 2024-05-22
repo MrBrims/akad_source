@@ -12,6 +12,30 @@
 			visibility: hidden;
 		}
 	</style>
+	<?php if (is_page()) {
+		if (!empty(carbon_get_post_meta(get_the_ID(), 'hero_img'))) {
+			$post_thumb = carbon_get_post_meta(get_the_ID(), 'hero_img');
+		} else {
+			$post_thumb = get_template_directory_uri() . '/resources/images/logo.svg';
+		}
+	?>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Article",
+				"inLanguage": "de",
+				"headline": "<?php the_title(); ?>",
+				"datePublished": "<?php the_date() ?>",
+				"dateModified": "<?php the_modified_date(); ?>",
+				"image": "<?php echo $post_thumb; ?>",
+				"author": [{
+					"@type": "Person",
+					"name": "<?php the_author(); ?>",
+					"url": "<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>"
+				}]
+			}
+		</script>
+	<?php } ?>
 </head>
 
 <body <?php body_class(); ?>>
