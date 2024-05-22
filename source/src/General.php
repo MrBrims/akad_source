@@ -32,8 +32,6 @@ class General
 
 		// add_action('init', [$this, 'set_tocken']);
 
-		add_action('init', [$this, 'geo']);
-
 		add_action('wp_enqueue_scripts', [$this, 'removeCode']);
 
 		add_action('init', [$this, 'utmSource']);
@@ -420,120 +418,6 @@ class General
 			}
 		}
 		return implode("\r\n", $out);
-	}
-
-	function geo ()
-	{
-		$user_agent = $_SERVER["HTTP_USER_AGENT"];
-		function getOS ($user_agent)
-		{
-			if (strpos($user_agent, "Windows") !== false)
-				$os = "Windows";
-			elseif (strpos($user_agent, "Linux") !== false)
-				$os = "Linux";
-			elseif (strpos($user_agent, "X11") !== false)
-				$os = "Linux";
-			elseif (strpos($user_agent, "iPhone") !== false)
-				$os = "iPhone";
-			elseif (strpos($user_agent, "OpenBSD") !== false)
-				$os = "OpenBSD";
-			elseif (strpos($user_agent, "SunOS") !== false)
-				$os = "SunOS";
-			elseif (strpos($user_agent, "Safari") !== false)
-				$os = "Safari";
-			elseif (strpos($user_agent, "Macintosh") !== false)
-				$os = "Macintosh";
-			elseif (strpos($user_agent, "Mac_PowerPC") !== false)
-				$os = "Macintosh";
-			elseif (strpos($user_agent, "QNX") !== false)
-				$os = "QNX";
-			elseif (strpos($user_agent, "BeOS") !== false)
-				$os = "BeOS";
-			elseif (strpos($user_agent, "OS/2") !== false)
-				$os = "OS/2";
-			elseif (strpos($user_agent, "QNX") !== false)
-				$os = "QNX";
-			else
-				$os = "Undefined or Search Bot";
-			return $os;
-		}
-		function getBrowser ($user_agent)
-		{
-			if (strpos($user_agent, "Firefox") !== false)
-				$browser = "Firefox";
-			elseif (strpos($user_agent, "Opera") !== false)
-				$browser = "Opera";
-			elseif (strpos($user_agent, "Chrome") !== false)
-				$browser = "Chrome";
-			elseif (strpos($user_agent, "MSIE") !== false)
-				$browser = "Internet Explorer";
-			elseif (strpos($user_agent, "Safari") !== false)
-				$browser = "Safari";
-			else
-				$browser = "Undefined";
-			return $browser;
-		}
-
-		// реферальная ссылка
-		if (!isset($_COOKIE['refer'])) {
-			if (isset($_SERVER["HTTP_REFERER"]) && !strpos($_SERVER["HTTP_REFERER"], $_SERVER['HTTP_HOST'])) {
-				setcookie('refer', $_SERVER["HTTP_REFERER"], time() + 60 * 60 * 24 * 7, '/');
-			} else {
-				setcookie('refer', 'none', time() + 60 * 60 * 24 * 365, '/');
-			}
-		}
-		//  куки
-		$utm = $_GET;
-
-		// Страница
-		$excludedStrings = [
-			'wp-json',
-			'admin-ajax',
-		];
-		$isExcluded = false;
-		foreach ($excludedStrings as $excludedString) {
-			if (strpos($_SERVER['REQUEST_URI'], $excludedString) !== false) {
-				$isExcluded = true;
-				break;
-			}
-		}
-		if (!$isExcluded) {
-			if (!isset($_COOKIE['fc_page'])) {
-				setcookie('fc_page', (((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']), time() + 60 * 60 * 24 * 3, '/');
-			}
-			setcookie('lc_page', (((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']), time() + 60 * 60 * 24, '/');
-		}
-
-		// органика - директ - реклама
-		if (isset($utm['utm_source']) || strpos($_SERVER["REQUEST_URI"], 'utm_source') !== false) {
-			$utm['utm_channel'] = 'cpc';
-		} elseif (!isset($_SERVER["HTTP_REFERER"]) || isset($_COOKIE['refer']) && (stripslashes($_COOKIE['refer']) === 'none')) {
-			$utm['utm_channel'] = 'direct';
-		} else {
-			$utm['utm_channel'] = 'organic';
-		}
-		
-		// запись утм
-		if (!isset($_COOKIE['fc_utm'])) {
-			setcookie('fc_utm', json_encode($utm), time() + 60 * 60 * 24 * 3, '/');
-		}
-		setcookie('lc_utm', json_encode($utm), time() + 60 * 60 * 24, '/');
-
-		//OS
-		if (!isset($_COOKIE['os'])) {
-			setcookie('os', getOS($user_agent), time() + 60 * 60 * 24, '/');
-		}
-		//Browser
-		if (!isset($_COOKIE['browser'])) {
-			setcookie('browser', getBrowser($user_agent), time() + 60 * 60 * 24, '/');
-		}
-		// mobile
-		if (!isset($_COOKIE['is_mobile'])) {
-			setcookie('is_mobile', (wp_is_mobile() ? 'yes' : 'no'), time() + 60 * 60 * 24, '/');
-		}
-		if (!isset($_COOKIE['user_agent'])) {
-			setcookie('user_agent', $user_agent, time() + 60 * 60 * 24, '/');
-		}
 	}
 }
 
