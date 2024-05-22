@@ -423,7 +423,7 @@ class Feedback
 		$title = sprintf(
 			'%s | %s | %s',
 			$ch,
-			Helpers::urlPathFromCookie(),
+			Helpers::urlPath(),
 			$this->formNameFromID()
 		);
 		$this->postMeta['subject'] = $title;
