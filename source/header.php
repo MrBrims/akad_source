@@ -6,7 +6,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
 	<meta name="ahrefs-site-verification" content="6b9c0c683d94d02847a03035e120f7761fb17cb6e7ade600f7319a99f4c3bd90">
-	<?php if (is_single()) : ?>
+	<style>
+		.popup {
+			opacity: 0;
+			visibility: hidden;
+		}
+	</style>
+	<?php if (is_page()) {
+		if (!empty(carbon_get_post_meta(get_the_ID(), 'hero_img'))) {
+			$post_thumb = carbon_get_post_meta(get_the_ID(), 'hero_img');
+		} else {
+			$post_thumb = get_template_directory_uri() . '/resources/images/logo.svg';
+		}
+	?>
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
@@ -15,6 +27,7 @@
 				"headline": "<?php the_title(); ?>",
 				"datePublished": "<?php the_date() ?>",
 				"dateModified": "<?php the_modified_date(); ?>",
+				"image": "<?php echo $post_thumb; ?>",
 				"author": [{
 					"@type": "Person",
 					"name": "<?php the_author(); ?>",
@@ -22,14 +35,7 @@
 				}]
 			}
 		</script>
-	<?php endif; ?>
-
-	<style>
-		.popup {
-			opacity: 0;
-			visibility: hidden;
-		}
-	</style>
+	<?php } ?>
 </head>
 
 <body <?php body_class(); ?>>

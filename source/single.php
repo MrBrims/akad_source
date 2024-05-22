@@ -61,6 +61,7 @@ while (have_posts()) {
 		<?php
 		get_template_part('parts/sections/blog-slider');
 		get_template_part('parts/sections/contact');
+		get_template_part('parts/shema/microdata-single');
 		?>
 	</main>
 
