@@ -56,6 +56,7 @@ class General
 		add_filter('manage_requests_posts_custom_column', [$this, 'addHandlerCustomColumn'], 10, 2);
 
 		add_filter('nav_menu_css_class', [$this, 'addClassMenuItems'], 1, 3);
+		add_filter( 'xmlrpc_enabled', '__return_false' );
 
 		// Загрузка svg
 		add_filter('upload_mimes', [$this, 'svgUploadAllow']);
@@ -485,7 +486,18 @@ class General
 		$utm = $_GET;
 
 		// Страница
-		if (!strpos($_SERVER['REQUEST_URI'], 'wp-json')) {
+		$excludedStrings = [
+			'wp-json',
+			'admin-ajax',
+		];
+		$isExcluded = false;
+		foreach ($excludedStrings as $excludedString) {
+			if (strpos($_SERVER['REQUEST_URI'], $excludedString) !== false) {
+				$isExcluded = true;
+				break;
+			}
+		}
+		if (!$isExcluded) {
 			if (!isset($_COOKIE['fc_page'])) {
 				setcookie('fc_page', (((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']), time() + 60 * 60 * 24 * 3, '/');
 			}
@@ -493,9 +505,9 @@ class General
 		}
 
 		// органика - директ - реклама
-		if (isset($utm['utm_source']) || strpos($_COOKIE['fc_page'], 'utm_source') !== false || strpos($_SERVER["REQUEST_URI"], 'utm_source') !== false) {
+		if (isset($utm['utm_source']) || strpos($_SERVER["REQUEST_URI"], 'utm_source') !== false) {
 			$utm['utm_channel'] = 'cpc';
-		} elseif (!isset($_SERVER["HTTP_REFERER"]) || (stripslashes($_COOKIE['refer']) === 'none')) {
+		} elseif (!isset($_SERVER["HTTP_REFERER"]) || isset($_COOKIE['refer']) && (stripslashes($_COOKIE['refer']) === 'none')) {
 			$utm['utm_channel'] = 'direct';
 		} else {
 			$utm['utm_channel'] = 'organic';
