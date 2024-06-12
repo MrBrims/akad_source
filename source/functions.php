@@ -137,3 +137,5 @@ function rd_duplicate_post_link($actions, $post)
 	return $actions;
 }
 add_filter('page_row_actions', 'rd_duplicate_post_link', 10, 2);
+
+Helpers::geo();
