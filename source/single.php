@@ -42,8 +42,10 @@ while (have_posts()) {
 						</div>
 					</div>
 					<div class="rich-text section single-content">
+						<div class="the-content-single">
+							<?php the_content(); ?>
+						</div>
 						<?php
-						the_content();
 						get_template_part('parts/sections/main-faq');
 						get_template_part('parts/blocks/page-author');
 						?>
@@ -59,12 +61,9 @@ while (have_posts()) {
 		<?php
 		get_template_part('parts/sections/blog-slider');
 		get_template_part('parts/sections/contact');
+		get_template_part('parts/shema/microdata-single');
 		?>
 	</main>
-
-	<?php if (!empty(carbon_get_post_meta(get_the_ID(), ''))) : ?>
-		<?php echo carbon_get_post_meta(get_the_ID(), ''); ?>
-	<?php endif ?>
 
 <?php
 }

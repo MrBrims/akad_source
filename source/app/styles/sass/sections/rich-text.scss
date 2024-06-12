@@ -1,8 +1,9 @@
 .rich-text {
     margin-top: 0;
+
     h2 {
         color: $titlecolor;
-        @include fluidMarginT(40px, 80px, 480px, 1024px, 80px);
+        @include fluidMarginT(30px, 60px, 480px, 1024px, 80px);
         @include fluidMarginB(20px, 25px, 480px, 1024px, 25px);
     }
 
@@ -34,5 +35,16 @@
     .page-author__name,
     .main-faq__inner-title {
         margin: 0;
+    }
+
+    h2,
+    h3,
+    h4,
+    p {
+        word-break: break-word;
+    }
+
+    a {
+        text-decoration: underline;
     }
 }

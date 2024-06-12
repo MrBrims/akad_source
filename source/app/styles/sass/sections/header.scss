@@ -1,7 +1,6 @@
 .header {
   position: fixed;
   width: 100vw;
-  max-width: 1920px;
   top: 0;
   z-index: 100;
   transition: top .3s ease-in-out;
@@ -85,22 +84,23 @@
     height: 60px;
     background-color: #325D9C;
     transition: all .3s ease-out;
-		position: relative;
-		&::before {
-			// Garland for the holidays
-			// content: "";
-			// position: absolute;
-			// width: 100%;
-			// max-width: 1920px;
-			// height: 51px;
-			// bottom: -50px;
-			// left: 50%;
-			// transform: translateX(-50%);
-			// background-image: url(../images/ny/garland.svg);
-			// background-size: cover;
-			// background-repeat: no-repeat;
-			// background-position: center;
-		}
+    position: relative;
+
+    &::before {
+      // Garland for the holidays
+      // content: "";
+      // position: absolute;
+      // width: 100%;
+      // max-width: 1920px;
+      // height: 51px;
+      // bottom: -50px;
+      // left: 50%;
+      // transform: translateX(-50%);
+      // background-image: url(../images/ny/garland.svg);
+      // background-size: cover;
+      // background-repeat: no-repeat;
+      // background-position: center;
+    }
   }
 
   &__bottom-inner {
@@ -114,32 +114,46 @@
   &__logo-link {
     background-image: url(../images/logo-wrapper.svg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 275px;
     background-position: center center;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
     height: 112px;
-    width: 350px;
+    width: 270px;
     position: relative;
-    top: 18px;
+    top: 8px;
     left: -17px;
     transition: all .1s ease-out;
   }
 
   &__logo-img {
-    max-width: 230px;
-    max-width: 230px;
+    max-width: 200px;
     position: relative;
-    top: -16px;
+    top: -12px;
   }
 
   &__menu-wrapper {
     width: 100%;
     display: flex;
+    align-items: center;
     position: relative;
     height: 60px;
+  }
+
+  &__btn-popup {
+    position: relative;
+    margin-left: 30px;
+    width: 108px;
+    height: 50px;
+
+    &::before {
+      content: "Anfrage";
+      font-size: 16px;
+      font-family: $titlefont;
+      padding-bottom: 2px;
+    }
   }
 
   &__btn-check {
@@ -167,7 +181,7 @@
       --offset: -38;
       stroke-dasharray: var(--length) var(--total-length);
       stroke-dashoffset: var(--offset);
-      transition: all .8s cubic-bezier(.645, .045, .355, 1);
+      transition: all .2s cubic-bezier(.645, .045, .355, 1);
     }
 
     circle {
@@ -219,11 +233,11 @@
     .header__bottom,
     .header__bottom-inner,
     .header__menu-wrapper {
-      height: 40px;
+      height: 50px;
     }
 
     .header__btn-wrappper {
-      top: -11px;
+      top: -7px;
     }
   }
 }
@@ -239,7 +253,7 @@
   .header {
     &__logo-link {
       left: -32px;
-      top: 16px;
+      top: 8px;
       width: 333px;
     }
 
@@ -250,6 +264,16 @@
 
     &__btn-wrappper {
       display: block;
+    }
+
+    &__btn-popup {
+      margin-left: auto;
+      margin-right: 70px;
+      width: 235px;
+
+      &::before {
+        content: "Unverbindliche Anfrage";
+      }
     }
   }
 }
@@ -277,24 +301,31 @@
     &__bottom,
     &__bottom-inner,
     &__menu-wrapper {
-      height: 40px;
+      height: 50px;
     }
 
     &__logo-link {
-      left: -26px;
-      top: 16px;
-      width: 260px;
-      background-size: 260px;
-      height: 80px;
+      background-size: contain;
+      background-image: none;
+      background-color: #fff;
+      height: 50px;
+      border: 3px solid $accent;
+      left: 0;
+      top: 0;
+      width: 170px;
     }
 
     &__logo-img {
-      max-width: 165px;
-      top: -11px;
+      max-width: 143px;
+      top: -3px;
     }
 
     &__btn-wrappper {
-      top: -10px;
+      top: -6px;
+    }
+
+    &__btn-popup {
+      height: 50px;
     }
   }
 }
@@ -307,20 +338,24 @@
   }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 580px) {
   .header {
+    &__btn-popup {
+      width: 105px;
+      margin-right: 55px;
 
-    &__logo-link {
-      background-size: 204px;
-      height: 60px;
-      left: -19px;
-      top: 8px;
-      width: 200px;
+      &::before {
+        content: "Anfrage";
+      }
     }
 
-    &__logo-img {
-      max-width: 143px;
-      top: -9px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header {
+    &__btn-popup {
+      width: 80px;
     }
 
   }

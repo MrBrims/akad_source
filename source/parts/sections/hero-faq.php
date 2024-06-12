@@ -1,4 +1,4 @@
-<section class="hero hero-faq">
+<section class="hero hero-category" style="background-image: url(<?php echo carbon_get_post_meta(get_the_ID(), 'herosmall_bg'); ?>);">
 	<div class="container">
 		<h1 class="hero__title hero-faq__title">
 			<?php echo carbon_get_post_meta(get_the_ID(), 'hero_title_left'); ?>

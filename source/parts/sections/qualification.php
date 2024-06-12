@@ -8,10 +8,10 @@
 		<div class="qualification__items">
 			<?php foreach ((carbon_get_theme_option('qualification_card')) as $key) : ?>
 				<div class="qualification__item">
-					<img class="qualification__item-icons" src="<?php echo $key['qualification_card_img']; ?>" alt="icons">
-					<h4 class="qualification__item-text">
+					<img class="qualification__item-icons" src="<?php echo $key['qualification_card_img']; ?>" alt="<?php Helpers::imageAlt($key['qualification_card_img']); ?>">
+					<p class="qualification__item-text">
 						<?php echo $key['qualification_card_title']; ?>
-					</h4>
+					</p>
 					<span class="qualification__tippy" data-tippy-content="<?php echo $key['qualification_card_quest']; ?>">i</span>
 				</div>
 			<?php endforeach; ?>

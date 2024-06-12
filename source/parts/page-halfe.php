@@ -21,11 +21,11 @@ get_header();
                 get_template_part('parts/sections/how-work');
                 ?>
             </div>
-            <aside class="sidebar">
+            <div class="sidebar">
                 <div class="team-vidget">
                     <?php get_template_part('parts/blocks/team'); ?>
                 </div>
-            </aside>
+            </div>
         </div>
     </div>
     <?php

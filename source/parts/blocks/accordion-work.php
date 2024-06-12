@@ -1,7 +1,7 @@
 <div class="accordion accordion-work">
 	<?php foreach ((carbon_get_theme_option('accordeon_work')) as $key) : ?>
 		<div class="accordion__item accordion-work__item">
-			<img class="accordion-work__img" src="<?php echo $key['accordeon_work_image']; ?>" alt="accordeon images">
+			<img class="accordion-work__img" src="<?php echo $key['accordeon_work_image']; ?>" alt="<?php Helpers::imageAlt($key['accordeon_work_image']); ?>">
 			<div class="accordion-work__inner">
 				<div class="accordion__header accordion-work__head">
 					<?php if (!empty($key['accordeon_work_title'])) : ?>
@@ -28,17 +28,7 @@
 					</div>
 				</div>
 				<div class="accordion-work__inner-icon">
-					<svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<g fill="#002E5D" clip-path="url(#a)">
-							<path d="M.363 7.151h15.274v1.697H.363z" />
-							<path d="M7.152 15.636V.362h1.697v15.274z" />
-						</g>
-						<defs>
-							<clipPath id="a">
-								<path fill="#fff" d="M0 0h16v16H0z" />
-							</clipPath>
-						</defs>
-					</svg>
+					<img src="<?php echo get_template_directory_uri() ?>/resources/images/icons/pluse-new.svg" alt="pluse">
 				</div>
 			</div>
 		</div>

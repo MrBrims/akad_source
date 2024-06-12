@@ -1,7 +1,11 @@
-<?php get_header(); ?>
+<?php get_header();
+$termId = get_queried_object_id();
+$thumbUrl = carbon_get_term_meta($termId, 'term_hero_bg');
+$category = get_queried_object();
+?>
 
 <main class="main">
-	<section class="hero hero-single">
+	<section class="hero hero-single hero-category" style="background-image:url(<?php echo $thumbUrl; ?>);">
 		<div class="container">
 			<h1 class="hero-single__title">
 				<?php echo single_cat_title(); ?>
@@ -26,7 +30,7 @@
 				// 	'screen_reader_text' => ' ',
 				// 	'aria_label' => '',
 				// ]); 
-				echo do_shortcode('[ajax_load_more post_type="post" sticky_posts="true" posts_per_page="5"]');
+				echo do_shortcode('[ajax_load_more post_type="post" sticky_posts="true" posts_per_page="5" category="' . $category->slug . '"]');
 				?>
 			</div>
 			<aside class="sidebar">

@@ -27,7 +27,7 @@ class MainMeta
 			->add_tab(__('Квалификации'), CommonMeta::qualGlobalMeta())
 			->add_tab(__('Список бакалавр'), CommonMeta::bakalavrGlobalMeta())
 			->add_tab(__('Команда'), CommonMeta::teamGlobalMeta())
-			->add_tab(__('Подбавл'), CommonMeta::globalFooter())
+			->add_tab(__('Подвал'), CommonMeta::globalFooter())
 			->add_tab(__('Скрипты'), CommonMeta::globalScripts())
 			->add_tab(__('API'), CommonMeta::globalApiKey());
 	}

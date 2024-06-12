@@ -8,7 +8,7 @@
         <div class="statistic__items">
             <?php foreach ((carbon_get_post_meta(get_the_ID(), 'statistic_card')) as $key) : ?>
                 <div class="statistic__item">
-                    <img class="statistic__img" src="<?php echo $key['statistic_image']; ?>" alt="statistic images">
+                    <img class="statistic__img" src="<?php echo $key['statistic_image']; ?>" alt="<?php Helpers::imageAlt($key['statistic_image']); ?>">
                     <span class="statistic__num">
                         <?php echo $key['statistic_num']; ?>
                     </span>

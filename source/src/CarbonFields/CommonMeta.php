@@ -19,6 +19,15 @@ class CommonMeta
 		];
 	}
 
+	public static function globalGifts(): array
+	{
+		return [
+			Field::make('image', 'akad_gift_img', __('Изображение акции'))
+				->set_type('image')
+				->set_value_type('url'),
+		];
+	}
+
 	public static function globalInfo(): array
 	{
 		return [
@@ -166,8 +175,27 @@ class CommonMeta
 		return [
 			Field::make('text', 'reviews_title', __('Заголовок')),
 			Field::make('complex', 'soc_reviews', __('Отзывы с соц. сетей'))
+				->set_width(30)
 				->set_layout('tabbed-horizontal')
-				->setup_labels(['singular_name' => 'отзыв'])
+				->setup_labels(['singular_name' => 'Отзыв'])
+				->add_fields([
+					Field::make('image', 'soc_reviews_img', __('Картинка'))
+						->set_type('image')
+						->set_value_type('url'),
+				]),
+			Field::make('complex', 'soc_reviews_coach', __('Отзывы для Coaching'))
+				->set_width(30)
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'Отзыв'])
+				->add_fields([
+					Field::make('image', 'soc_reviews_img', __('Картинка'))
+						->set_type('image')
+						->set_value_type('url'),
+				]),
+			Field::make('complex', 'soc_reviews_lektor', __('Отзывы для Lektorat'))
+				->set_width(30)
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'Отзыв'])
 				->add_fields([
 					Field::make('image', 'soc_reviews_img', __('Картинка'))
 						->set_type('image')
@@ -225,36 +253,140 @@ class CommonMeta
 	public static function teamGlobalMeta(): array
 	{
 		return [
-			Field::make('text', 'main_team_title', __('Заголовок')),
-			Field::make('complex', 'main_team_card', __('Карточки'))
+			Field::make('separator', 'main_team_mp', __('Отдел МП')),
+			Field::make('text', 'main_team_mp_title', __('Заголовок')),
+			Field::make('complex', 'main_team_mp_card', __('Карточки'))
 				->set_layout('tabbed-horizontal')
 				->setup_labels(['singular_name' => 'карточку'])
 				->add_fields([
-					Field::make('image', 'main_team_card_photo', __('Фото'))
+					Field::make('image', 'main_team_mp_photo', __('Фото'))
 						->set_type('image')
 						->set_value_type('url')
 						->set_width(20),
-					Field::make('text', 'main_team_card_name', __('Имя'))
-						->set_width(40),
-					Field::make('text', 'main_team_card_position', __('Должность'))
-						->set_width(40),
-					Field::make('text', 'main_team_card_rating', __('Рейтинг'))
-						->set_width(50),
-					Field::make('text', 'main_team_card_rating_all', __('Общее число оценок'))
-						->set_width(50),
-					Field::make('text', 'main_team_card_year', __('Лет работы'))
+					Field::make('text', 'main_team_mp_name', __('Имя'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_position', __('Должность'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_rating', __('Рейтинг'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_rating_all', __('Общее число оценок'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_year', __('Лет работы'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_order', __('Число заказов'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_client', __('Обслужено клиентов'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_time', __('Время работы'))
+						->set_width(20),
+					Field::make('text', 'main_team_mp_whatsapp', __('WhatsApp'))
 						->set_width(30),
-					Field::make('text', 'main_team_card_order', __('Число заказов'))
+					Field::make('text', 'main_team_mp_phone', __('Телефон'))
 						->set_width(30),
-					Field::make('text', 'main_team_card_client', __('Обслужено клиентов'))
+					Field::make('text', 'main_team_mp_mail', __('Почта'))
 						->set_width(30),
-					Field::make('rich_text', 'main_team_card_descr', __('Описание')),
-					Field::make('text', 'main_team_card_time', __('Время работы')),
-					Field::make('text', 'main_team_card_whatsapp', __('WhatsApp'))
-						->set_width(50),
-					Field::make('text', 'main_team_card_mail', __('Почта'))
-						->set_width(50),
-				])
+					Field::make('rich_text', 'main_team_mp_descr', __('Описание')),
+				]),
+			Field::make('separator', 'main_team_mo', __('Отдел МО')),
+			Field::make('text', 'main_team_mo_title', __('Заголовок')),
+			Field::make('complex', 'main_team_mo_card', __('Карточки'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'карточку'])
+				->add_fields([
+					Field::make('image', 'main_team_mo_photo', __('Фото'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(20),
+					Field::make('text', 'main_team_mo_name', __('Имя'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_position', __('Должность'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_rating', __('Рейтинг'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_rating_all', __('Общее число оценок'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_year', __('Лет работы'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_order', __('Число заказов'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_client', __('Обслужено клиентов'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_time', __('Время работы'))
+						->set_width(20),
+					Field::make('text', 'main_team_mo_whatsapp', __('WhatsApp'))
+						->set_width(30),
+					Field::make('text', 'main_team_mo_phone', __('Телефон'))
+						->set_width(30),
+					Field::make('text', 'main_team_mo_mail', __('Почта'))
+						->set_width(30),
+					Field::make('rich_text', 'main_team_mo_descr', __('Описание'))
+				]),
+			Field::make('separator', 'main_team_ma', __('Отдел МА')),
+			Field::make('text', 'main_team_ma_title', __('Заголовок')),
+			Field::make('complex', 'main_team_ma_card', __('Карточки'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'карточку'])
+				->add_fields([
+					Field::make('image', 'main_team_ma_photo', __('Фото'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(20),
+					Field::make('text', 'main_team_ma_name', __('Имя'))
+						->set_width(20),
+					Field::make('text', 'main_team_ma_position', __('Должность'))
+						->set_width(20),
+					Field::make('text', 'main_team_ma_rating', __('Рейтинг'))
+						->set_width(20),
+					Field::make('text', 'main_team_ma_rating_all', __('Общее число оценок'))
+						->set_width(20),
+					Field::make('text', 'main_team_ma_year', __('Лет работы'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_author', __('Число авторов'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_time', __('Время работы'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_whatsapp', __('WhatsApp'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_phone', __('Телефон'))
+						->set_width(30),
+					Field::make('text', 'main_team_ma_mail', __('Почта'))
+						->set_width(30),
+					Field::make('rich_text', 'main_team_ma_descr', __('Описание')),
+				]),
+			Field::make('separator', 'main_team_dev', __('Отдел ДЕВ-МАРКЕТИНГ')),
+			Field::make('text', 'main_team_dev_title', __('Заголовок')),
+			Field::make('complex', 'main_team_dev_card', __('Карточки'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'карточку'])
+				->add_fields([
+					Field::make('image', 'main_team_dev_photo', __('Фото'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(10),
+					Field::make('text', 'main_team_dev_name', __('Имя'))
+						->set_width(25),
+					Field::make('text', 'main_team_dev_position', __('Должность'))
+						->set_width(25),
+					Field::make('text', 'main_team_dev_time', __('Время работы'))
+						->set_width(25)
+				]),
+			Field::make('separator', 'main_team_fin', __('ФИН Отдел')),
+			Field::make('text', 'main_team_fin_title', __('Заголовок')),
+			Field::make('complex', 'main_team_fin_card', __('Карточки'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'карточку'])
+				->add_fields([
+					Field::make('image', 'main_team_fin_photo', __('Фото'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(10),
+					Field::make('text', 'main_team_fin_name', __('Имя'))
+						->set_width(25),
+					Field::make('text', 'main_team_fin_position', __('Должность'))
+						->set_width(25),
+					Field::make('text', 'main_team_fin_time', __('Время работы'))
+						->set_width(25)
+				]),
 		];
 	}
 
@@ -300,7 +432,45 @@ class CommonMeta
 				->set_layout('tabbed-horizontal')
 				->setup_labels(['singular_name' => 'отзовик'])
 				->add_fields([
-					Field::make('image', 'footer_rev_icons', __('Иконка способа отзовика'))
+					Field::make('image', 'footer_rev_icons', __('Иконка отзовика'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(60),
+					Field::make('text', 'footer_rev_link', __('Ссылка на отзовик'))
+						->set_width(40),
+				]),
+			Field::make('rich_text', 'footer_uber_links', __('Ссылки Über uns'))
+				->set_width(30),
+			Field::make('rich_text', 'footer_blog_links', __('Ссылки Blog'))
+				->set_width(30),
+			Field::make('rich_text', 'footer_other_links', __('Прочие ссылки'))
+				->set_width(30),
+			Field::make('rich_text', 'footer_arbeit_links', __('Wir arbeiten in'))
+				->set_width(50),
+			Field::make('rich_text', 'footer_ghost_links', __('GHOSTWRITING'))
+				->set_width(50),
+			Field::make('rich_text', 'footer_fach_links', __('Fachbereiche'))
+				->set_width(50),
+			Field::make('rich_text', 'footer_lekt_links', __('Lektorat & Korrekturlesen'))
+				->set_width(50),
+			Field::make('rich_text', 'footer_and_links', __('Andere Dienste'))
+				->set_width(50),
+			Field::make('complex', 'footer_icons_plag', __('Иконки плагиата'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'иконку'])
+				->set_width(60)
+				->add_fields([
+					Field::make('image', 'footer_icon_plag', __('Иконки'))
+						->set_type('image')
+						->set_value_type('url'),
+				]),
+			Field::make('rich_text', 'footer_hilfe_links', __('Hilfe & coaching'))
+				->set_width(50),
+			Field::make('complex', 'footer_icons_trust', __('Траст бейджи'))
+				->set_layout('tabbed-horizontal')
+				->setup_labels(['singular_name' => 'бейдж'])
+				->add_fields([
+					Field::make('image', 'footer_icon_trust', __('Бейджи'))
 						->set_type('image')
 						->set_value_type('url'),
 				])
@@ -337,6 +507,31 @@ class CommonMeta
 				->set_width(30)
 				->set_value_type('url'),
 			Field::make('rich_text', 'hero_text', __('Текст после заголовка')),
+			Field::make('select', 'ak_hero_form', 'Выбор формы')
+				->set_width(30)
+				->add_options(
+					array(
+						'parts/blocks/form-litle' => 'Маленька общая',
+						'parts/blocks/form-online' => 'Для онлайнов',
+						'parts/blocks/form-coach' => 'Для коачинга',
+						'parts/blocks/form-lektorat' => 'Для лектората',
+					)
+				),
+			Field::make('text', 'ak_hero_form_title', __('Заголовок формы'))
+				->set_default_value('Anruf bestellen')
+				->set_width(70),
+		];
+	}
+
+	public static function heroSmall(): array
+	{
+		return [
+			Field::make('text', 'herosmall_title', __('Заголовок'))
+				->set_width(70),
+			Field::make('image', 'herosmall_bg', __('Фон шапки'))
+				->set_type('image')
+				->set_value_type('url')
+				->set_width(30),
 		];
 	}
 
@@ -363,6 +558,30 @@ class CommonMeta
 		return [
 			Field::make('text', 'coaching_title', __('Заголовок')),
 			Field::make('rich_text', 'coaching_text', __('Контент секции Coaching')),
+		];
+	}
+
+	public static function bigFom(): array
+	{
+		return [
+			Field::make('text', 'ak_bigform_title', __('Заголовок формы')),
+			Field::make('checkbox', 'ak_bigform_check', __('Сделать поле  Thema der Arbeit обязательным?'))
+				->set_width(30),
+			Field::make('text', 'ak_bigform_btn_text', __('Текст на кнопке'))
+				->set_default_value('JETZT ANFRAGEN')
+				->set_width(30),
+			Field::make('text', 'ak_bigform_siten_num', __('Количество страниц'))
+				->set_default_value('5')
+				->set_width(30),
+			Field::make('select', 'ak_complex_global_select', 'Выбор формы')
+				->add_options(
+					array(
+						'parts/blocks/form-main' => 'Большая общая',
+						'parts/blocks/form-main-online' => 'Для онлайнов',
+						'parts/blocks/form-main-coach' => 'Для коачинга',
+						'parts/blocks/form-main-lekt' => 'Для лектората + общая',
+					)
+				)
 		];
 	}
 
@@ -623,6 +842,60 @@ class CommonMeta
 				->set_width(30),
 			Field::make('text', 'microdata_price', __('Цена'))
 				->set_width(30),
+		];
+	}
+
+	public static function bewertungerInt(): array
+	{
+		return [
+			Field::make('complex', 'bewert_fields', __('Интервью'))
+				->set_layout('tabbed-vertical')
+				->setup_labels(['singular_name' => 'интервью'])
+				->add_fields([
+					Field::make('image', 'bewert_field_img', __('Аватар'))
+						->set_type('image')
+						->set_value_type('url')
+						->set_width(30),
+					Field::make('text', 'bewert_field_name', __('Имя клиента'))
+						->set_width(70),
+					Field::make('text', 'bewert_field_art', __('Art der Arbeit'))
+						->set_width(50),
+					Field::make('text', 'bewert_field_art_name', __('Название Art der Arbeit'))
+						->set_width(50),
+					Field::make('text', 'bewert_field_fach', __('Fachbereich'))
+						->set_width(50),
+					Field::make('text', 'bewert_field_fach_name', __('Название Fachbereich'))
+						->set_width(50),
+					Field::make('textarea', 'bewert_field_text', __('Текст в карточке')),
+					Field::make('complex', 'bewert_field_content', __('Контент интервью'))
+						->set_layout('tabbed-vertical')
+						->setup_labels(['singular_name' => 'контент'])
+						->add_fields('bewert_field_interw', 'Интервьюер', [
+							Field::make('image', 'bewert_field_author_img', __('Иконка автора'))
+								->set_type('image')
+								->set_value_type('url')
+								->set_width(30),
+							Field::make('text', 'bewert_field_author_name', __('Имя автора'))
+								->set_width(70),
+							Field::make('textarea', 'bewert_field_author_quest', __('Вопрос')),
+						])
+						->add_fields('bewert_field_cust', 'Клиент', [
+							Field::make('image', 'bewert_field_cust_img', __('Иконка автора'))
+								->set_type('image')
+								->set_value_type('url')
+								->set_width(30),
+							Field::make('text', 'bewert_field_cust_name', __('Имя автора'))
+								->set_width(70),
+							Field::make('textarea', 'bewert_field_cust_quest', __('Ответ')),
+						])
+				])
+				->set_header_template('
+					<% if (bewert_field_name) { %>
+						<%- bewert_field_name %>
+						<% } else { %>
+						<%- "Name" %>
+					<% } %>
+					')
 		];
 	}
 }

@@ -22,7 +22,7 @@ class General
 		16 => 'Миронова Д.'
 	];
 
-	public function __construct()
+	public function __construct ()
 	{
 		add_action('wp_enqueue_scripts', [$this, 'themeScriptsAndStyles']);
 
@@ -31,8 +31,6 @@ class General
 		add_action('init', [$this, 'settingsAdminWP']);
 
 		// add_action('init', [$this, 'set_tocken']);
-
-		// add_action('init', [$this, 'geo']);
 
 		add_action('wp_enqueue_scripts', [$this, 'removeCode']);
 
@@ -56,23 +54,92 @@ class General
 		add_filter('manage_requests_posts_custom_column', [$this, 'addHandlerCustomColumn'], 10, 2);
 
 		add_filter('nav_menu_css_class', [$this, 'addClassMenuItems'], 1, 3);
-
-		// Подключение фильтра изменения языка shema WebPage в Yoast SEO
-		add_filter('wpseo_schema_webpage', [$this, 'shemaDePage']);
-
-		// Подключение фильтра изменения языка shema WebSite в Yoast SEO
-		add_filter('wpseo_schema_website', [$this, 'shemaDeSite']);
-
-		// Подключение фильтра изменения языка shema Organization в Yoast SEO
-		add_filter('wpseo_schema_organization', [$this, 'shemaDeOrganization']);
+		add_filter( 'xmlrpc_enabled', '__return_false' );
 
 		// Загрузка svg
 		add_filter('upload_mimes', [$this, 'svgUploadAllow']);
 		add_filter('wp_check_filetype_and_ext', [$this, 'fix_svg_mime_type'], 10, 5);
+
+		// Скрыть стандартный редактор для страниц указанный в массиве
+		add_action('admin_init', [$this, 'hide_editor']);
+
+		// Подключение js и css для админки
+		add_action('admin_enqueue_scripts', [$this, 'adminStyleScript'], 99);
+		add_action('rest_api_init', [$this, 'akadJson']);
 	}
 
-	// Добавиление utm_source в куки
-	public static function utmSource()
+	public function akadJson ()
+	{
+		function getJsonSpec ()
+		{
+			// Путь к JSON
+			$fileDir = DE_URI . '/data/spec.json';
+
+			// Извлечение содержимого
+			$fileContent = file_get_contents($fileDir);
+
+			// Парсинг и присвоение переменной
+			$jsonContent = json_decode($fileContent, true);
+
+			return $jsonContent;
+		}
+
+		function getJsonType ()
+		{
+			// Путь к JSON
+			$fileDir = DE_URI . '/data/types.json';
+
+			// Извлечение содержимого
+			$fileContent = file_get_contents($fileDir);
+
+			// Парсинг и присвоение переменной
+			$jsonContent = json_decode($fileContent, true);
+
+			return $jsonContent;
+		}
+
+		register_rest_route('my-namespace/v2', '/spec/', array(
+			'methods' => 'GET',
+			'callback' => 'getJsonSpec',
+		)
+		);
+
+		register_rest_route('my-namespace/v2', '/type/', array(
+			'methods' => 'GET',
+			'callback' => 'getJsonType',
+		)
+		);
+	}
+
+	// Подключение js и css для админки
+	public function adminStyleScript ()
+	{
+		wp_enqueue_style('style-admin', get_template_directory_uri() . '/resources/css/admin.css');
+		wp_enqueue_script('script-admin', get_template_directory_uri() . '/resources/js/admin.js');
+	}
+
+	// Скрыть стандартный редактор для страниц указанный в массиве
+	public function hide_editor ()
+	{
+		$post_id = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : null);
+		if (!$post_id)
+			return;
+
+		// Список шаблонов страниц, для которых нужно скрыть редактор
+		$hide_editor_on_templates = array(
+			'pages/halfe-page.php',
+			'pages/lektorat-page.php',
+			// добавьте названия шаблонов страниц, для которых нужно скрыть редактор
+		);
+
+		$current_template = get_page_template_slug($post_id);
+		if (in_array($current_template, $hide_editor_on_templates)) {
+			remove_post_type_support('page', 'editor');
+		}
+	}
+
+	// Добавление utm_source в куки
+	public static function utmSource ()
 	{
 		if (isset($_GET['utm_source'])) {
 			$utm_source = $_GET['utm_source'];
@@ -81,52 +148,14 @@ class General
 		}
 	}
 
-	// Функция изменения языка shema WebPage в Yoast SEO
-	public static function shemaDePage($data)
-	{
-		$data['inLanguage'] = 'de-DE';
-		$data['primaryImageOfPage']['inLanguage'] = 'de-DE';
-		$data['image']['inLanguage'] = 'de-DE';
-		return $data;
-	}
-
-	// Функция изменения языка shema WebSite в Yoast SEO
-	public static function shemaDeSite($data)
-	{
-		$data['inLanguage'] = 'de-DE';
-		return $data;
-	}
-
-	// Функция изменения языка shema Organization в Yoast SEO
-	public static function shemaDeOrganization($data)
-	{
-		$data['logo'] = [
-			'@type'      => 'ImageObject',
-			'@id'        => 'https://akademily.de/#/schema/logo/image/',
-			'inLanguage' => 'de-DE',
-			'url'        => 'https://akademily.de/wp-content/uploads/2024/01/logo.svg',
-			'contentUrl' => 'https://akademily.de/wp-content/uploads/2024/01/logo.svg',
-			'caption'    => 'Akademily',
-		];
-		$data['image'] = [
-			'@type'      => 'ImageObject',
-			'@id'        => 'https://akademily.de/#/schema/logo/image/',
-			'inLanguage' => 'de-DE',
-			'url'        => 'https://akademily.de/wp-content/uploads/2024/01/logo.svg',
-			'contentUrl' => 'https://akademily.de/wp-content/uploads/2024/01/logo.svg',
-			'caption'    => 'Akademily',
-		];
-		return $data;
-	}
-
 	// Разрешает добавлять svg
-	public function svgUploadAllow($mimes)
+	public function svgUploadAllow ($mimes)
 	{
 		$mimes['svg'] = 'image/svg+xml';
 		return $mimes;
 	}
 	# Исправление MIME типа для SVG файлов.
-	function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
+	function fix_svg_mime_type ($data, $file, $filename, $mimes, $real_mime = '')
 	{
 
 		// WP 5.1 +
@@ -143,12 +172,12 @@ class General
 			// разрешим
 			if (current_user_can('manage_options')) {
 
-				$data['ext']  = 'svg';
+				$data['ext'] = 'svg';
 				$data['type'] = 'image/svg+xml';
 			}
 			// запретим
 			else {
-				$data['ext']  = false;
+				$data['ext'] = false;
 				$data['type'] = false;
 			}
 		}
@@ -156,30 +185,7 @@ class General
 		return $data;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public function themeScriptsAndStyles()
+	public function themeScriptsAndStyles ()
 	{
 		// wp_enqueue_script('bootstrap', DE_URI . '/assets/js/bootstrap.bundle.min.js', [], '1.7', true);
 		// wp_enqueue_script('swiper', DE_URI . '/assets/js/swiper-bundle.min.js', [], '1.7', true);
@@ -196,13 +202,13 @@ class General
 		wp_enqueue_style('new', DE_URI . '/resources/css/app.min.css', [], $version);
 	}
 
-	public function removeCode()
+	public function removeCode ()
 	{
 		wp_dequeue_style('wp-block-library');
 	}
 
 	// Add class menu items
-	public function addClassMenuItems($classes, $item, $args)
+	public function addClassMenuItems ($classes, $item, $args)
 	{
 		if (isset($args->add_li_class)) {
 			$classes[] = $args->add_li_class;
@@ -211,7 +217,7 @@ class General
 	}
 
 
-	public function settingsAdminWP()
+	public function settingsAdminWP ()
 	{
 		register_nav_menu('top-menu', 'Top menu');
 		register_nav_menu('mobile-menu', 'Mobile menu');
@@ -222,12 +228,12 @@ class General
 		add_theme_support('post-thumbnails', ['post']);
 	}
 
-	public function locale(): string
+	public function locale (): string
 	{
 		return 'de-DE';
 	}
 
-	public function managerStatsNotice()
+	public function managerStatsNotice ()
 	{
 		if ($_SERVER['REQUEST_URI'] !== '/wp-admin/edit.php?post_type=requests') {
 			return;
@@ -236,7 +242,7 @@ class General
 		global $wpdb;
 
 		$data = $wpdb->get_results("SELECT DISTINCT meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_manager'");
-?>
+		?>
 		<div class="notice notice-success">
 			<h3>Количество заявок у менеджеров</h3>
 			<div class="flex-column">
@@ -248,22 +254,25 @@ class General
                             ON p.ID = pm.post_id AND pm.meta_value = '{$item->meta_value}' AND pm.meta_key = '_manager'
                         WHERE p.post_status = 'publish'
                     ");
-				?>
-					<a class="button" href="/wp-admin/edit.php?s&post_status=all&post_type=requests&action=-1&m=0&manager=<?= $item->meta_value; ?>&filter_action=Фильтр&paged=1&action2=-1">
-						<span><?= sprintf('%s - %d', $this->managers[$item->meta_value], count($result)); ?></span>
+					?>
+					<a class="button"
+						href="/wp-admin/edit.php?s&post_status=all&post_type=requests&action=-1&m=0&manager=<?= $item->meta_value; ?>&filter_action=Фильтр&paged=1&action2=-1">
+						<span>
+							<?= sprintf('%s - %d', $this->managers[$item->meta_value], count($result)); ?>
+						</span>
 					</a>
-				<?php
+					<?php
 				}
 				?>
 			</div>
 			<br />
 		</div>
-	<?php
+		<?php
 	}
 
-	public function requestsCustomFilter($postType)
+	public function requestsCustomFilter ($postType)
 	{
-	?>
+		?>
 		<select name="manager">
 			<?php foreach ($this->managers as $key => $value) { ?>
 				<option value="<?= $key; ?>" <?= selected($key, @$_GET['manager'], 0); ?>>
@@ -271,10 +280,10 @@ class General
 				</option>
 			<?php } ?>
 		</select>
-<?php
+		<?php
 	}
 
-	public function handlerFilter($query)
+	public function handlerFilter ($query)
 	{
 		$cs = function_exists('get_current_screen') ? get_current_screen() : null;
 
@@ -294,14 +303,14 @@ class General
 		}
 	}
 
-	public function addCustomColumn($columns)
+	public function addCustomColumn ($columns)
 	{
 		$myColumns['manager'] = 'Менеджер';
 
 		return array_slice($columns, 0, 2) + $myColumns + $columns;
 	}
 
-	public function addHandlerCustomColumn($columnName, $postId)
+	public function addHandlerCustomColumn ($columnName, $postId)
 	{
 		if ($columnName === 'manager') {
 			if (get_post_meta($postId, '_manager', true)) {
@@ -342,7 +351,7 @@ class General
 	// Mein persönliches Skype:         live:.cid.ad237ccbf347238
 
 
-	public static function managers($type = false): string
+	public static function managers ($type = false): string
 	{
 		$dd = getdate();
 		$name = '';
@@ -388,13 +397,13 @@ class General
 		return $name;
 	}
 
-	public function set_tocken()
+	public function set_tocken ()
 	{
 		$token = bin2hex(random_bytes(32));
 		setcookie('csrf_token', $token, time() + 3600, '/');
 	}
 
-	public static function get_utm()
+	public static function get_utm ()
 	{
 		$out = array();
 		$keys = array('utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term');
@@ -410,45 +419,6 @@ class General
 		}
 		return implode("\r\n", $out);
 	}
-
-	// public static function geo()
-	// {
-	//   // URL параметры
-	//   $session = [
-	//     "first" => ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . (($_SERVER['REQUEST_URI'] == '/wp-content/themes/akademilyassets/js/feedback.js?ver=1') ? '/' : $_SERVER['REQUEST_URI']),
-	//     "isMobile" => wp_is_mobile() ? 'true' : 'false',
-	//     "refer" => $_SERVER["HTTP_REFERER"],
-	//     "dich" => $_SERVER['REQUEST_URI'],
-	//   ];
-	//   if (!isset($_COOKIE['session'])) {
-	//     setcookie('session', json_encode($session), time() + 60 * 60 * 24, '/');
-	//   };
-
-	//   // GET параметры
-	//   if (!isset($_COOKIE['getParam'])) {
-	//     setcookie('getParam', json_encode($_GET), time() + 60 * 60 * 24, '/');
-	//   }
-
-	//   // GEO параметры
-	//   if (!isset($_COOKIE['geo'])) {
-	//     $client_ip = $_SERVER['REMOTE_ADDR'];
-	//     // проверка для локалки
-	//     // $client_ip = '84.244.8.172';
-
-	//     $api = 'https://json.geoiplookup.io/' . $client_ip;
-
-	//     $ch = curl_init();
-	//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	//     curl_setopt($ch, CURLOPT_URL, $api);
-
-	//     $response = curl_exec($ch);
-	//     curl_close($ch);
-
-	//     $response = json_encode(json_decode($response));
-	//     setcookie('geo', $response, time() + 60 * 60 * 24, '/');
-	//     return $response;
-	//   }
-	// }
 }
 
 new General();

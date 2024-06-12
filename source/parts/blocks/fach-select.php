@@ -1,7 +1,5 @@
-<select class="wide search-select custom-select" name="specialization" required>
-	<option value="" disabled selected>Fachrichtung</option>
-	<?php
-	foreach (SPEC as $value) { ?>
-		<option value="<?php echo $value; ?>" class=""><?php echo $value; ?></option>
-	<?php } ?>
-</select>
+<div class="wrapper-select">
+	<select class="wide custom-select input fach-select ajax-select" name="specialization" required>
+		<option value="" disabled="" selected="">Fachrichtung</option>
+	</select>
+</div>

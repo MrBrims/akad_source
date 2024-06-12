@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="rating__inner">
-        <img class="rating__logo" src="<?php echo get_template_directory_uri() ?>/resources/images/rating_logo/akademily.svg" alt="akademily rating logo">
+        <img class="rating__logo" src="<?php echo get_template_directory_uri() ?>/resources/images/rating_logo/kundenot.webp" alt="Kundennote rating logo">
         <div class="rating__box">
             <?php
             $rating = floatval(carbon_get_theme_option('rating_akademily')) * 2;

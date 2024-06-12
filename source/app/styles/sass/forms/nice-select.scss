@@ -12,11 +12,22 @@
 }
 
 .nice-select-dropdown {
-  width: fit-content;
+  max-width: 300px;
+  word-break: break-all;
+}
+
+.wrapper-select {
+  position: relative;
+  height: 40px;
 }
 
 select.custom-select {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  cursor: pointer;
+  color: #445664;
 }
 
 .nice-select .list {

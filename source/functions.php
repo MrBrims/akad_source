@@ -1,5 +1,4 @@
 <?php
-
 /** Constants */
 define('DE_PATH', __DIR__);
 define('DE_URI', get_template_directory_uri());
@@ -17,13 +16,16 @@ require_once 'src/CustomPostType.php';
 /** Settings meta fields */
 require_once 'src/CarbonFields/CommonMeta.php';
 require_once 'src/CarbonFields/PageMeta.php';
+require_once 'src/CarbonFields/TermMeta.php';
 require_once 'src/CarbonFields/UserMeta.php';
 require_once 'src/CarbonFields/PostMeta.php';
+require_once 'src/CarbonFields/ComplexFields/ComplexFields.php';
 
 /** New fields */
 require_once 'src/CarbonFields/MainMeta.php';
 
 /** Feedback */
+require_once 'src/PrivateConstants.php';
 require_once 'src/Feedback.php';
 
 /*
@@ -135,3 +137,5 @@ function rd_duplicate_post_link($actions, $post)
 	return $actions;
 }
 add_filter('page_row_actions', 'rd_duplicate_post_link', 10, 2);
+
+Helpers::geo();

@@ -1,3 +1,23 @@
+<?php
+$type_review = carbon_get_post_meta(get_the_ID(), 'ak_complex_fields_page');
+foreach ($type_review as $key) {
+	if ($key['_type'] == 'template_unic_review') {
+		$type_review = $key['unic_review_type'];
+	}
+}
+$review_arr = null;
+switch ($type_review) {
+	case 'coach':
+		$review_arr = carbon_get_theme_option('soc_reviews_coach');
+		break;
+	case 'lektor':
+		$review_arr = carbon_get_theme_option('soc_reviews_lektor');
+		break;
+	default:
+		$review_arr = carbon_get_theme_option('soc_reviews');
+		break;
+}
+?>
 <section class="section reviews">
 	<div class="container">
 		<?php if (!empty(carbon_get_theme_option('reviews_title'))) : ?>
@@ -11,10 +31,10 @@
 		<div class="soc-rev">
 			<div class="soc-rev__body swiper">
 				<div class="soc-rev__wrapper swiper-wrapper">
-					<?php foreach ((carbon_get_theme_option('soc_reviews')) as $key) : ?>
+					<?php foreach ($review_arr as $key) : ?>
 						<div class="soc-rev__slide swiper-slide">
 							<a class="soc-rev__slide-link" href="<?php echo $key['soc_reviews_img']; ?>" data-fancybox="gallery">
-								<img class="soc-rev__slide-img" src="<?php echo $key['soc_reviews_img']; ?>" alt="social reviews">
+								<img class="soc-rev__slide-img" src="<?php echo $key['soc_reviews_img']; ?>" alt="<?php Helpers::imageAlt($key['soc_reviews_img']); ?>">
 							</a>
 						</div>
 					<?php endforeach; ?>

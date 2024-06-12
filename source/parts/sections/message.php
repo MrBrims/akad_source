@@ -10,8 +10,11 @@
 		</p>
 	</div>
 	<div class="message__container">
-		<?php
-		get_template_part('parts/blocks/form-main');
-		?>
+		<?php if (!empty(carbon_get_post_meta(get_the_ID(), 'ak_bigform_title'))) : ?>
+			<h3 class="title message__title">
+				<?php echo carbon_get_post_meta(get_the_ID(), 'ak_bigform_title'); ?>
+			</h3>
+		<?php endif ?>
+		<?php get_template_part(carbon_get_post_meta(get_the_ID(), 'ak_complex_global_select')); ?>
 	</div>
 </section>

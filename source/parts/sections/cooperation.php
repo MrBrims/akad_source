@@ -9,14 +9,16 @@
 			<?php foreach ((carbon_get_post_meta(get_the_ID(), 'cooperation_card')) as $key) : ?>
 				<div class="cooperation__item">
 					<div class="cooperation__item-head">
-						<img class="cooperation__item-icon" src="<?php echo $key['cooperation_card_icon']; ?>" alt="icon">
-						<h4 class="cooperation__item-title">
+						<img class="cooperation__item-icon" src="<?php echo $key['cooperation_card_icon']; ?>" alt="<?php Helpers::imageAlt($key['cooperation_card_icon']); ?>">
+						<p class="cooperation__item-title">
 							<?php echo $key['cooperation_card_title']; ?>
-						</h4>
+						</p>
 					</div>
-					<div class="cooperation__text">
-						<?php echo $key['cooperation_card_text']; ?>
-					</div>
+					<?php if (!empty($key['cooperation_card_text'])) : ?>
+						<div class="cooperation__text">
+							<?php echo $key['cooperation_card_text']; ?>
+						</div>
+					<?php endif ?>
 				</div>
 			<?php endforeach; ?>
 		</div>

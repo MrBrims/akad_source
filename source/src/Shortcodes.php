@@ -18,7 +18,7 @@ class Shortcodes
 
 	public function mceAddButtons($pluginArray)
 	{
-		$pluginArray['mcButtons'] = DE_URI . '/assets/js/admin.js';
+		$pluginArray['mcButtons'] = DE_URI . '/resources/js/admin.js';
 		return $pluginArray;
 	}
 
@@ -40,9 +40,9 @@ class Shortcodes
 	{
 		return '
         <div class="banner-content">
-            <div class="banner-content__img"><img src="https://akademily.de/wp-content/themes/akademily/resources/images/icons/help-com.svg" alt="" width="100%"></div>
+            <div class="banner-content__img"><img src="https://akademily.de/wp-content/themes/akademily/resources/images/icons/help-com.svg" alt="trust bage" width="100%"></div>
             <div class="banner-content__text">
-            <h4>Brauchen Sie Hilfe?</h4>
+            <div class="banner-content__title">Brauchen Sie Hilfe?</div>
             <p>Vertrauen Sie Ihre Arbeit echten Profis an!</p>
             </div>
             <div class="banner-content__btn"><a class="btn popup-link" href="#popup-form">
