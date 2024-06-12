@@ -1,5 +1,5 @@
 export function tocPage() {
-	let h2Elements = document.querySelectorAll('.inner h2')
+	let h2Elements = document.querySelectorAll('.toc-page h2')
 	let toc = document.querySelector('.section-toc__nav')
 	let ol = document.createElement('ol')
 
