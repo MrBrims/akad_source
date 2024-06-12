@@ -23,9 +23,9 @@ get_header();
 	<?php
 	get_template_part('parts/sections/price-lektorat');
 	get_template_part('parts/sections/price-coach');
-	get_template_part('parts/sections/message');
 	get_template_part('parts/sections/main-faq');
 	get_template_part('parts/sections/contact');
+	get_template_part('parts/sections/message');
 	?>
 </main>
 

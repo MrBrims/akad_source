@@ -1,30 +1,30 @@
 <div class="footer__two">
 	<div class="footer__two-inner">
-		<h4 class="footer__title">
+		<span class="footer__title">
 			Über uns
-		</h4>
+		</span>
 		<?php echo apply_filters('the_content', carbon_get_theme_option('footer_uber_links')); ?>
 	</div>
 	<div class="footer__two-inner">
-		<h4 class="footer__title">
+		<span class="footer__title">
 			Blog
-		</h4>
+		</span>
 		<?php echo apply_filters('the_content', carbon_get_theme_option('footer_blog_links')); ?>
 	</div>
 	<div class="footer__two-inner">
 		<?php echo apply_filters('the_content', carbon_get_theme_option('footer_other_links')); ?>
 	</div>
 	<div class="footer__two-inner">
-		<h4 class="footer__title">
+		<span class="footer__title">
 			Wir arbeiten in
-		</h4>
+		</span>
 		<?php echo apply_filters('the_content', carbon_get_theme_option('footer_arbeit_links')); ?>
 	</div>
 	<div class="footer__two-inner">
 		<div class="footer__reviews">
-			<h4 class="footer__title">
+			<span class="footer__title">
 				<?php echo carbon_get_theme_option('footer_title_rev'); ?>
-			</h4>
+			</span>
 			<div class="footer__reviews-items">
 				<?php foreach ((carbon_get_theme_option('footer_rev')) as $key) : ?>
 					<a href="<?php echo $key['footer_rev_link']; ?>">
@@ -36,9 +36,9 @@
 			</div>
 		</div>
 		<div class="footer__plagiat">
-			<h4 class="footer__title">
+			<span class="footer__title">
 				PLAGIATSSOFTWARE
-			</h4>
+			</span>
 			<div class="footer__plagiat-items">
 				<?php foreach ((carbon_get_theme_option('footer_icons_plag')) as $key) : ?>
 					<div class="footer__plagiat-item">

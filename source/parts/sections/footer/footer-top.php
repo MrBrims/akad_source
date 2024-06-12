@@ -13,9 +13,9 @@
 		</div>
 	</div>
 	<div class="footer__schedule">
-		<h4 class="footer__title">
+		<span class="footer__title">
 			<?php echo carbon_get_theme_option('footer_title_schedule'); ?>
-		</h4>
+		</span>
 		<div class="footer__schedule-time">
 			<?php echo carbon_get_theme_option('global_time'); ?>
 		</div>
@@ -24,9 +24,9 @@
 		</div>
 	</div>
 	<div class="footer__pay">
-		<h4 class="footer__title">
+		<span class="footer__title">
 			<?php echo carbon_get_theme_option('footer_title_pay'); ?>
-		</h4>
+		</span>
 		<div class="footer__pay-items">
 			<?php foreach ((carbon_get_theme_option('footer_pay')) as $key) : ?>
 				<div class="footer__pay-item">

@@ -1,23 +1,8 @@
 .message {
-	@include fluidPaddingT(40px, 70px, 480px, 1024px, 70px);
 	@include fluidPaddingB(40px, 70px, 480px, 1024px, 70px);
 	padding-left: 10px;
 	padding-right: 10px;
 	overflow: hidden;
-
-	position: relative;
-
-	&::before {
-		content: "";
-		z-index: -1;
-		position: absolute;
-		inset: 0 -400px;
-		background-color: #F3F8FF;
-		background-image: url(../images/pattern.svg);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center center;
-	}
 
 	&__container {
 		background-color: #fff;

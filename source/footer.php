@@ -13,7 +13,7 @@
 <?php
 get_template_part('parts/blocks/popup-form');
 get_template_part('parts/blocks/popup-thank');
-get_template_part('parts/blocks/buttons');
+// get_template_part('parts/blocks/buttons');
 ?>
 
 <?php wp_footer(); ?>
